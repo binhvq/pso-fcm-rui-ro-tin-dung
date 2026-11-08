@@ -6,7 +6,7 @@ Chạy: python3 thu_cuc_tieu_taiwan_kiem_chung.py
 """
 import os, sys, glob
 os.environ["OMP_NUM_THREADS"]="1"; os.environ["OPENBLAS_NUM_THREADS"]="1"
-sys.path.insert(0,"/home/binh/learn/ths/khai-pha-du-lieu-va-phat-hien-tri-thuc/tieu-luan/thu-nghiem-so-bo")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np, pandas as pd
 from multiprocessing import Pool
 from thu_pso_sau import FCM, RAW, signed_log, zscore

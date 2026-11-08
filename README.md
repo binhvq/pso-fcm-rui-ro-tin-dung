@@ -34,3 +34,13 @@ Dữ liệu doanh nghiệp Việt Nam (Tran và cộng sự, 2022) không đư�
 ## Biên dịch tiểu luận
 
 Chép các font Times New Roman (`times*.ttf`) và Courier New (`cour*.ttf`) vào thư mục `fonts/`, rồi chạy `./compile.sh` (cần Docker hoặc `xelatex` + `biber`). Kết quả ở `build/main.pdf`.
+
+## Sinh lại slide
+
+```bash
+cd slide
+npm ci
+npm run slide
+```
+
+Lệnh này chuyển hình `hinh/*.pdf` sang `anh/*.png`, biên dịch công thức `ct/ct.tex` thành `ct/ct-*.png`, xuất số liệu từ `results/so-lieu*.tex` ra `so-lieu.json`, rồi dựng các tệp `.pptx`. Cần Node.js, `xelatex`, `pdftoppm` (poppler) và ImageMagick. Slide dùng font Be Vietnam Pro.

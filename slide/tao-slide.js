@@ -1,6 +1,7 @@
 // Sinh slide thuyết trình tiểu luận PSO–FCM, chia theo người trình bày.
-//   node tao-slide.js            -> 5 tệp phan-*.pptx và tong-hop-nhom-1-pso-fcm.pptx
-// Số liệu lấy từ so-lieu.json (xuất từ results/so-lieu*.tex); khóa {tênMacro} không tồn tại thì dừng.
+//   npm run slide              -> phan-*.pptx và tong-hop-nhom-1-pso-fcm.pptx (sinh lại ảnh, công thức, số liệu trước)
+//   node tao-slide.js          -> chỉ dựng slide từ anh/, ct/ và so-lieu.json có sẵn
+// Số liệu lấy từ so-lieu.json (node xuat-so-lieu.js xuất từ results/so-lieu*.tex); khóa {tênMacro} không tồn tại thì dừng.
 "use strict";
 const fs = require("fs");
 const path = require("path");
@@ -33,7 +34,7 @@ function anh(slide, p, x, y, { w, h }) {
   if (w && !h) h = (w * k.h) / k.w;
   else if (h && !w) w = (h * k.w) / k.h;
   else { const r = Math.min(w / k.w, h / k.h); const w2 = k.w * r, h2 = k.h * r; x += (w - w2) / 2; y += (h - h2) / 2; w = w2; h = h2; }
-  slide.addImage({ path: p, x, y, w, h });
+  slide.addImage({ path: p, x, y, w, h, altText: path.basename(p) });
   return { x, y, w, h };
 }
 
@@ -99,7 +100,7 @@ function ghiChu(sl, t) { sl.addNotes(s(t).replace(/\n\s+/g, "\n")); }
 function phan1(pres) {
   let sl = pres.addSlide();
   sl.background = { color: C.navy };
-  sl.addImage({ path: path.join(GOC, "..", "hinh", "haui_Logo.jpg"), x: 0.7, y: 0.55, w: 1.0, h: 1.0 });
+  sl.addImage({ path: path.join(GOC, "..", "hinh", "haui_Logo.jpg"), x: 0.7, y: 0.55, w: 1.0, h: 1.0, altText: "Logo HaUI" });
   sl.addText([{ text: "ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI", options: { bold: true, breakLine: true } },
     { text: "Môn Khai phá dữ liệu và phát hiện tri thức · Mã lớp 20261IT7314001" }],
     { x: 1.95, y: 0.6, w: 10, h: 0.9, fontFace: BF, fontSize: 15, color: "CADCFC", margin: 0, valign: "middle" });

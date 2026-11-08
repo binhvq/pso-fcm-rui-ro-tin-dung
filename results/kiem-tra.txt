@@ -21,7 +21,7 @@ E2 fcm trùng E3 u_ngau_nhien (cùng seed). Chỉ tỉ lệ đạt J tốt nhấ
 Kết luận: K6 không đạt do dao động mẫu với n = 30 (khoảng tin cậy 95% ≈ ±0,18), không do lỗi code; dải 15–50% chốt
 trước quá hẹp. fcm_kpp 30/30 (đạt phần thứ hai của K6). Dùng số chính thức (người dùng chốt 13/10/2026 20:17).
 Script chẩn đoán (thư mục tạm của job sẽ bị xoá nên chép nguyên văn dưới đây):
-    import sys; sys.path.insert(0, "/home/binh/learn/ths/khai-pha-du-lieu-va-phat-hien-tri-thuc/tieu-luan/code")
+    import sys; sys.path.insert(0, "code")
     import numpy as np, tien_xu_ly as tx
     from fcm import FCM
     X = tx.nap("taiwan_kiem_chung_khong_log").X
@@ -35,7 +35,7 @@ Script chẩn đoán (thư mục tạm của job sẽ bị xoá nên chép nguy�
         print(f"seed {seeds.start}-{seeds.stop-1}, max_iter {mi}: đạt J tốt nhất %d/%d, số vòng lớn nhất %d" % ti_le(seeds, mi))
 
 == Đối chiếu ngẫu nhiên 10 số (bảng + macro) với CSV, tính lại độc lập (rng 2026), 13/10/2026
-Lệnh: python3 doi_chieu_10_so.py /home/binh/learn/ths/khai-pha-du-lieu-va-phat-hien-tri-thuc/tieu-luan/results  (script chép nguyên văn dưới đây)
+Lệnh: python3 doi_chieu_10_so.py results  (script chép nguyên văn dưới đây)
     ĐẠT  ('E1', 'viet_nam', 2, 'fcm_lap_lai'): CSV 0,784 | macro \soLieuEMotVietNamCHaiFcmLapLaiAuc = 0,784 | có trong e1-ket-qua-viet_nam.tex: True
     ĐẠT  ('E1', 'taiwan_kiem_chung', 2, 'fcm_kpp'): CSV 0,451 | macro \soLieuEMotTaiwanKiemChungCHaiFcmKppAuc = 0,451 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
     ĐẠT  ('E1', 'viet_nam', 3, 'c_msgwo_wfcm'): CSV 0,594 | macro \soLieuEMotVietNamCBaCMsgwoWfcmAuc = 0,594 | có trong e1-ket-qua-viet_nam.tex: True

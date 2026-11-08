@@ -1,10 +1,13 @@
 {
   "name": "slide",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sinh slide báo cáo từ hình, công thức và số liệu của tiểu luận",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "anh": "bash anh/tao-anh.sh",
+    "ct": "bash ct/tao-ct.sh",
+    "so-lieu": "node xuat-so-lieu.js",
+    "slide": "npm run anh && npm run ct && npm run so-lieu && node tao-slide.js"
   },
   "keywords": [],
   "author": "",
