@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\caption{Profile cụm FCM thường và FCM có trọng số do PSO tìm trên Taiwan Default (c = 3, seed 1000): trung bình giá trị gốc}
+\label{tab:e4-profile-taiwan_kiem_chung}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+Phương pháp & Cụm & Cỡ (\%) & Vỡ nợ (\%) & Mơ hồ (\%) & \rotatebox{60}{PAY\_3} & \rotatebox{60}{PAY\_5} & \rotatebox{60}{PAY\_2} & \rotatebox{60}{PAY\_4} & \rotatebox{60}{PAY\_6} \\
+\midrule
+FCM (k-means++) &1 & 44,3 & 15,9 & 100,0 & −0,01 & −0,04 & −0,02 & −0,03 & −0,03 \\
+ &2 & 25,1 & 21,7 & 75,1 & −1,16 & −1,36 & −1,06 & −1,30 & −1,44 \\
+ &3 & 30,6 & 31,4 & 100,0 & 0,42 & 0,33 & 0,44 & 0,37 & 0,29 \\
+\midrule
+PSO trọng số &1 & 46,8 & 13,2 & 100,0 & −0,10 & −0,11 & −0,16 & −0,09 & −0,07 \\
+ &2 & 27,0 & 20,4 & 86,2 & −1,25 & −1,36 & −1,13 & −1,32 & −1,40 \\
+ &3 & 26,2 & 39,8 & 100,0 & 0,82 & 0,62 & 0,91 & 0,65 & 0,46 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: cụm đánh số theo tỉ lệ vỡ nợ tăng dần; mơ hồ: tỉ lệ điểm trong cụm có độ thuộc lớn nhất $<$ 0,6; thuộc tính chọn là 5 thuộc tính có khoảng trung bình giữa các cụm (PSO trọng số) rộng nhất tính theo độ lệch chuẩn. PAY\_k: tình trạng trả nợ ở tháng thứ k trước tháng quan sát (theo mô tả của UCI: $-1$ trả đúng hạn, $1$ đến $9$ trễ hạn 1 đến 9 tháng; dữ liệu còn các mã $-2$ và $0$ không được giải thích); giá trị dương là có trễ hạn.}
+\end{table}

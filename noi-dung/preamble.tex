@@ -1,0 +1,204 @@
+% ============================================================
+% preamble.tex — Cấu hình toàn cục cho tiểu luận PSO–FCM đánh giá rủi ro tín dụng
+% Engine: XeLaTeX (BẮT BUỘC — KHÔNG dùng pdfLaTeX)
+% ============================================================
+
+% ---- Font & Tiếng Việt ----
+\usepackage{fontspec}
+% Font nhúng trong thư mục fonts/ của project (không phụ thuộc font hệ thống).
+% Nhờ vậy compile được ở mọi môi trường: máy local, Docker TeX Live, Overleaf.
+% Đường dẫn Path tính từ thư mục gốc project (nơi chạy lệnh compile main.tex).
+\setmainfont{Times New Roman}[
+  Path = fonts/,
+  Extension = .ttf,
+  UprightFont = times,
+  BoldFont = timesbd,
+  ItalicFont = timesi,
+  BoldItalicFont = timesbi
+]
+% Sans-serif không dùng trong tài liệu → không khai báo Arial (đỡ 1 font phải
+% nạp + dựng cache, giúp Overleaf compile lần đầu nhanh hơn, tránh timeout).
+\setmonofont{Courier New}[
+  Path = fonts/,
+  Extension = .ttf,
+  Scale = 0.9,
+  UprightFont = cour,
+  BoldFont = courbd,
+  ItalicFont = couri,
+  BoldItalicFont = courbi
+]
+
+\usepackage{polyglossia}
+\setdefaultlanguage{vietnamese}
+% polyglossia tự load hyphenation patterns tiếng Việt
+
+% ---- Cỡ chữ 13pt (chuẩn báo cáo khoa học VN) ----
+% Lớp report chỉ hỗ trợ tối đa 12pt; XeLaTeX dùng font TrueType scalable nên
+% có thể đặt cỡ tùy ý. Đặt thân bài về 13pt, baselineskip 15.6pt (sẽ được
+% setspace nhân 1.5 ở dưới).
+\AtBeginDocument{\fontsize{13pt}{15.6pt}\selectfont}
+
+% ---- Kích thước trang & lề ----
+\usepackage[
+  a4paper,
+  left=3cm,
+  right=2cm,
+  top=2.5cm,
+  bottom=2.5cm
+]{geometry}
+
+% ---- Giãn dòng ----
+\usepackage{setspace}
+\onehalfspacing   % giãn dòng 1.5
+
+% ---- Tiêu đề, mục lục, đánh số ----
+\usepackage{titlesec}
+% Định dạng chapter: căn giữa, in hoa, 14pt đậm
+\titleformat{\chapter}[display]
+  {\normalfont\fontsize{14pt}{18pt}\selectfont\bfseries\centering}
+  {\MakeUppercase{\chaptertitlename}\ \thechapter}
+  {0pt}
+  {\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-10pt}{20pt}
+% Mục và tiểu mục cùng cỡ thân bài (13pt), in đậm; tiểu mục thêm nghiêng.
+\titleformat{\section}
+  {\normalfont\fontsize{13pt}{15.6pt}\selectfont\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{13pt}{15.6pt}\selectfont\bfseries\itshape}{\thesubsection}{0.6em}{}
+
+% ---- Dấu chấm dẫn (dot leader) cho mục CHƯƠNG trong mục lục ----
+% Mặc định mục cấp chương không có dấu chấm dẫn → tiêu đề ngắn để lại khoảng
+% trống lớn tới số trang. titletoc (đi kèm titlesec) thêm dấu chấm cho đồng
+% nhất với mục con.
+\usepackage{titletoc}
+% Mục lục in "CHƯƠNG 1." trước tên chương; main.tex đổi tiền tố thành
+% "PHỤ LỤC" sau \appendix.
+\newcommand{\chaptertocprefix}{CHƯƠNG}
+\titlecontents{chapter}[0pt]
+  {\addvspace{6pt}\bfseries}
+  {\chaptertocprefix\ \thecontentslabel.\quad}
+  {}
+  {\titlerule*[0.6pc]{.}\contentspage}
+
+% ---- Toán học ----
+\usepackage{amsmath}
+\usepackage{mathtools}
+% Font toán cùng họ Times với thân bài (TeX Gyre Termes Math có sẵn trong
+% TeX Live và Overleaf). unicode-math đã gồm các ký hiệu của amssymb.
+\usepackage{unicode-math}
+\setmathfont{texgyretermes-math.otf}
+
+% ---- Hình ảnh ----
+\usepackage{graphicx}
+\graphicspath{{hinh/}}   % ảnh đặt trong thư mục hinh/
+
+% ---- Vẽ khung trang bìa ----
+\usepackage{tikz}        % khung trang trí trang bìa (remember picture/overlay)
+
+% ---- Bảng biểu ----
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}   % bảng dài nhiều trang
+
+% ---- Caption cho hình và bảng ----
+\usepackage{caption}
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  labelsep=period
+}
+
+% ---- Mã giả thuật toán ----
+% Dùng cặp package algorithm + algorithmic, có sẵn trong mọi bản TeX Live nên
+% biên dịch được cả trên Docker lẫn Overleaf mà không cần cài thêm.
+\usepackage{algorithm}
+\usepackage[noend]{algorithmic}  % noend: khối lồng nhau thể hiện bằng thụt lề, không in dòng "end"
+\floatname{algorithm}{Thuật toán}
+\renewcommand{\algorithmicrequire}{\textbf{Đầu vào:}}
+\renewcommand{\algorithmicensure}{\textbf{Đầu ra:}}
+% Từ khoá mã giả tiếng Việt
+\renewcommand{\algorithmicfor}{\textbf{với}}
+\renewcommand{\algorithmicforall}{\textbf{với mọi}}
+\renewcommand{\algorithmicdo}{\textbf{thực hiện}}
+\renewcommand{\algorithmicwhile}{\textbf{trong khi}}
+\renewcommand{\algorithmicif}{\textbf{nếu}}
+\renewcommand{\algorithmicthen}{\textbf{thì}}
+\renewcommand{\algorithmicelse}{\textbf{ngược lại}}
+\renewcommand{\algorithmicrepeat}{\textbf{lặp}}
+\renewcommand{\algorithmicuntil}{\textbf{cho tới khi}}
+\renewcommand{\algorithmicreturn}{\textbf{trả về}}
+\renewcommand{\algorithmicto}{\textbf{tới}}
+\renewcommand{\algorithmicand}{\textbf{và}}
+\renewcommand{\algorithmicor}{\textbf{hoặc}}
+
+% ---- Màu sắc & liên kết ----
+\usepackage{xcolor}
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  pdfencoding=auto
+]{hyperref}
+
+% ---- Tài liệu tham khảo (BibLaTeX + Biber) ----
+% style=numeric-comp: đánh số [1] và gộp dải số liên tiếp, gần với chuẩn IEEE.
+\usepackage[
+  backend=biber,
+  style=numeric-comp,
+  sorting=none,
+  maxbibnames=99,
+  giveninits=true
+]{biblatex}
+% polyglossia đặt ngôn ngữ chính là vietnamese, nhưng biblatex không có
+% vietnamese.lbx → các từ nối ("in", "and", "pages"...) bị lỗi dính chữ
+% ("inIEEE Transactions..."). Ánh xạ sang bibstring tiếng Anh để khắc phục.
+\DeclareLanguageMapping{vietnamese}{english}
+\addbibresource{noi-dung/tai-lieu-tham-khao.bib}
+% Trường note trong .bib chứa ghi chú nội bộ của nhóm (số bài, đường dẫn PDF,
+% lý do thay bài) → bỏ khi in danh mục tài liệu tham khảo.
+% URL dạng https://doi.org/... trùng với DOI → bỏ URL khi mục đã có DOI.
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{\step[fieldset=note, null]}
+    \map{
+      \step[fieldsource=doi, final]
+      \step[fieldset=url, null]
+    }
+  }
+}
+
+% ---- Nhúng mã nguồn (phụ lục) ----
+% Dùng fancyvrb (\VerbatimInput) thay cho listings: XeLaTeX xử lý UTF-8 native
+% nên giữ ĐÚNG dấu tiếng Việt trong comment code. (listings băm theo byte →
+% hỏng dấu tổ hợp tiếng Việt.)
+\usepackage{fancyvrb}
+% fancyvrb không tự bẻ dòng dài → dùng cỡ chữ nhỏ (\scriptsize) để dòng code
+% dài nhất (~96 ký tự) vừa trong khung.
+\fvset{
+  frame=single,
+  numbers=left,
+  numbersep=5pt,
+  fontsize=\scriptsize
+}
+
+% ---- Tiện ích khác ----
+\usepackage{enumitem}     % tùy chỉnh danh sách
+\usepackage{microtype}    % căn lề đẹp hơn (XeLaTeX hỗ trợ một phần)
+
+% ---- Ngắt dòng và ngắt trang ----
+% Tiếng Việt gần như không ngắt được từ nên TeX ít lựa chọn khi bẻ dòng; nới
+% dung sai và cho phép giãn thêm ở lượt xếp cuối để không còn dòng tràn ra lề.
+\tolerance=2000
+\emergencystretch=3em
+% Cấm để lại một dòng lẻ của đoạn ở đầu hoặc cuối trang.
+\widowpenalty=10000
+\clubpenalty=10000
+\usepackage{float}        % [H] cho hình/bảng
+\usepackage{subcaption}   % hình phụ (a), (b)...
+
+% ---- Đánh số trang ----
+% Số trang sẽ được bật trong main.tex sau phần mở đầu không đánh số
+\pagestyle{plain}

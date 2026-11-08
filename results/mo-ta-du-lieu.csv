@@ -1,0 +1,9 @@
+bo,loai,n_goc,D_goc,so_lien_tuc,so_roi_rac,o_thieu_%,o_0_gia_%,dong_trung,nhan1_%,mat_can_bang,n_dung,D_dung,lech_tv,nhon_tv,ngoai_lai_%,"cap_r>0,9",D_hieu_dung_90%,gia_tri_rieng_tv
+viet_nam,Doanh nghiệp niêm yết VN — khó khăn tài chính,3277,25,25,0,0.0,4.21,0,13.3,6.5,3277,21,1.11,0.6,15.4,6,10,405
+taiwan_kiem_chung,Thẻ tín dụng cá nhân — vỡ nợ,30000,23,14,9,0.0,0.0,56,22.12,3.5,5000,23,0.89,0.0,5.9,0,13,1855
+taiwan_kiem_chung_khong_log,Thẻ tín dụng cá nhân — vỡ nợ (không log),30000,23,14,9,0.0,0.0,56,22.12,3.5,5000,23,2.52,7.8,12.9,7,13,1855
+south_german,Vay tiêu dùng cá nhân — tín dụng xấu,1000,20,3,17,0.0,0.0,0,30.0,2.3,1000,20,0.77,0.5,12.8,0,16,4
+german_so,Vay tiêu dùng cá nhân (bản số hoá gốc),1000,24,3,21,0.0,0.0,0,30.0,2.3,1000,24,1.17,0.4,17.9,0,18,2
+australian,Duyệt thẻ tín dụng — bị từ chối,690,14,7,7,0.0,0.0,0,55.51,0.8,690,14,1.15,0.5,15.9,0,12,11
+polish,Doanh nghiệp Ba Lan — phá sản,10503,64,64,0,1.47,0.0,87,4.71,20.2,5000,64,1.68,17.2,24.3,29,20,4818
+taiwan_pha_san,Doanh nghiệp Đài Loan — phá sản,6819,95,93,2,0.0,0.0,0,3.23,30.0,5000,94,6.63,233.9,26.0,39,42,4261

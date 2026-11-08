@@ -1,0 +1,8 @@
+Bỏ 4 cột không phải số: ['REASON', 'JOB', 'DEROG', 'DEBTINC']
+hmeq.csv: 5000 dòng × 8 thuộc tính số; nhãn dương 19.9%
+ c  so_muc_J  u_ngau_nhien_dat  diem_ngau_nhien_dat  kmeans_pp_dat  pso_w_dat  sup_%  pc_tv  cum_nho_tv_%  auc_tv
+ 2         1               100                  100            100        100    100  0.500          49.4   0.578
+ 3         1               100                  100            100        100    100  0.333           0.0   0.578
+ 4         1               100                  100            100        100    100  0.250           0.0   0.578
+ 5         1               100                  100            100        100    100  0.200           0.0   0.578
+ 6         1               100                  100            100        100    100  0.167           0.0   0.578

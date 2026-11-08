@@ -1,0 +1,44 @@
+\begin{table}[htbp]
+\centering
+\caption{TN2 -- chẩn đoán số cực tiểu của J\textsubscript{m}: FCM từ 30 khởi tạo mỗi kiểu}
+\label{tab:e3-chan-doan}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+& & \multicolumn{3}{c}{U ngẫu nhiên} & \multicolumn{3}{c}{k-means++} \\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+Bộ dữ liệu & c & \begin{tabular}[b]{@{}c@{}}Số\\cực tiểu\end{tabular} & \begin{tabular}[b]{@{}c@{}}Đạt J\\tốt nhất (\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Sụp\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Số\\cực tiểu\end{tabular} & \begin{tabular}[b]{@{}c@{}}Đạt J\\tốt nhất (\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Sụp\\(\%)\end{tabular} \\
+\midrule
+Việt Nam & 2 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Việt Nam & 3 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Việt Nam & 4 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default & 2 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default & 3 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default & 4 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default & 5 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default & 6 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default (không log) & 2 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default (không log) & 3 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default (không log) & 4 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Default (không log) & 5 & 2 & 37 & 0 & 1 & 100 & 0 \\
+Taiwan Default (không log) & 6 & 2 & 57 & 0 & 1 & 100 & 0 \\
+South German Credit & 2 & 1 & 100 & 100 & 1 & 100 & 100 \\
+South German Credit & 3 & 1 & 100 & 100 & 1 & 100 & 100 \\
+South German Credit & 4 & 1 & 100 & 100 & 1 & 100 & 100 \\
+German Credit (bản số) & 2 & 1 & 100 & 100 & 1 & 100 & 100 \\
+German Credit (bản số) & 3 & 1 & 100 & 100 & 1 & 100 & 100 \\
+German Credit (bản số) & 4 & 1 & 100 & 100 & 1 & 100 & 100 \\
+Australian Credit & 2 & 1 & 100 & 100 & 1 & 100 & 100 \\
+Australian Credit & 3 & 1 & 100 & 100 & 1 & 100 & 100 \\
+Australian Credit & 4 & 1 & 100 & 100 & 1 & 100 & 100 \\
+Polish Bankruptcy & 2 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Polish Bankruptcy & 3 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Polish Bankruptcy & 4 & 1 & 100 & 0 & 1 & 100 & 0 \\
+Taiwan Bankruptcy & 2 & 1 & 100 & 100 & 1 & 100 & 100 \\
+Taiwan Bankruptcy & 3 & 1 & 100 & 100 & 1 & 100 & 100 \\
+Taiwan Bankruptcy & 4 & 1 & 100 & 100 & 2 & 90 & 90 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: số cực tiểu: số mức J\textsubscript{m} lệch nhau quá $10^{-4}$ (tương đối), kể cả mức sụp; đạt J tốt nhất so với J\textsubscript{m} nhỏ nhất của cả 2 kiểu; sụp: mọi tâm dồn về trung bình dữ liệu ($\max|V| < 10^{-3}$).}
+\end{table}

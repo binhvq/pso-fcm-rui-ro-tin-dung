@@ -1,0 +1,673 @@
+% ============================================================
+% 03-thuc-nghiem.tex — Chương 3: thực nghiệm trên dữ liệu tín dụng thật
+% Mọi con số kết quả lấy từ macro \soLieu... (results/so-lieu*.tex) hoặc bảng sinh tự động (results/bang/*.tex).
+% Tên trong mã: TN1 = E5 + E7, TN2 = E3 + E6, TN3 = E8, TN4 = E9, TN5 = E10; profile cụm = E4.
+% ============================================================
+\chapter{THỰC NGHIỆM VÀ ĐÁNH GIÁ}
+\label{chap:thuc-nghiem}
+
+Chương này trả lời câu hỏi của tiểu luận: \emph{\cauHoiTong} Sau 2 mục về dữ liệu (mục~\ref{sec:du-lieu}) và thiết kế
+thực nghiệm (mục~\ref{sec:thiet-lap}), 4 câu hỏi nghiên cứu được trả lời theo thứ tự của quy trình đề xuất
+(mục~\ref{sec:de-xuat}), cũng là thứ tự nhóm thực hiện: mục~\ref{sec:diem-xuat-phat} cho CH1 (hướng ban đầu, PSO tìm tâm
+khởi tạo, và lý do chuyển hướng),
+mục~\ref{sec:pso-trong-so} cho CH2 (PSO tìm trọng số so với các đối chứng), mục~\ref{sec:phien-ban-trong-so} cho CH3 (5
+phiên bản PSO khi tìm trọng số) và mục~\ref{sec:kiem-chung} cho CH4 (kiểm chứng trên mẫu độc lập và giới hạn). Mục~\ref{sec:dien-giai} đọc
+các phân khúc để diễn giải rủi ro, và mục~\ref{sec:danh-gia-chung} đánh giá chung từng thuật toán.
+
+% Giang
+\section{Dữ liệu và tiền xử lý}
+\label{sec:du-lieu}
+
+Bài toán là phân nhóm khách hàng vay thành $c$ cụm mờ bằng FCM, chỉ dựa trên thuộc tính tài chính và lịch sử trả nợ,
+sao cho các cụm khác nhau rõ về mức rủi ro. Không thuật toán nào nhìn thấy nhãn vỡ nợ; nhãn chỉ dùng để đánh giá phân hoạch
+(chênh tỉ lệ vỡ nợ, AUC phân hoạch) và để lấy mẫu phân tầng bộ Taiwan. Khách hàng có độ thuộc chia đều cho nhiều cụm là
+khách hàng ``biên'', loại khách hàng mà phân cụm mờ được kỳ vọng mô tả tốt hơn phân cụm cứng.
+
+\subsection{Dữ liệu}
+
+Bộ chính thứ nhất là dữ liệu dự báo tình trạng khó khăn tài chính của doanh nghiệp niêm yết Việt Nam \parencite{tran2022distress}: 3.277
+quan sát doanh nghiệp--năm của 825 công ty trên HOSE, HNX và UPCOM giai đoạn 2010--2020, trừ ngành tài chính, ngân hàng
+và bảo hiểm, mỗi quan sát có 25 chỉ số tài chính X1--X25 (thanh khoản, đòn bẩy, rủi ro kinh doanh, thị trường, định
+giá). Nhãn bằng 1 khi công ty thuộc nhóm gặp khó khăn tài chính (vốn chủ sở hữu âm, hoặc EBITDA nhỏ hơn lãi vay 2 năm liên tiếp,
+hoặc lợi nhuận hoạt động âm 3 năm liên tiếp), chiếm \soLieuMoTaVietNamNhanMot\% số quan sát; nhãn gán theo công ty
+chứ không theo từng năm. Đây là rủi ro tín dụng doanh nghiệp, tức khả năng trả nợ của công ty đi vay.
+
+Bộ chính thứ hai là Default of Credit Card Clients của Đài Loan \parencite{yeh2009default,uciTaiwanDefault2009}: 30.000
+chủ thẻ năm 2005, 23 thuộc tính gồm hạn mức, nhân khẩu học, tình trạng trả nợ 6 tháng (PAY\_0, PAY\_2--PAY\_6), dư nợ
+sao kê và số tiền đã trả; nhãn bằng 1 khi khách hàng vỡ nợ ở tháng kế tiếp (\soLieuMoTaTaiwanKiemChungNhanMot\%). Nhóm
+lấy 2 mẫu con phân tầng theo nhãn, mỗi mẫu 5.000 khách hàng, không giao nhau. ``Taiwan Default'' trong chương luôn chỉ mẫu
+kiểm chứng; mẫu thiết kế đã dùng trong các thí nghiệm thử và được dùng lại ở TN5 làm mẫu độc lập để kiểm trọng số. Với bộ
+Việt Nam, TN5 chia các quan sát thành 2 nửa theo mã doanh nghiệp (mọi năm của một công ty nằm cùng một nửa), chuẩn hoá
+riêng từng nửa (\texttt{viet\_nam\_nua}). Bộ Việt Nam đã được dùng khi thiết kế, nên một phát hiện chỉ được coi là vững
+khi lặp lại trên Taiwan Default và trên mẫu độc lập.
+
+Bảng~\ref{tab:tu-dien-vn} và~\ref{tab:tu-dien-taiwan} liệt kê thuộc tính của 2 bộ chính; các tên cột này được dùng
+trong phần kết quả và diễn giải.
+
+\begin{table}[htbp]
+\centering
+\caption{Thuộc tính của bộ dữ liệu Việt Nam (theo Phụ lục A của~\cite{tran2022distress})}
+\label{tab:tu-dien-vn}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{8.9cm}>{\raggedright\arraybackslash}p{3.2cm}@{}}
+\toprule
+Cột & Ý nghĩa & Nhóm \\
+\midrule
+X1, X2, X3$^{*}$ & Tỉ số tiền mặt; tỉ số thanh toán nhanh; tỉ số thanh toán hiện hành & Thanh khoản \\
+X4, X5 & Nợ dài hạn / vốn chủ sở hữu (VCSH); nợ dài hạn / tổng tài sản & Tài chính (đòn bẩy) \\
+X6, X7 & Tổng nợ / VCSH; tổng nợ / tổng tài sản & Tài chính (đòn bẩy) \\
+X8, X9 & Nợ ngắn hạn / VCSH; nợ ngắn hạn / tổng tài sản & Tài chính (đòn bẩy) \\
+X10, X11 & Phải trả người bán / VCSH; phải trả người bán / tổng tài sản & Kinh doanh \\
+X12 & Tổng tài sản / tổng nợ & Kinh doanh \\
+X13 & EBITDA / (nợ ngắn hạn + lãi vay) & Kinh doanh \\
+X14, X15$^{*}$ & P/E; P/E pha loãng & Thị trường \\
+X16, X17, X18$^{*}$ & P/B; P/S (giá / doanh thu); giá / giá trị sổ sách hữu hình & Thị trường \\
+X19 & Vốn hoá thị trường & Thị trường \\
+X20 & Giá / dòng tiền (P/CF) & Thị trường \\
+X21$^{*}$, X22 & Giá trị doanh nghiệp (EV); EV / doanh thu & Định giá \\
+X23, X24 & EV / EBITDA; EV / EBIT & Định giá \\
+X25 & Lợi nhuận trên mỗi cổ phiếu pha loãng (EPS) & Định giá \\
+\addlinespace
+Financial\_Distress & Nhãn: 1 nếu công ty thuộc nhóm gặp khó khăn tài chính, 0 nếu không; chỉ dùng để đánh giá & Nhãn \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize $^{*}$ Cột bị loại vì gần trùng với cột khác (mục~\ref{sec:tien-xu-ly}); còn 21
+thuộc tính. Các cột định danh (mã công ty, tên, sàn, năm) không đưa vào phân cụm; mã công ty chỉ dùng để chia 2 nửa ở TN5.}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Thuộc tính của bộ dữ liệu Taiwan Default (theo mô tả của UCI~\cite{uciTaiwanDefault2009})}
+\label{tab:tu-dien-taiwan}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{9.0cm}>{\raggedright\arraybackslash}p{2.6cm}@{}}
+\toprule
+Cột & Ý nghĩa & Nhóm \\
+\midrule
+LIMIT\_BAL & Hạn mức tín dụng (Đài tệ) & Hạn mức \\
+SEX, EDUCATION, MARRIAGE, AGE & Giới tính; trình độ học vấn; tình trạng hôn nhân; tuổi & Nhân khẩu học \\
+PAY\_0, PAY\_2--PAY\_6 & Tình trạng trả nợ từ tháng 9 lùi về tháng 4 năm 2005: $-1$ trả đúng hạn, 1 đến 9 là trễ 1 đến 9 tháng;
+dữ liệu còn các mã $-2$ và 0 không được mô tả. Giá trị dương là có trễ hạn & Lịch sử trả nợ \\
+BILL\_AMT1--BILL\_AMT6 & Dư nợ sao kê từ tháng 9 lùi về tháng 4 (Đài tệ); có giá trị âm & Dư nợ \\
+PAY\_AMT1--PAY\_AMT6 & Số tiền đã trả từ tháng 9 lùi về tháng 4 (Đài tệ) & Thanh toán \\
+\addlinespace
+default payment next month & Nhãn: 1 nếu vỡ nợ ở tháng kế tiếp, 0 nếu không; chỉ dùng để đánh giá & Nhãn \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Cả 23 thuộc tính được giữ; cột mã khách hàng bị bỏ. Tên PAY\_0 là tháng đầu tiên,
+bộ dữ liệu không có cột PAY\_1.}
+\end{table}
+
+TN2 và TN3 dùng thêm 5 bộ dữ liệu rủi ro công khai, gồm 3 bộ tín dụng cá nhân và 2 bộ phá sản doanh nghiệp (phá sản là dạng vỡ nợ nặng nhất của doanh nghiệp, nên dùng làm dữ liệu thay thế cho rủi ro tín dụng doanh nghiệp): South German Credit \parencite{gromping2019sgc}; German Credit bản số 24 cột
+\parencite{uciGermanStatlog1994}; Australian Credit Approval \parencite{uciAustralian1987}; Polish Companies
+Bankruptcy, năm thứ ba \parencite{uciPolish2016,zieba2016polish}; Taiwanese Bankruptcy Prediction
+\parencite{uciTaiwanBankruptcy2020,liang2016bankruptcy}. Hai bộ phá sản được lấy mẫu phân tầng 5.000 quan sát.
+
+Bảng~\ref{tab:mo-ta-du-lieu} mô tả các bộ sau tiền xử lý. Hai bộ chính có phần lớn thuộc tính số liên tục, bất đối xứng
+vừa phải sau log (trung vị $|$hệ số bất đối xứng$|$ \soLieuMoTaVietNamLech{} và \soLieuMoTaTaiwanKiemChungLech) và số chiều hiệu
+dụng khoảng một nửa số chiều (\soLieuMoTaVietNamDHieuDung{} trên \soLieuMoTaVietNamD{} và
+\soLieuMoTaTaiwanKiemChungDHieuDung{} trên \soLieuMoTaTaiwanKiemChungD). Bản Taiwan chưa lấy log có đuôi dài hơn hẳn
+(hệ số bất đối xứng \soLieuMoTaTaiwanKiemChungKhongLogLech, \soLieuMoTaTaiwanKiemChungKhongLogNgoaiLai\% điểm ngoại lai). Ba bộ tín
+dụng cá nhân nhỏ, đa số thuộc tính là mã định danh hoặc thứ bậc. Hai bộ phá sản nhiều chiều (\soLieuMoTaPolishD{} và
+\soLieuMoTaTaiwanPhaSanD), đuôi cực dài kể cả sau log (độ nhọn dư \soLieuMoTaPolishNhon{} và
+\soLieuMoTaTaiwanPhaSanNhon) và nhãn lệch mạnh.
+
+\input{results/bang/mo-ta-du-lieu}
+
+\subsection{Tiền xử lý}
+\label{sec:tien-xu-ly}
+
+FCM dùng khoảng cách Euclid, nên mọi thuộc tính phải cùng thang đo và không để vài giá trị cực lớn chi
+phối khoảng cách. Bốn bước áp dụng như nhau cho mọi phương pháp: làm sạch giá trị thiếu, bỏ thuộc tính gần trùng, nén
+đuôi dài bằng log có dấu, chuẩn hoá z-score (module \texttt{tien\_xu\_ly.py}, Phụ lục~\ref{app:code}).
+
+Với bộ Việt Nam, bước khó nhất là phát hiện giá trị thiếu bị ghi thành số 0. Tổng nợ trên vốn chủ sở hữu (X6) không thể
+nhỏ hơn nợ ngắn hạn trên vốn chủ sở hữu (X8), vậy mà X6 bằng 0 trong khi X8 dương ở 1.084 dòng; X7 bằng 0 trong khi X9
+dương ở 1.074 dòng; tổng tài sản trên tổng nợ (X12) bằng 0 ở 1.287 dòng, điều không thể có ở doanh nghiệp đang hoạt
+động. Nếu giữ nguyên, các cụm có nguy cơ tách theo ``có số 0 hay không'' thay vì theo rủi ro. Nhóm coi số 0 ở 3 cột
+này là giá trị thiếu và điền trung vị của phần khác 0; số 0 ở X4, X5 (nợ dài hạn) được giữ vì có thể là thật. Bốn thuộc
+tính gần trùng bị loại: X15 (tương quan 0,999 với X14), X18 (0,96 với X16), X21 (0,95 với X19) và X3 (0,944 với X2),
+còn \soLieuMoTaVietNamD{} thuộc tính. Danh sách này được nhóm chọn thủ công và bỏ sót X10 (tương quan
+0,966 với X8), cột vẫn được giữ trong mọi thí nghiệm. Dữ liệu gốc có dấu hiệu đã bị cắt ở phân vị 1\% và 99\% (cực trị của các cột trùng
+2 phân vị này), nên không xử lý ngoại lai thêm.
+
+Với Taiwan Default, nhóm bỏ cột mã khách hàng, giữ 23 thuộc tính. Thuộc tính tiền tệ lệch rất mạnh, và dư nợ sao kê âm
+ở 1.930 trong 30.000 dòng của bộ gốc (315 dòng trong mẫu kiểm chứng). Phép $\operatorname{sign}(x)\log(1 + |x|)$ nén
+đuôi dài mà vẫn giữ dấu và giữ 0, được áp dụng cho mọi thuộc tính của 2 bộ chính. Thí nghiệm thử còn cho thấy trên
+bản chưa log, với $c \ge 5$, FCM khởi tạo ngẫu nhiên dừng ở các cực tiểu khác nhau; bản không log vì thế được giữ riêng
+cho phần đối chiếu (mục~\ref{sec:diem-xuat-phat}). South German, German bản số và Australian không lấy log vì đa số thuộc
+tính là mã thứ bậc hoặc định danh; 2 bộ phá sản bị loại cột hằng, điền trung vị cho ô trống rồi lấy log có dấu. Mọi
+bộ được chuẩn hoá z-score theo cột; bản giá trị gốc được giữ để đọc profile cụm ở mục~\ref{sec:dien-giai}.
+
+% Giang; Hà — 3.2.3
+\section{Thiết kế thực nghiệm}
+\label{sec:thiet-lap}
+
+\subsection{Các thí nghiệm}
+\label{sec:cac-thi-nghiem}
+
+Bảng~\ref{tab:ch3-thi-nghiem} liệt kê 5 thí nghiệm theo thứ tự trình bày. TN1 và TN2 là hướng ban đầu: TN1 so 5 phiên bản PSO
+khi tìm tâm khởi tạo, TN2 đo số cực tiểu của $J_m$ để giải thích kết quả. TN3, TN4, TN5 là phần chính, chạy sau khi chuyển hướng: TN3 so PSO-W tìm trọng số với 3 đối
+chứng trên 7 bộ, TN4 so 5 phiên bản PSO khi tìm trọng số, TN5 kiểm trọng số học được trên mẫu độc lập. Thứ tự chạy thực tế
+khác thứ tự trình bày; trong mã nguồn và tệp kết quả, các thí nghiệm giữ tên theo thứ tự chạy (ghi trong ngoặc ở cột đầu;
+Phụ lục~\ref{app:code}).
+
+\begin{table}[htbp]
+\centering
+\caption{Các thí nghiệm của tiểu luận}
+\label{tab:ch3-thi-nghiem}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.2cm}>{\raggedright\arraybackslash}p{5.2cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{0.9cm}>{\raggedright\arraybackslash}p{0.9cm}@{}}
+\toprule
+TN (mã) & Phương pháp so sánh & Dữ liệu và cấu hình & Số lượt & Câu hỏi & Mục \\
+\midrule
+TN1 (E5, E7) & Năm phiên bản PSO tìm tâm, $N \in \{10, 20, 30\}$ hạt, $T \in \{20, 30, 50\}$ vòng; 3 đối chứng FCM ($U$ ngẫu
+nhiên, điểm ngẫu nhiên, k-means++); quỹ đạo gbest & Hai bộ chính $c = 3$; 3 cấu hình nhiều cực tiểu & \soLieuENamSoLuot{} và
+\soLieuEBaySoLuot & CH1 & \ref{sec:e5-dat-j} \\
+\addlinespace
+TN2 (E3, E6) & FCM từ 30 khởi tạo $U$ ngẫu nhiên và 30 khởi tạo k-means++ (E6 thêm điểm ngẫu nhiên và PSO-W); đếm số cực
+tiểu quan sát được & Bảy bộ tín dụng và bản Taiwan Default chưa lấy log, $m = 2$ (E3); 2 bộ chính, $m \in \{1{,}5;\ 2\}$,
+$c = 2, \dots, 8$ (E6) & 60--120 mỗi cấu hình & CH1 & \ref{sec:vi-sao} \\
+\addlinespace
+TN3 (E8) & PSO-W tìm trọng số (10 hạt, 500 lần tính fitness); FCM k-means++, WFCM giải tích, tìm ngẫu nhiên cùng ngân sách &
+Bảy bộ tín dụng, $m = 2$, $c \in \{2, 3, 4\}$ (\soLieuETamSoCauHinh{} cấu hình) & \soLieuETamSoLuot & CH2 & \ref{sec:pso-trong-so} \\
+\addlinespace
+TN4 (E9) & Năm phiên bản PSO tìm trọng số ở 2 ngân sách (500, 1.000 lần tính fitness); tìm ngẫu nhiên cùng ngân sách; FCM
+k-means++ & Hai bộ chính, $m = 2$, $c \in \{2, 3, 4\}$ & \soLieuEChinSoLuot & CH3 & \ref{sec:phien-ban-trong-so} \\
+\addlinespace
+TN5 (E10) & Trọng số học trên mẫu nguồn (PSO-W, tìm ngẫu nhiên, WFCM giải tích) áp lên mẫu đích; FCM thường và PSO-W học tại
+chỗ trên mẫu đích & Taiwan Default (mẫu thiết kế $\leftrightarrow$ kiểm chứng), Việt Nam (2 nửa theo doanh nghiệp), $c \in \{2,
+3, 4\}$ & \soLieuEMuoiSoLuot & CH4 & \ref{sec:kiem-chung} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Môi trường, tham số và cách chạy}
+
+Mã nguồn viết bằng Python~3.9.4 (numpy~2.0.2, scipy~1.13.1, pandas~2.3.3, scikit-learn~1.6.1), chạy trên Intel Xeon
+E-2278G 3,40~GHz, Linux, nhiều tiến trình song song (8 đến 16), mỗi tiến trình một luồng BLAS. Một \emph{tác vụ} là một bộ
+(cấu hình dữ liệu, seed) chạy tuần tự mọi phương pháp; một \emph{lượt} là một phương pháp chạy với một seed trên một cấu hình.
+Mỗi phương pháp nhận bộ sinh số ngẫu nhiên riêng tạo từ seed, nên mọi phương pháp tìm trọng số trong cùng tác vụ dùng chung tâm
+khởi tạo k-means++ và mẫu Silhouette. Mọi thí nghiệm dùng 30 seed chung, từ 1000 đến 1029; FCM dừng khi thay đổi lớn nhất của
+tâm (của ma trận độ thuộc, với khởi tạo $U$ ngẫu nhiên; Thuật toán~\ref{alg:fcm}) giữa 2 vòng nhỏ hơn
+$\varepsilon = 10^{-5}$, trần 10.000 vòng. Không lượt nào lỗi. Đơn vị độc lập trong mọi phép so là seed ($n = 30$), không
+phải lượt.
+
+\subsection{Kiểm định và cách báo kết quả}
+\label{sec:kiem-dinh}
+
+Ở phần trọng số, mỗi phép so là một cặp (phương pháp, đối chứng) ở một cấu hình và một chỉ số, dùng kiểm định Wilcoxon hai phía
+theo cặp seed~\parencite{wilcoxon1945}; trong mỗi thí nghiệm, thủ tục Holm~\parencite{holm1979} hiệu chỉnh trên toàn bộ các
+phép so ($\alpha = 0{,}05$). Kết quả được báo bằng trung vị 30 seed và số cấu hình ``tốt hơn / không khác / kém hơn''. Hai chỉ
+số chính (chênh tỉ lệ vỡ nợ, AUC phân hoạch) và phép so được chốt trước khi chạy TN3--TN5, sau khi các thí nghiệm thử đã
+xem chúng trên 2 bộ chính; Silhouette chỉ là chỉ số phụ vì chính nó là
+fitness. Ở phần tìm tâm, mỗi phiên bản cải tiến được so với PSO gốc trên độ lệch $J$ sau PSO bằng Wilcoxon, Holm trên
+\soLieuENamKdSoPhep{} phép so; tỉ lệ đạt $J$ tốt nhất chỉ được báo dạng số seed $k/30$, vì ở phần này hầu hết các
+phương pháp đạt cùng một nghiệm và mô tả là đủ. Khi không có phép so nào có ý nghĩa sau hiệu chỉnh, tiểu luận viết ``không
+phát hiện khác biệt'', không viết phương pháp nào tốt hơn hay kém hơn. Kiểm định theo seed chỉ cho biết khác biệt có vượt dao động ngẫu nhiên
+của thuật toán trên mẫu đang xét hay không; độ bất định do lấy mẫu khách hàng nằm ngoài phép đo này và chỉ được kiểm một phần ở TN5.
+
+% Hải — 3.3.1, 3.3.3; Bình — 3.3.2
+\section{PSO tìm tâm khởi tạo cho FCM}
+\label{sec:diem-xuat-phat}
+
+Mục này trình bày hướng nhóm thực hiện trước, cách ghép PSO với FCM phổ biến nhất trong tài liệu, và trả lời CH1. TN1 dùng
+5 phiên bản PSO tìm tâm (Thuật toán~\ref{alg:pso-khoi-tao}) trên lưới số hạt $N \in \{10, 20, 30\}$ và số vòng
+$T \in \{20, 30, 50\}$, rồi FCM chạy tới hội tụ từ gbest. Mục~\ref{sec:e5-dat-j} so các phiên bản với nhau,
+mục~\ref{sec:e5-doi-chung} so với 3 cách khởi tạo không dùng PSO, mục~\ref{sec:vi-sao} giải thích kết quả bằng số cực tiểu
+của $J_m$, và mục~\ref{sec:chuyen-huong} nêu nhận xét cùng lý do nhóm chuyển sang tìm trọng số. Phép đo số cực tiểu cũng là
+bước 1 của quy trình đề xuất.
+
+\subsection{So sánh 5 phiên bản theo số hạt và số vòng}
+\label{sec:e5-dat-j}
+
+Như thuật toán tối ưu, cả 4 bản cải tiến cho gbest gần cực tiểu hơn PSO gốc: có ý nghĩa sau Holm ở
+\soLieuENamKdWTotHon{} trên \soLieuENamKdSoOMoiPb{} ô với PSO-W, \soLieuENamKdSTotHon{} với PSO-S, \soLieuENamKdLogTotHon{} với
+PSO-LOG và \soLieuENamKdQpsoTotHon{} với QPSO, không ô nào kém hơn. Quỹ đạo gbest (Hình~\ref{fig:e7-quy-dao}) cho thấy PSO gốc,
+vốn giữ trọng số quán tính cố định bằng 1 và không giảm theo vòng, chỉ cải thiện trong vài vòng đầu (trên Taiwan Default, vòng cải thiện cuối có trung vị
+\soLieuEBayTaiwanKiemChungGocHatBaKhongVongNamKhongVongCuoiTv), còn PSO-W và QPSO cải thiện tới vòng cuối.
+\label{sec:e5-toi-uu}
+
+Bảng~\ref{tab:e5-lech-taiwan_kiem_chung} cho thấy cùng hiện tượng trên cả lưới. Độ lệch của PSO gốc chỉ giảm khi tăng số hạt
+(từ 26,0\% với 10 hạt xuống 22,5\% với 30 hạt trên Taiwan Default) và không đổi theo số vòng; 4 bản cải tiến giảm theo cả
+số hạt lẫn số vòng, tốt nhất là PSO-W và QPSO với 30 hạt, 50 vòng (9,5\% và 10,1\%). Bộ Việt Nam cho cùng xu hướng, với QPSO tốt nhất (6,1\%). Ngay ở ô
+tốt nhất, gbest vẫn cao hơn $J_m$ tốt nhất khoảng 6--10\%: PSO một mình chưa tới cực tiểu, phần còn lại do FCM làm.
+
+\input{results/bang/e5-lech-taiwan_kiem_chung}
+
+Thứ hạng đó không còn sau khi FCM chạy. Trên 2 bộ chính với $c = 3$, mọi phiên bản ở mọi ô của lưới đạt $J_m$ tốt nhất ở
+cả 30 seed. Trên Taiwan Default chưa lấy log với $c = 6$, cấu hình có 2 cực tiểu (mục~\ref{sec:vi-sao}), tỉ lệ đạt dao động
+từ 77\% tới 100\% mà không theo số hạt, số vòng hay phiên bản (Bảng~\ref{tab:e5-luoi-taiwan_kiem_chung_khong_log}); QPSO, bản
+tối ưu tốt nhất ở cấu hình này, lại cùng PSO-LOG có ô thấp nhất. Tăng ngân sách hay đổi phiên bản vì vậy không làm FCM tốt hơn.
+
+\input{results/bang/e5-luoi-taiwan_kiem_chung_khong_log}
+
+\subsection{So với khởi tạo ngẫu nhiên và k-means++}
+\label{sec:e5-doi-chung}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{e7-quy-dao-gbest}
+\caption{TN1: quỹ đạo gbest khi PSO tìm tâm (30 hạt, 50 vòng, $m = 2$, $c = 3$), đo bằng độ lệch $J_m$ của gbest so với $J_m$ tốt
+nhất, theo vòng; đường là trung vị, dải màu là khoảng tứ phân vị qua 30 seed}
+\label{fig:e7-quy-dao}
+\end{figure}
+
+Bảng~\ref{tab:e5-tong-hop} đặt 5 phiên bản (20 hạt, 30 vòng) cạnh 3 cách khởi tạo không dùng PSO. Trên 2 bộ chính với
+$c = 3$, mọi tổ hợp PSO và mọi đối chứng,
+kể cả FCM khởi tạo $U$ ngẫu nhiên, đạt $J$ tốt nhất ở mọi lượt; so theo seed với FCM k-means++, mọi lượt cho cùng $J_m$
+(\soLieuENamVietNamCBaCungJKpp\% và \soLieuENamTaiwanKiemChungCBaCungJKpp\%), cùng PC và AUC, và số vòng FCM không giảm. Ở 3
+cấu hình có nhiều cực tiểu, nhóm đếm số seed (trên 30) mà mỗi cách đạt cực tiểu tốt nhất. Trên Taiwan Default chưa log
+($c = 6$), k-means++ đạt ở cả 30 seed (trượt \soLieuENamKhongLogDoiChungKppTruot), còn các tổ hợp PSO đạt ít hơn hoặc bằng
+(tỉ lệ đạt của PSO trừ của k-means++ từ \soLieuENamKhongLogDoiChungHieuKppMin{} đến \soLieuENamKhongLogDoiChungHieuKppMax{} điểm
+phần trăm). Trên Taiwan Default với $m = 1{,}5$, $c = 7$, k-means++ trượt
+\soLieuEBayTaiwanKiemChungCBayDoiChungKppTruot/30 seed và mọi tổ hợp PSO đạt ít hơn k-means++
+(\soLieuEBayTaiwanKiemChungCBayDoiChungHieuKppMin{} đến \soLieuEBayTaiwanKiemChungCBayDoiChungHieuKppMax{} điểm). Chỉ trên Việt
+Nam với $m = 1{,}5$, $c = 8$, PSO đạt nhiều hơn k-means++ (k-means++ trượt \soLieuEBayVietNamCTamDoiChungKppTruot/30 seed, PSO
+hơn \soLieuEBayVietNamCTamDoiChungHieuKppMin{} đến \soLieuEBayVietNamCTamDoiChungHieuKppMax{} điểm, tức 2--3 seed); mức chênh
+này nhỏ và lấy lại được bằng cách chạy k-means++ nhiều lần (chạy lại 20 lần đạt cả 30 seed). So với FCM khởi tạo $U$ ngẫu nhiên, PSO có
+tốt hơn trên Taiwan Default chưa log (FCM $U$ ngẫu nhiên chỉ đạt 57\%), đúng loại kết quả các bài báo ghi nhận; nhưng FCM khởi
+tạo từ $c$ điểm dữ liệu ngẫu nhiên, tức bộ tâm của một hạt trước khi bay, đã đạt ở \soLieuENamKhongLogFcmDiemK/30 seed. Lợi
+ích so với khởi tạo ngẫu nhiên vì vậy đến từ việc khởi tạo bằng tâm, không từ bước tìm kiếm của bầy. Trong khi đó PSO chậm hơn FCM k-means++ khoảng \soLieuENamTaiwanKiemChungCBaTiLeThoiGianTv{} lần trên Taiwan
+Default và \soLieuENamVietNamCBaTiLeThoiGianTv{} lần trên Việt Nam (20 hạt, 30 vòng, trung vị).
+
+
+\input{results/bang/e5-tong-hop}
+
+Các chỉ số phân cụm cũng không phân biệt được các cách khởi tạo (Bảng~\ref{tab:e5-chi-so}). Trên các lượt cho cùng nghiệm,
+PC và AUC của mọi phương pháp chênh với FCM k-means++ dưới $10^{-4}$, Silhouette chênh nhiều nhất 0,018 trên 2 bộ chính.
+XB thì dao động rất rộng giữa các phương pháp dù cùng nghiệm, vì 2 tâm gần trùng làm mẫu số gần bằng không
+(mục~\ref{sec:chi-so}); tiểu luận vì vậy không dùng XB để so.
+\label{sec:e5-chi-so}
+
+\input{results/bang/e5-chi-so}
+
+\subsection{Giải thích: số cực tiểu của hàm mục tiêu}
+\label{sec:vi-sao}
+
+TN2 chạy FCM ($m = 2$) từ 30 khởi tạo độ thuộc ngẫu nhiên và 30 khởi tạo k-means++ trên mỗi bộ, mỗi $c$, rồi gom các $J_m$
+cuối lệch nhau không quá $10^{-4}$ (tương đối) thành một mức; số mức là số cực tiểu \emph{quan sát được}, không phải phép chứng
+minh $J_m$ chỉ có từng ấy cực tiểu. Một lượt là \emph{sụp} khi mọi tâm dồn về trung bình dữ liệu (độ lớn tâm dưới $10^{-3}$
+trên dữ liệu z-score), tức mọi độ thuộc bằng $1/c$ (Bảng~\ref{tab:e3-chan-doan}).
+
+\input{results/bang/e3-chan-doan}
+
+Bảng cho thấy 3 nhóm hành vi. \emph{Một cực tiểu:} trên 2 bộ chính đã lấy log, ở mọi cấu hình đã thử, $J_m$ chỉ có
+\soLieuEBaTaiwanKiemChungCSauUNgauNhienSoCucTieu{} cực tiểu và \soLieuEBaTaiwanKiemChungCSauUNgauNhienDatJ\% lượt đạt nó, với cả
+2 kiểu khởi tạo; Polish Bankruptcy cũng vậy nhưng gần sụp (PC \soLieuEBaPolishCHaiUNgauNhienPc{} với $c = 2$). \emph{Sụp:}
+South German, German bản số và Australian sụp ở \soLieuEBaSouthGermanCHaiUNgauNhienSup\% lượt với mọi $c$, Taiwan Bankruptcy
+sụp \soLieuEBaTaiwanPhaSanCHaiUNgauNhienSup\% với khởi tạo ngẫu nhiên; khi mức thấp nhất là nghiệm sụp, một bộ khởi tạo tìm được
+$J_m$ thấp hơn chỉ đưa FCM tới nghiệm sụp nhanh hơn. \emph{Nhiều cực tiểu không sụp:} chỉ Taiwan Default \emph{chưa lấy log}
+với $c = 5, 6$ và khởi tạo ngẫu nhiên (\soLieuEBaTaiwanKiemChungKhongLogCSauUNgauNhienDatJ\% lượt đạt cực tiểu tốt hơn với
+$c = 6$); ngay ở đây k-means++ đạt cực tiểu tốt hơn ở \soLieuEBaTaiwanKiemChungKhongLogCSauKmeansPpDatJ\% lượt, và sau khi lấy
+log chỉ còn 1 cực tiểu.
+
+TN2 còn quét 2 bộ chính với $m \in \{1{,}5;\ 2\}$, $c = 2, \dots, 8$ và 4 kiểu khởi tạo, gồm cả PSO-W
+(Bảng~\ref{tab:e6-cuc-tieu}). $J_m$ chỉ có 1 cực tiểu quan sát được ở \soLieuESauSoCauHinhMotCucTieu{} trên
+\soLieuESauSoCauHinh{} cấu hình; 2 cấu hình còn lại có $m = 1{,}5$ và nhiều cụm (Taiwan Default $c = 7$, Việt Nam $c = 8$).
+Cột khoảng cách nhỏ nhất giữa 2 tâm cho thấy với $m = 2$ và $c \ge 3$ 2 tâm gần trùng nhau
+(\soLieuESauVietNamMHaiPhayKhongCBaKcTam{} trên Việt Nam với $c = 3$), tức FCM thực chất tìm được ít cụm hơn số cụm yêu cầu.
+
+\input{results/bang/e6-cuc-tieu}
+
+\subsection{Nhận xét và lý do chuyển sang tìm trọng số}
+\label{sec:chuyen-huong}
+
+Kết quả của hướng ban đầu trả lời CH1 và khớp với TN2: khi $J_m$ chỉ có 1 cực tiểu, PSO và FCM làm giảm cùng một hàm nên PSO
+không còn gì để tìm; ở các cấu hình hiếm hoi có nhiều cực tiểu, chạy lại k-means++ vài lần là đủ. Hai giới hạn cần đọc kèm:
+các cấu hình nhiều cực tiểu được chọn bằng TN2 trên chính mẫu kiểm chứng (thiên lệch nghiêng về phía có lợi cho PSO, nên không
+làm yếu kết luận âm), và với 30 seed chỉ khác biệt lớn mới phát hiện được.
+
+Như đã tổng hợp ở mục~\ref{sec:trai-chieu}, các bài đề xuất PSO--FCM báo phương pháp của mình
+tốt hơn FCM nhưng với đối chứng không tương đương: bài 02 khởi tạo FCM ngẫu nhiên còn PSO--FCM khởi tạo bằng đồ
+thị~\cite{qian2022psofcm}, bài 04 không có FCM thuần làm đối chứng~\cite{zhang2025qpsofcm}. Khi FCM được so trong điều kiện
+tương đương, các nghiên cứu độc lập cho kết quả giống của nhóm: hoà trên dữ liệu dễ~\cite{mehdizadeh2008hybrid}, thua hoặc
+không hơn và chậm hơn nhiều lần~\cite{ghamisi2015swarm,omran2004thesis,izakian2009hybrid}, kể cả bản PSO--FCM đối chứng trong
+bài 06~\cite{liu2021msgwo}; và Hathaway và Bezdek đã ghi nhận từ năm 1988 rằng trong thực tế FCM khá ít phụ thuộc khởi
+tạo~\cite{hathaway1988recent}. Tài liệu vì vậy không cho lý do để kỳ vọng PSO tìm tâm cải thiện FCM trên dữ liệu như của nhóm.
+
+Cùng tài liệu đó gợi ý hướng khác: ở bài 06, đánh trọng số thuộc tính đóng góp nhiều hơn hẳn phần tìm tâm bằng bầy
+sói~\cite{liu2021msgwo} (mục~\ref{sec:cac-nghien-cuu}), trong khi FCM không tự chọn được
+trọng số (mục~\ref{sec:kc-trong-so}). Nhóm vì vậy giữ nguyên dữ liệu, tiền xử lý, 5 phiên bản PSO và cách kiểm định, chỉ đổi
+thứ PSO tối ưu: từ tâm cụm sang trọng số thuộc tính. Các mục sau trình bày kết quả của hướng mới.
+
+% Giang
+\section{PSO tìm trọng số so với các đối chứng}
+\label{sec:pso-trong-so}
+
+Mục này trả lời CH2 bằng TN3: PSO-W tìm trọng số thuộc tính cho FCM (mục~\ref{sec:pso-trong-so-pp}), so với FCM k-means++,
+WFCM trọng số giải tích và tìm ngẫu nhiên cùng 500 lần tính fitness, trên 7 bộ tín dụng với $c = 2, 3, 4$ và $m = 2$
+(\soLieuETamSoLuot{} lượt, không lượt nào lỗi). Hai chỉ số chính được chốt trước khi chạy là AUC phân hoạch và chênh tỉ lệ vỡ
+nợ $\Delta r$ (mục~\ref{sec:chi-so}); cả hai dùng nhãn, còn nhãn không đi vào fitness. Silhouette chỉ là chỉ số phụ vì chính
+nó là fitness. Mỗi cặp (PSO, đối chứng) được so theo cặp seed bằng Wilcoxon ở từng bộ, từng $c$ và từng chỉ số, hiệu chỉnh
+Holm trên cả \soLieuETamSoPhep{} phép thử (Bảng~\ref{tab:e8-ket-qua}, \ref{tab:e8-tong-hop}).
+
+\input{results/bang/e8-ket-qua}
+
+\input{results/bang/e8-tong-hop}
+
+\subsection{Tách rủi ro trên 2 bộ chính}
+
+Trên Việt Nam, PSO tốt hơn FCM thường có ý nghĩa ở cả 3 số cụm, cả về AUC phân
+hoạch lẫn chênh tỉ lệ vỡ nợ. Với $c = 2$, AUC tăng từ \soLieuETamVietNamCHaiFcmKppAucCung{} lên
+\soLieuETamVietNamCHaiPsoTrongSoAucCung{} và $\Delta r$ từ \soLieuETamVietNamCHaiFcmKppChenhTiLe{} lên
+\soLieuETamVietNamCHaiPsoTrongSoChenhTiLe; với $c = 4$, $\Delta r$ tăng từ \soLieuETamVietNamCBonFcmKppChenhTiLe{} lên
+\soLieuETamVietNamCBonPsoTrongSoChenhTiLe. Trên Taiwan Default với $c = 3$, AUC tăng từ
+\soLieuETamTaiwanKiemChungCBaFcmKppAucCung{} lên \soLieuETamTaiwanKiemChungCBaPsoTrongSoAucCung{} và $\Delta r$ từ
+\soLieuETamTaiwanKiemChungCBaFcmKppChenhTiLe{} lên \soLieuETamTaiwanKiemChungCBaPsoTrongSoChenhTiLe; $c = 4$ cho kết quả cùng
+chiều. Ở vai trò tìm tâm, PSO không làm được điều này vì cho cùng nghiệm với FCM ở mọi lượt (mục~\ref{sec:e5-dat-j}).
+
+\subsection{Phần do cơ chế bầy đàn và so với trọng số bằng công thức}
+
+So với tìm ngẫu nhiên cùng ngân sách, PSO cho fitness tốt hơn có ý nghĩa ở
+\soLieuETamSilhouetteNgauNhienTrongSoHon{} trên \soLieuETamSoCauHinh{} cấu hình và không kém ở cấu hình nào. Hình~\ref{fig:e8-hoi-tu}
+cho thấy khoảng cách hình thành trong khoảng 50 tới 100 lần tính fitness đầu: sau đó tìm ngẫu nhiên gần như ngừng cải thiện,
+còn PSO tiếp tục tăng tới khoảng 200 lần trên Việt Nam và tới cuối ngân sách trên Taiwan Default. Về 2 chỉ số chính, PSO tốt hơn tìm ngẫu nhiên ở \soLieuETamChenhTiLeNgauNhienTrongSoHon{} cấu hình theo $\Delta r$
+(3 cấu hình của Việt Nam và Taiwan Default $c = 2$) và \soLieuETamAucCungNgauNhienTrongSoHon{} cấu hình theo AUC; ở phần
+lớn cấu hình còn lại 2 cách không khác nhau. Như vậy trên Việt Nam, một phần lợi ích về tách rủi ro đến từ chính cơ chế bầy
+đàn; ở các bộ khác, lợi ích (nếu có) chủ yếu đến từ việc đánh trọng số theo Silhouette, và tìm ngẫu nhiên đủ nhiều cũng đạt
+được.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{e8-hoi-tu}
+\caption{TN3: fitness tốt nhất (Silhouette trừ phạt cụm nhỏ) theo số lần tính fitness của PSO và tìm ngẫu nhiên; đường là
+trung vị, dải là khoảng tứ phân vị của 30 seed}
+\label{fig:e8-hoi-tu}
+\end{figure}
+
+WFCM giải tích rẻ hơn khoảng hai bậc độ lớn và trên Việt Nam với $c = 3$,
+$c = 4$ cho AUC và $\Delta r$ ngang hoặc hơn PSO. Nhưng trên Taiwan Default với $c = 3$, công thức gần như làm mất khả năng
+tách rủi ro (AUC \soLieuETamTaiwanKiemChungCBaWfcmGiaiTichAucCung, $\Delta r$
+\soLieuETamTaiwanKiemChungCBaWfcmGiaiTichChenhTiLe), trong khi PSO đạt \soLieuETamTaiwanKiemChungCBaPsoTrongSoAucCung{} và
+\soLieuETamTaiwanKiemChungCBaPsoTrongSoChenhTiLe. Công thức dồn trọng số vào thuộc tính làm các cụm chặt nhất; trên Taiwan
+Default đó là dư nợ các tháng (BILL\_AMT2--6, seed 1000), đúng nhóm mà PSO giảm trọng số (Hình~\ref{fig:e8-trong-so}). Tính
+trên cả 7 bộ, PSO tốt hơn WFCM giải tích ở \soLieuETamAucCungWfcmGiaiTichHon{} cấu hình và kém ở
+\soLieuETamAucCungWfcmGiaiTichKem{} cấu hình theo AUC; không cách nào thắng ở mọi bộ.
+
+Các đối chứng trên đều là FCM với $m = 2$, mà với $c \ge 3$ FCM này gần suy biến (mục~\ref{sec:vi-sao}). Vì vậy nhóm chạy
+thêm K-means không trọng số, cùng seed và tiền xử lý, làm mốc tham chiếu (Bảng~\ref{tab:e8-kmeans}; Holm riêng trên
+\soLieuETamKmSoPhep{} phép so để không đổi họ kiểm định của TN3). Với 2 cụm, PSO tốt hơn K-means trên cả 2 bộ chính. Với
+3 và 4 cụm, K-means tách rủi ro tốt hơn: trên Việt Nam, $\Delta r$ với $c = 4$ là \soLieuETamKmVietNamCBonChenhTiLe{} so
+với \soLieuETamVietNamCBonPsoTrongSoChenhTiLe{} của PSO; trên Taiwan Default, K-means hơn có ý nghĩa ở $\Delta r$ với $c = 4$,
+còn với $c = 3$ không phát hiện khác biệt. Tính trên 7 bộ, PSO tốt hơn / không khác / kém K-means ở
+\soLieuETamKmChenhTiLeHon{} / \soLieuETamKmChenhTiLeBang{} / \soLieuETamKmChenhTiLeKem{} cấu hình theo $\Delta r$. Như vậy lợi
+ích của PSO tìm trọng số là lợi ích so với FCM $m = 2$, chưa phải so với mọi cách phân cụm; khi chỉ cần phân hoạch cứng,
+K-means là mốc phải so trước. Lý do giữ FCM nằm ở độ thuộc (mục~\ref{sec:dien-giai}).
+
+\input{results/bang/e8-kmeans}
+
+\subsection{Trọng số tìm được và chi phí}
+
+Hình~\ref{fig:e8-trong-so} cho thấy PSO chọn các thuộc tính có nghĩa kinh tế rõ. Trên Taiwan
+Default, 3 thuộc tính nặng nhất là \soLieuETamTaiwanKiemChungTrongSoCaoMotTen, \soLieuETamTaiwanKiemChungTrongSoCaoHaiTen{} và
+\soLieuETamTaiwanKiemChungTrongSoCaoBaTen{} (tình trạng trả nợ các tháng), trùng với trục phân cụm đọc được ở
+mục~\ref{sec:dien-giai}, còn hạn mức và dư nợ các tháng bị giảm trọng số. Trên Việt Nam, trọng số dồn vào các tỉ số định giá
+(\soLieuETamVietNamTrongSoCaoMotTen: EV/doanh thu; \soLieuETamVietNamTrongSoCaoBaTen: P/S) và đòn bẩy
+(\soLieuETamVietNamTrongSoCaoHaiTen: tổng nợ/vốn chủ sở hữu), mỗi thuộc tính nặng gấp khoảng
+\soLieuETamVietNamTrongSoCaoMotGiaTri{} lần trung bình, còn các tỉ số thanh khoản (X1, X2) và phần lớn tỉ số thị trường khác
+bị đẩy về gần cận dưới. Vector trọng số vì vậy còn cho biết nhóm chỉ tiêu nào quyết định phân khúc.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{e8-trong-so}
+\caption{TN3: trọng số tương đối (chia cho trung bình, trung vị của 30 seed) do PSO tìm với $c = 3$; đường đứt là trọng số
+bằng nhau của FCM thường}
+\label{fig:e8-trong-so}
+\end{figure}
+
+Một lượt PSO tìm trọng số mất khoảng \soLieuETamThoiGianPso{} giây (trung vị trên mọi cấu hình), so với
+\soLieuETamThoiGianFcm{} giây của FCM thường, vì mỗi lần tính fitness là một lần chạy FCM và một lần tính Silhouette. Chi phí
+này chỉ trả một lần khi dựng phân khúc, nên chấp nhận được với dữ liệu cỡ vài nghìn khách hàng; với dữ liệu lớn hơn cần giảm
+mẫu Silhouette hoặc trần vòng FCM bên trong.
+
+
+% Hà; Hải — QPSO và chi phí
+\section{Năm phiên bản PSO khi tìm trọng số}
+\label{sec:phien-ban-trong-so}
+
+Mục này trả lời CH3 bằng TN4: 5 phiên bản PSO (Bảng~\ref{tab:ch2-phien-ban}) lắp vào cùng khung tìm trọng số
+(Thuật toán~\ref{alg:pso-trong-so}), chạy trên 2 bộ chính với $c = 2, 3, 4$ ở 2 ngân sách, 500 lần tính fitness (10 hạt) và
+1.000 lần (20 hạt), cùng 49 vòng (\soLieuEChinSoLuot{} lượt). Mỗi phiên bản được so với tìm ngẫu nhiên cùng ngân sách và mỗi
+bản cải tiến được so với PSO gốc, trên điểm fitness (Silhouette trừ phạt), AUC phân hoạch và chênh tỉ lệ vỡ nợ, ở
+\soLieuEChinSoO{} ô (2 bộ, 3 số cụm, 2 ngân sách); Holm hiệu chỉnh trên cả \soLieuEChinSoPhep{} phép so
+(Bảng~\ref{tab:e9-tong-hop}--\ref{tab:e9-chenh}, Hình~\ref{fig:e9-quy-dao}).
+
+\input{results/bang/e9-tong-hop}
+
+\subsection{Mọi phiên bản đều hơn tìm ngẫu nhiên}
+
+Cả 5 phiên bản cho điểm fitness tốt hơn tìm ngẫu nhiên cùng ngân sách có ý nghĩa ở \soLieuEChinGocNgauNhienDiemHon{} đến
+12 trên \soLieuEChinSoO{} ô, và chênh tỉ lệ vỡ nợ tốt hơn ở 8 đến 9 ô; không phiên bản nào kém tìm ngẫu nhiên ở ô nào, trên
+chỉ số nào. Với AUC phân hoạch, phần lớn ô không khác (Bảng~\ref{tab:e9-tong-hop}): trên Việt Nam, mọi cách đánh trọng số đều
+đã nâng AUC so với FCM thường, và khác biệt giữa PSO và tìm ngẫu nhiên nằm ở mức tách của cụm rủi ro cao, tức $\Delta r$. Hình~\ref{fig:e9-quy-dao}
+cho thấy cách khoảng cách hình thành: mọi phiên bản tăng nhanh trong 200--400 lần tính fitness đầu rồi chững lại, còn tìm ngẫu
+nhiên chỉ tăng chậm sau khoảng 200 lần. Theo trung vị, PSO với 500 lần đã có điểm cao hơn tìm ngẫu nhiên với 1.000 lần ở mọi ô;
+chẳng hạn trên Việt
+Nam với $c = 3$, điểm của PSO-W với 500 lần là \soLieuEChinVietNamCBaPsoWNamKhongKhongDiem{} so với
+\soLieuEChinVietNamCBaNgauNhienMotKhongKhongKhongDiem{} của tìm ngẫu nhiên với 1.000 lần. Kết quả này củng cố TN3: phần lợi ích
+do cơ chế bầy đàn không phụ thuộc phiên bản PSO nào được chọn.
+
+\input{results/bang/e9-diem}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{e9-quy-dao}
+\caption{TN4: điểm fitness tốt nhất (Silhouette trừ phạt, trung vị 30 seed) theo số lần tính fitness của 5 phiên bản PSO
+và tìm ngẫu nhiên (NN), ngân sách 1.000 lần, $c = 3$}
+\label{fig:e9-quy-dao}
+\end{figure}
+
+\subsection{Các bản cải tiến không hơn PSO gốc}
+
+Không bản cải tiến nào khác PSO gốc có ý nghĩa ở bất kỳ ô nào, trên cả 3 chỉ số (Bảng~\ref{tab:e9-tong-hop}); trên hình,
+quỹ đạo của 5 phiên bản gần như chồng lên nhau. QPSO là bản gần ngưỡng nhất, với trung vị $\Delta r$ cao hơn trên Taiwan Default
+$c = 4$ (Bảng~\ref{tab:e9-chenh}) nhưng không còn ý nghĩa sau hiệu chỉnh. Kết quả này ngược với phần tìm tâm, nơi cả 4 bản cải
+tiến đều đưa gbest gần cực tiểu hơn PSO gốc (mục~\ref{sec:e5-dat-j}). Một cách giải thích là khác biệt về không gian tìm kiếm:
+khi tìm tâm, hộp tìm kiếm rộng bằng miền dữ liệu và PSO gốc ($\omega = 1$) không thu hẹp được quanh gbest; khi tìm trọng số,
+hộp chỉ là $[0{,}05;\ 1]^D$ và fitness thay đổi theo bậc, vì nhiều vector trọng số gần nhau cho cùng một phân hoạch cứng, nên
+việc thu hẹp bước đi không đem lại thêm bao nhiêu. Nhóm không có phép thử tách riêng nguyên nhân này.
+
+\input{results/bang/e9-chenh}
+
+Tăng ngân sách từ 500 lên 1.000 lần tính fitness làm trung vị điểm fitness tốt lên ở 27 trên 30 trường hợp (5 phiên bản,
+6 cấu hình), rõ nhất khi có nhiều cụm (trên Taiwan
+Default với $c = 4$, PSO gốc từ \soLieuEChinTaiwanKiemChungCBonPsoGocNamKhongKhongDiem{} lên
+\soLieuEChinTaiwanKiemChungCBonPsoGocMotKhongKhongKhongDiem), nhưng không đổi kết luận về $\Delta r$ và AUC, trong khi thời gian
+gấp đôi (trung vị \soLieuEChinVietNamCBaPsoWNamKhongKhongTTong~s với PSO-W 500 lần trên Việt Nam $c = 3$). Không phát hiện khác
+biệt giữa các phiên bản sau hiệu chỉnh Holm; vì họ hiệu chỉnh gộp nhiều phép so nên kiểm định kém nhạy, và kết quả âm này chỉ cho thấy
+khác biệt (nếu có) là nhỏ. Về thực hành, PSO gốc hoặc PSO-W với khoảng 500 lần tính fitness là đủ.
+
+% Bình
+\section{Kiểm chứng trên mẫu độc lập và giới hạn}
+\label{sec:kiem-chung}
+
+Mục này trả lời CH4 và là bước 3 của quy trình đề xuất. Ở TN3, trọng số được tìm và đánh giá trên cùng một mẫu; nếu PSO chỉ
+khớp với đặc điểm riêng của mẫu đó, lợi ích sẽ không giữ khi áp trọng số lên khách hàng mới. TN5 học trọng số trên một mẫu
+nguồn, rồi trên một mẫu đích độc lập chạy FCM với trọng số đó từ cùng tâm khởi tạo k-means++ như FCM thường. Có 4 chiều
+chuyển: 2 mẫu 5.000 khách hàng không giao nhau của Taiwan Default theo cả 2 chiều, và 2 nửa của bộ Việt Nam chia theo
+doanh nghiệp theo cả 2 chiều. Mỗi chiều so 5 cách trên mẫu đích: FCM thường, trọng số chuyển từ WFCM giải tích, từ tìm
+ngẫu nhiên, từ PSO-W, và PSO-W học ngay trên mẫu đích làm mốc ``tại chỗ'' (Bảng~\ref{tab:e10-ket-qua},
+\ref{tab:e10-tong-hop}; \soLieuEMuoiSoLuot{} lượt).
+
+\input{results/bang/e10-ket-qua}
+
+\input{results/bang/e10-tong-hop}
+
+\subsection{Lợi ích giữ trên mẫu độc lập}
+
+Trọng số PSO học trên mẫu nguồn vẫn làm FCM tách rủi ro tốt hơn FCM thường trên mẫu đích: tốt hơn có ý nghĩa ở
+\soLieuEMuoiChenhTiLeFcmKppHon{} trên \soLieuEMuoiSoCauHinh{} cấu hình theo chênh tỉ lệ vỡ nợ (không cấu hình nào kém hơn) và
+\soLieuEMuoiAucCungFcmKppHon{} cấu hình theo AUC phân hoạch. Trên Việt Nam (nửa 0 sang nửa 1, $c = 2$), $\Delta r$ tăng từ
+\soLieuEMuoiVnKhongMotCHaiFcmKppChenhTiLe{} lên \soLieuEMuoiVnKhongMotCHaiPsoChuyenChenhTiLe; trên Taiwan Default (mẫu kiểm
+chứng sang mẫu thiết kế, $c = 4$), AUC tăng từ \soLieuEMuoiTaiwanKcTkCBonFcmKppAucCung{} lên
+\soLieuEMuoiTaiwanKcTkCBonPsoChuyenAucCung. Cấu hình duy nhất kém hơn FCM thường (theo AUC, không theo $\Delta r$) là Taiwan
+Default với $c = 2$ (mẫu thiết kế sang mẫu kiểm chứng), đúng chỗ PSO đã yếu ở TN3.
+
+So với PSO học ngay trên mẫu đích, trọng số chuyển sang không khác có ý nghĩa ở \soLieuEMuoiChenhTiLePsoTaiChoBang{} cấu hình
+theo $\Delta r$ và \soLieuEMuoiAucCungPsoTaiChoBang{} cấu hình theo AUC. Phần mất đi tập trung ở một chiều chuyển của Taiwan
+Default (mẫu thiết kế sang mẫu kiểm chứng) với $c = 3, 4$; chẳng hạn với $c = 4$, AUC là
+\soLieuEMuoiTaiwanTkKcCBonPsoChuyenAucCung{} so với \soLieuEMuoiTaiwanTkKcCBonPsoTaiChoAucCung{} khi học tại chỗ, vẫn cao hơn FCM
+thường. Trọng số học ở 2 mẫu cũng giống nhau: cosine trung vị giữa trọng số học trên mẫu nguồn và trên mẫu đích là
+\soLieuEMuoiTaiwanTkKcCosTrongSo{} ở Taiwan Default và \soLieuEMuoiVnKhongMotCosTrongSo{} ở Việt Nam. Tuy vậy, do mọi trọng số đều dương,
+hai vector ngẫu nhiên trong miền tìm kiếm cũng có cosine khoảng 0,8, nên con số này chưa cho thấy từng giá trị trọng số ổn
+định giữa 2 mẫu; thứ giữ được là lợi ích của phân hoạch.
+
+Phần lợi ích do cơ chế bầy đàn cũng giữ: trọng số PSO chuyển sang tốt hơn trọng số tìm ngẫu nhiên chuyển sang ở
+\soLieuEMuoiChenhTiLeNgauNhienChuyenHon{} cấu hình theo $\Delta r$ (không cấu hình nào kém hơn), rõ nhất trên Việt Nam ở mọi
+chiều và mọi $c$. So với WFCM giải tích chuyển sang, PSO tốt hơn ở \soLieuEMuoiChenhTiLeWfcmChuyenHon{} cấu hình theo $\Delta r$
+và \soLieuEMuoiAucCungWfcmChuyenHon{} cấu hình theo AUC; trên Taiwan Default công thức lại gần như xoá khả năng tách rủi ro
+($\Delta r$ \soLieuEMuoiTaiwanTkKcCBaWfcmChuyenChenhTiLe{} với $c = 3$), giống TN3.
+
+\subsection{Khi nào PSO tìm trọng số không có ích}
+\label{sec:khong-co-ich}
+
+Trên 7 bộ của TN3, PSO kém FCM thường có ý nghĩa ở \soLieuETamAucCungFcmKppKem{} cấu hình theo AUC, đều với
+$c = 2$ (Australian, Polish, South German, Taiwan Bankruptcy, Taiwan Default). Với 2 cụm, FCM thường đã tách theo trục có
+liên quan tới vỡ nợ, còn PSO tìm một cách tách đẹp hơn về hình học (Silhouette cao hơn) nhưng ít liên quan tới rủi ro hơn:
+fitness không nhìn nhãn nên không có gì bảo đảm 2 mục tiêu trùng nhau. Ở Australian, South German và Taiwan Bankruptcy với
+$c \ge 3$ (và Polish với $c = 4$), FCM thường cho nghiệm gần sụp, cụm nhỏ nhất chỉ chiếm \soLieuETamSouthGermanCBaFcmKppCumNhoNhat{} dữ liệu (South
+German, $c = 3$) hoặc \soLieuETamAustralianCBonFcmKppCumNhoNhat{} (Australian, $c = 4$). Phạt cụm nhỏ buộc PSO tìm phân hoạch
+cân hơn; trên South German điều này làm AUC tăng (\soLieuETamSouthGermanCBonFcmKppAucCung{} lên
+\soLieuETamSouthGermanCBonPsoTrongSoAucCung{} với $c = 4$), nhưng trên Australian và Polish thì không tăng có ý nghĩa. Trên
+Taiwan Bankruptcy với $c = 4$, PSO giảm số cụm rỗng nhưng cụm nhỏ nhất vẫn dưới 0,1\% dữ liệu ở trung vị, tức phạt cụm nhỏ
+không đạt được.
+
+Tổng hợp TN3 và TN5, PSO tìm trọng số có ích khi dữ liệu có nhiều thuộc tính số liên tục đo các khía cạnh khác nhau của
+rủi ro, như các tỉ số tài chính của bộ Việt Nam hay lịch sử trả nợ và dư nợ của bộ Taiwan Default: ở đó PSO có ích với mọi
+$c$ đã thử trên Việt Nam và với $c = 3, 4$ trên Taiwan Default, còn $c = 2$ là chỗ yếu nhất. Trên các bộ mà đa số thuộc tính là mã thứ bậc hoặc định danh (South German,
+German, Australian) hoặc có đuôi cực dài (2 bộ phá sản), FCM thường đã gần sụp và trọng số không cứu được. Vì fitness không
+nhìn nhãn, bước 3 của quy trình đề xuất (mục~\ref{sec:de-xuat}) là cần thiết: dùng nhãn lịch sử trên một mẫu độc lập để quyết
+định có áp trọng số hay không, đúng như TN5 làm.
+
+
+\section{Diễn giải các phân khúc rủi ro}
+\label{sec:dien-giai}
+
+Mục này đọc các phân khúc với $c = 3$, $m = 2$, seed 1000, đặt phân hoạch FCM thường cạnh phân hoạch FCM có trọng số do
+PSO-W tìm (TN3) trên cùng tâm khởi tạo (Bảng~\ref{tab:e4-profile-viet_nam}, \ref{tab:e4-profile-taiwan_kiem_chung}). Cụm được
+đánh số theo tỉ lệ vỡ nợ tăng dần; cột ``mơ hồ'' là tỉ lệ khách hàng có độ thuộc lớn nhất dưới 0,6; 5 thuộc tính in ra (thang
+gốc) là 5 thuộc tính có khoảng trung bình giữa các cụm của phân hoạch có trọng số rộng nhất, tính theo độ lệch chuẩn.
+
+\input{results/bang/e4-profile-viet_nam}
+
+Trên Việt Nam, trọng số làm phân khúc rủi ro cao gọn và rõ hơn. Với FCM thường, cụm rủi ro cao chiếm
+\soLieuEBonVietNamFcmKppCumBaCo\% doanh nghiệp với tỉ lệ khó khăn tài chính \soLieuEBonVietNamFcmKppCumBaVoNo\%; với trọng số do PSO tìm,
+cụm này chỉ còn \soLieuEBonVietNamPsoTrongSoCumBaCo\% doanh nghiệp nhưng tỉ lệ khó khăn tài chính lên \soLieuEBonVietNamPsoTrongSoCumBaVoNo\%,
+còn cụm rủi ro thấp chiếm \soLieuEBonVietNamPsoTrongSoCumMotCo\% với tỉ lệ \soLieuEBonVietNamPsoTrongSoCumMotVoNo\%. Cụm rủi ro
+cao có các tỉ số nợ trên vốn chủ sở hữu (X6, X8, X10) cao nhất, đúng các thuộc tính PSO đánh trọng số cao ở
+Hình~\ref{fig:e8-trong-so}; tỉ số phải trả người bán trên tổng tài sản (X11) cũng cao dù trọng số của nó thấp. Cụm giữa được tách theo định giá: P/S (X17) cao gấp nhiều lần 2 cụm
+còn lại, tức nhóm doanh nghiệp được thị trường định giá cao so với doanh thu, có tỉ lệ khó khăn tài chính \soLieuEBonVietNamPsoTrongSoCumHaiVoNo\%,
+dưới mức chung của bộ dữ liệu. Độ thuộc cũng có ý nghĩa trở lại: tỉ lệ khách hàng mơ hồ giảm từ \soLieuEBonVietNamFcmKppCumBaMoHo--\soLieuEBonVietNamFcmKppCumMotMoHo\% ở FCM thường
+xuống \soLieuEBonVietNamPsoTrongSoCumMotMoHo--\soLieuEBonVietNamPsoTrongSoCumBaMoHo\%, nên độ thuộc phân biệt được doanh nghiệp
+điển hình với doanh nghiệp ``biên'', đúng lý do chọn phân cụm mờ ở Chương~\ref{chap:tong-quan}.
+
+\input{results/bang/e4-profile-taiwan_kiem_chung}
+
+Trên Taiwan Default, trục phân khúc ở cả 2 phân hoạch là lịch sử trả nợ: 5 thuộc tính khác nhau nhiều nhất giữa các cụm đều
+là tình trạng trả nợ các tháng (PAY\_2--PAY\_6), và cụm rủi ro cao gồm khách hàng có giá trị PAY dương, tức có trễ hạn. Trọng số
+làm trục này rõ hơn: cụm rủi ro cao có PAY trung bình cao hơn và tỉ lệ vỡ nợ \soLieuEBonTaiwanKiemChungPsoTrongSoCumBaVoNo\%
+(so với \soLieuEBonTaiwanKiemChungFcmKppCumBaVoNo\% ở FCM thường), còn cụm rủi ro thấp có tỉ lệ
+\soLieuEBonTaiwanKiemChungPsoTrongSoCumMotVoNo\% (so với \soLieuEBonTaiwanKiemChungFcmKppCumMotVoNo\%). Khác với Việt Nam, độ
+thuộc vẫn chia gần đều: tỉ lệ khách hàng mơ hồ ở 2 cụm vẫn là \soLieuEBonTaiwanKiemChungPsoTrongSoCumBaMoHo\%. Với $m = 2$, trọng
+số làm phân hoạch cứng tách rủi ro tốt hơn nhưng chưa làm các tâm tách đủ xa để độ thuộc có ý nghĩa trên bộ này; chọn $m$ nhỏ
+hơn (mục~\ref{sec:vi-sao}) là hướng bổ sung.
+
+% Bình
+\section{Đánh giá chung các thuật toán}
+\label{sec:danh-gia-chung}
+
+Các mục trên trả lời từng câu hỏi nghiên cứu. Mục này nhìn lại theo từng thuật toán: mỗi phiên bản PSO đã được dùng ở 2
+vai trò, cùng với FCM, WFCM giải tích và tìm ngẫu nhiên làm đối chứng (Bảng~\ref{tab:ch3-danh-gia}).
+
+\begin{table}[htbp]
+\centering
+\caption{Đánh giá các thuật toán trên dữ liệu tín dụng theo 2 vai trò}
+\label{tab:ch3-danh-gia}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{5.4cm}>{\raggedright\arraybackslash}p{5.0cm}>{\raggedright\arraybackslash}p{2.1cm}@{}}
+\toprule
+Thuật toán & Khi tìm tâm khởi tạo (TN1, TN2) & Khi tìm trọng số (TN3, TN4) & Thời gian \\
+\midrule
+FCM k-means++ & Đạt $J_m$ tốt nhất ở mọi lượt trên 2 bộ chính; chỉ kém PSO 2--3/30 seed ở một cấu hình nhiều cực tiểu & Mốc không trọng số; thua PSO
+trên Việt Nam (mọi $c$) và Taiwan Default ($c = 3, 4$) & \soLieuETamThoiGianFcm~s \\
+\addlinespace
+WFCM giải tích & --- & Ngang hoặc hơn PSO trên Việt Nam $c = 3, 4$; gần như mất khả năng tách rủi ro trên Taiwan Default & cỡ một
+lần FCM \\
+\addlinespace
+Tìm ngẫu nhiên & --- & Thua PSO về fitness ở \soLieuETamSilhouetteNgauNhienTrongSoHon/\soLieuETamSoCauHinh{} cấu hình; ngừng cải
+thiện sớm & cùng ngân sách \\
+\addlinespace
+PSO gốc & gbest xa cực tiểu nhất (22--26\% trên Taiwan Default); không cải thiện khi tăng số vòng & Không khác các bản cải tiến
+ở ô nào & 25--27~s (500 lần tính fitness) \\
+PSO-W & Cùng QPSO gần cực tiểu nhất (9,5\% với 30 hạt, 50 vòng) & Dùng ở TN3; không khác PSO gốc & như PSO gốc \\
+PSO-S & Kém nhất trong 4 bản cải tiến & Không khác PSO gốc & như PSO gốc \\
+PSO-LOG & Giữa PSO-W và PSO-S & Không khác PSO gốc & như PSO gốc \\
+QPSO & Tốt nhất trên Việt Nam và Taiwan chưa log & Gần ngưỡng nhất ($\Delta r$, Taiwan $c = 4$), không có ý nghĩa sau Holm &
+như PSO gốc \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ở vai trò tìm tâm, sau khi FCM chạy, mọi phiên bản cho cùng nghiệm với FCM
+k-means++ và chậm hơn khoảng \soLieuENamTaiwanKiemChungCBaTiLeThoiGianTv{} lần trên Taiwan Default; thời gian ở cột cuối là của
+vai trò tìm trọng số (trung vị).}
+\end{table}
+
+Ba nhận xét rút ra từ bảng. Thứ nhất, \emph{các phiên bản PSO có thứ hạng rõ khi được đo như thuật toán tối ưu}: 4 bản cải
+tiến đưa gbest gần cực tiểu hơn PSO gốc, PSO-W và QPSO tốt nhất, đúng như lý do chúng được đề xuất trong tài
+liệu~\cite{shi1998inertia,qian2022psofcm,zhang2025qpsofcm}. Thứ hai, \emph{thứ hạng đó không chuyển thành kết quả phân cụm}: khi
+tìm tâm, FCM chạy sau đưa mọi điểm xuất phát về cùng một cực tiểu; khi tìm trọng số, fitness thay đổi theo bậc và hộp tìm kiếm
+hẹp, nên PSO gốc đã đủ. Thứ ba, \emph{vai trò của PSO quyết định kết quả, còn phiên bản thì không}: cùng 5 thuật toán, ở vai
+trò tìm tâm không đem lại gì so với FCM k-means++, ở vai trò tìm trọng số làm phân khúc tách rủi ro tốt hơn trên 2 bộ chính
+và tối ưu fitness tốt hơn tìm ngẫu nhiên. Với dữ liệu tín dụng như của nhóm, khi cần độ thuộc để nhận ra khách hàng
+``biên'', lựa chọn hợp lý là FCM khởi tạo k-means++, cộng PSO gốc hoặc PSO-W tìm trọng số với khoảng 500 lần tính fitness,
+và giữ WFCM giải tích làm phương án rẻ để so; khi chỉ cần phân hoạch cứng với 3 cụm trở lên, K-means không trọng số tách rủi
+ro tốt hơn trên 2 bộ chính và nên được so trước.
+
+\section*{Tiểu kết Chương 3}
+\addcontentsline{toc}{section}{Tiểu kết Chương 3}
+\label{sec:tong-ket}
+
+Bảng~\ref{tab:ch3-tong-ket} tóm tắt câu trả lời cho 4 câu hỏi nghiên cứu; số liệu đã trình bày ở các mục trên.
+
+\begin{table}[htbp]
+\centering
+\caption{Tổng kết kết quả thực nghiệm}
+\label{tab:ch3-tong-ket}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.4cm}>{\raggedright\arraybackslash}p{11.0cm}@{}}
+\toprule
+Câu hỏi & Kết quả \\
+\midrule
+CH1: PSO tìm tâm (hướng ban đầu) & Không giúp FCM. $J_m$ hầu như chỉ có 1 cực tiểu
+(\soLieuESauSoCauHinhMotCucTieu/\soLieuESauSoCauHinh{} cấu hình) hoặc FCM sụp; mọi tổ hợp PSO cho cùng nghiệm với FCM k-means++
+trên 2 bộ chính; ở các cấu hình nhiều cực tiểu chỉ hơn k-means++ nhiều nhất 2--3/30 seed, trong khi chậm hơn nhiều lần. \\
+CH2: PSO tìm trọng số & Có ích rõ trên 2 bộ chính: tốt hơn FCM thường có ý nghĩa ở mọi $c$ trên Việt Nam và $c = 3, 4$ trên
+Taiwan Default (Việt Nam $c = 2$: $\Delta r$ \soLieuETamVietNamCHaiFcmKppChenhTiLe{} lên
+\soLieuETamVietNamCHaiPsoTrongSoChenhTiLe). Hơn tìm ngẫu nhiên cùng ngân sách về fitness ở
+\soLieuETamSilhouetteNgauNhienTrongSoHon/\soLieuETamSoCauHinh{} cấu hình. WFCM giải tích ngang hoặc hơn PSO trên Việt Nam $c = 3, 4$ nhưng
+hỏng trên Taiwan Default. K-means không trọng số tách rủi ro tốt hơn PSO với $c = 3, 4$ trên Việt Nam và $c = 4$ trên Taiwan
+Default (theo $\Delta r$), kém PSO với $c = 2$. Trọng số có nghĩa kinh tế. \\
+CH3: 5 phiên bản & Mọi phiên bản hơn tìm ngẫu nhiên (fitness \soLieuEChinGocNgauNhienDiemHon--12/\soLieuEChinSoO{} ô,
+$\Delta r$ 8--9/\soLieuEChinSoO{} ô); không phát hiện bản cải tiến nào khác PSO gốc sau hiệu chỉnh Holm. Tăng ngân sách từ 500 lên 1.000 lần tính
+fitness chỉ cải thiện ít. \\
+CH4: kiểm chứng và giới hạn & Trọng số học trên mẫu nguồn vẫn tốt hơn FCM thường trên mẫu đích độc lập
+(\soLieuEMuoiChenhTiLeFcmKppHon/\soLieuEMuoiSoCauHinh{} cấu hình theo $\Delta r$) và không khác học tại chỗ ở
+\soLieuEMuoiChenhTiLePsoTaiChoBang/\soLieuEMuoiSoCauHinh. Không có ích trên các bộ FCM gần sụp và với $c = 2$ (cả Taiwan Default theo AUC). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thực nghiệm gồm 2 giai đoạn. Ở hướng ban đầu, PSO tìm tâm làm giảm cùng hàm $J_m$ với FCM, và vì hàm này trên dữ liệu
+tín dụng đã thử hầu như chỉ có 1 cực tiểu, PSO không đem lại gì dù các bản cải tiến tối ưu tốt hơn PSO gốc, đúng như các so sánh độc lập trong tài liệu. Sau khi chuyển hướng, PSO tìm trọng
+số thuộc tính (thứ FCM không tự tối ưu được) và làm các phân khúc tách rủi ro tốt hơn rõ trên 2 bộ chính, lợi ích giữ trên
+mẫu độc lập, và phần lợi ích do cơ chế bầy đàn, đo bằng đối chứng tìm ngẫu nhiên, thấy rõ trên Việt Nam. Ở vai trò này, không
+phát hiện khác biệt giữa các phiên bản PSO. Lợi ích không phổ quát: fitness không dùng nhãn nên cần kiểm phân hoạch bằng nhãn lịch sử, đúng bước 3 của quy trình
+đề xuất. Hai giới hạn cần đọc kèm: chỉ có 2 bộ dữ liệu chính, và mọi kết quả trọng số dùng $m = 2$ với một fitness.

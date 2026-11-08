@@ -1,0 +1,300 @@
+% ============================================================
+% 01-tong-quan.tex — Chương 1: tổng hợp từ phần Introduction của 10 bài
+% Nguồn: phiếu đọc tai-lieu/phieu-doc/01..10 (mọi con số có số trang trong phiếu), báo cáo
+% researcher-261013-1149 (so sánh PSO–FCM với FCM trong tài liệu), mục "Căn cứ lý thuyết về hội tụ" của phat-hien.
+% Không dùng số liệu thực nghiệm của nhóm ở chương này.
+% ============================================================
+\chapter{TỔNG QUAN VỀ PHÂN CỤM DỮ LIỆU TRONG ĐÁNH GIÁ RỦI RO TÍN DỤNG}
+\label{chap:tong-quan}
+
+Chương này tổng hợp phần mở đầu (Introduction) của 10 bài báo nhóm đã đọc, bổ sung một số tài liệu nền. Mười bài gồm 6
+bài về phân cụm mờ kết hợp metaheuristic
+\cite{cui2022fpsoueba,qian2022psofcm,shang2021psokfcm,zhang2025qpsofcm,sun2024mstsofcm,liu2021msgwo}, 3 bài về rủi ro
+tín dụng \cite{bosker2025clustered,vasheghani2025loan,lakra2025wcapso} và một bài tổng quan về thuật toán lấy cảm hứng
+sinh học trong phân cụm mờ \cite{valdez2021bioinspired}. Sau phần bối cảnh tín dụng, mục~\ref{sec:phan-cum-mo} trình bày FCM
+và 2 điểm yếu được tài liệu nêu, mục~\ref{sec:pso-tong-quan} giới thiệu PSO và các phiên bản cải tiến,
+mục~\ref{sec:metaheuristic} phân biệt 2 cách ghép PSO với FCM (tìm tâm, hoặc tối ưu thứ FCM không tự tối ưu được như trọng
+số thuộc tính), và mục~\ref{sec:tinh-hinh-nghien-cuu} đặt 10 bài cạnh nhau để chỉ ra điều tài liệu chưa làm. Khi trích
+một nhận định, nhóm ghi rõ đó là khẳng định của tác giả hay có số liệu đi kèm.
+
+% Bình — bài 07, 08; Paz 2025
+\section{Rủi ro tín dụng và vai trò của khai phá dữ liệu}
+\label{sec:rui-ro-tin-dung}
+\label{sec:khai-pha-tin-dung}
+
+Rủi ro tín dụng là khả năng người vay không thực hiện được nghĩa vụ trả nợ, gây tổn thất cho tổ chức cho vay. Paz và cộng
+sự~\cite{paz2025creditreview} mô tả đánh giá rủi ro tín dụng là việc ước lượng khả năng người vay vỡ nợ, và cho rằng dự
+báo chính xác giúp quyết định cho vay tốt hơn, tuân thủ quy định tốt hơn và giữ ổn định tài chính (tr.~1).
+
+Trong khung an toàn vốn Basel, rủi ro tín dụng của một khoản vay được mô tả bằng ba tham số: xác suất vỡ nợ (PD), tỉ lệ
+tổn thất khi vỡ nợ (LGD) và dư nợ tại thời điểm vỡ nợ (EAD). Bosker và cộng sự~\cite{bosker2025clustered} (bài 07) nghiên
+cứu LGD và nhắc rằng theo cách tiếp cận dựa trên
+xếp hạng nội bộ (IRB), ngân hàng phải xếp các hợp đồng vào những nhóm đồng nhất, và ước lượng cho mỗi nhóm phải ``hợp lý
+và trực quan'' theo Điều~179 của Quy định về yêu cầu vốn của Liên minh châu Âu (tr.~629--630). Với ngân hàng dùng IRB,
+phân nhóm khách hàng vì thế là bước bắt buộc.
+
+Lý do thứ hai đến từ mô hình hoá. Theo Bosker và cộng sự, một mô hình thống kê duy nhất thường không đủ để mô tả những
+người vay rất khác nhau, nên bài phân cụm người vay bằng k-prototypes rồi dựng một mô hình dự báo LGD cho mỗi cụm (tr.~618,
+623). Trên 9.457 khoản vay vỡ nợ, sai số bình phương trung bình khi dự báo LGD giảm từ 0,1099--0,1245 (không phân cụm)
+xuống 0,0887 khi chọn biến phân cụm bằng giá trị Shapley (Bảng~3, tr.~641, 646), và 3 cụm có LGD trung bình 0,06, 0,41 và
+0,78 (Bảng~2, tr.~645). Ahelegbey và Giudici~\cite{ahelegbey2023p2p} lập luận tương tự cho doanh nghiệp nhỏ và vừa vay qua
+nền tảng cho vay ngang hàng (tr.~1). Vasheghani và cộng sự~\cite{vasheghani2025loan} (bài 08) đề xuất dùng phân cụm khách
+hàng ngân hàng bán lẻ làm bước tiền xử lý trước khi dự báo vỡ nợ (tr.~2, 12); vì bài có nhiều con số tự mâu thuẫn giữa văn
+bản và bảng, nhóm chỉ dùng lập luận của bài.
+
+Dù phục vụ quy định hay mô hình theo cụm, các nhóm khách hàng đều cần khác nhau rõ về mức rủi ro và đủ ổn định để diễn
+giải; Chương~\ref{chap:thuc-nghiem} dùng chính tiêu chí này.
+
+Theo cách nhìn của quá trình phát hiện tri thức trong cơ sở dữ liệu (KDD), bước khai phá ở đây thường là phân lớp có giám
+sát để dự báo vỡ nợ, hoặc phân cụm không dùng nhãn để chia khách hàng thành nhóm cho bước sau. Biến tốt cho phân cụm
+chưa chắc tốt cho dự báo: ở bài của Bosker và cộng sự, chọn biến bằng phân rã Silhouette cho Silhouette trên 0,6 nhưng hệ số xác định $R^2$ thấp
+hơn cách loại biến từng bước khoảng 3--6\% (tr.~640--641). Vì vậy tiểu luận đánh giá phân hoạch bằng cả chỉ số nội lẫn một
+chỉ số dùng nhãn vỡ nợ (mục~\ref{sec:chi-so}).
+
+Metaheuristic có mặt trong mô hình tín dụng ở 3 vai trò. Vai trò thứ nhất là chọn đặc trưng: tổng quan của Paz và cộng sự
+khoanh phạm vi vào hướng này và tổng hợp được 23 nghiên cứu giai đoạn 2019--2023 (tóm tắt, tr.~1). Vai trò thứ hai là tìm siêu tham số cho mô hình phân lớp, như
+biến thể PSO tìm 7 siêu tham số của XGBoost ở Lakra và cộng sự~\cite{lakra2025wcapso} (bài 09, tr.~127295--127296). Vai
+trò thứ ba là tham gia trực tiếp vào bước phân cụm, như tìm tâm cụm hoặc tìm trọng số thuộc tính cho FCM. Không bài tín
+dụng nào nhóm đọc dùng vai trò thứ ba: bài 07 phân cụm bằng k-prototypes, bài 08 bằng K-means, bài 09 không phân cụm. Bài
+07 lại cho thấy chọn biến nào đưa vào phân cụm thay đổi kết quả đáng kể, tức câu hỏi ``thuộc tính nào quan trọng'' có thật
+trong phân cụm khách hàng tín dụng.
+
+% Bình — bài 01, 03, 05, 06, 10
+\section{Phân cụm mờ, FCM và 2 điểm yếu}
+\label{sec:phan-cum-mo}
+
+Phân cụm chia một tập đối tượng thành các nhóm sao cho đối tượng trong cùng nhóm giống nhau hơn đối tượng ở 2 nhóm khác
+nhau, mà không cần nhãn. Trong phân cụm cứng, như K-means, mỗi đối tượng thuộc đúng một cụm; Vasheghani và cộng sự nhận
+xét K-means đơn giản nhưng nhạy với tâm khởi tạo và xử lý kém cụm không có dạng cầu (tr.~2). Trong phân cụm mờ, mỗi đối
+tượng có một độ thuộc trong $[0, 1]$ với từng cụm, tổng các độ thuộc bằng 1.
+
+Fuzzy C-Means (FCM) do Bezdek đề xuất~\cite{bezdek1981pattern,bezdek1984fcm} là thuật toán phân cụm mờ được dùng nhiều nhất.
+FCM tìm ma trận độ thuộc và bộ tâm cụm cực tiểu hoá tổng bình phương khoảng cách có trọng số độ thuộc mũ $m$, bằng cách lặp
+luân phiên 2 công thức cập nhật (mục~\ref{sec:fcm}). Số cụm $c$ và hệ số mờ $m > 1$ phải chọn trước; Valdez và cộng
+sự~\cite{valdez2021bioinspired} (bài 10) coi đây là một hạn chế vì trong thực tế không ai biết trước các giá trị này (tr.~3).
+
+Cui và cộng sự~\cite{cui2022fpsoueba} (bài 01) cho rằng phân cụm mờ giữ được quan hệ của
+một mẫu với nhiều cụm nên đánh giá được mức đe doạ trên mạng từ nhiều góc (tóm tắt, tr.~1; tr.~3--4). Với dữ liệu tín dụng,
+một khách hàng có độ thuộc 0,5 với cụm rủi ro thấp và 0,5 với cụm rủi ro trung bình mang thông tin khác hẳn một khách hàng
+thuộc cụm rủi ro thấp với độ thuộc 0,95. Mục~\ref{sec:dien-giai} dùng ngưỡng độ thuộc lớn nhất để tách nhóm ``biên'' này.
+
+FCM và các biến thể được dùng cho an ninh mạng, định vị vệ tinh, phụ tải điện và âm nhạc (bài 01--04), và theo Sun và cộng
+sự~\cite{sun2024mstsofcm} (bài 05, tr.~1) cho cả phân đoạn ảnh u não lẫn nhận diện hành vi làm đẹp báo cáo kế toán. Trong
+3 bài tín dụng đã đọc thì không bài nào dùng phân cụm mờ; Yi~\cite{yi2025gru} là một trong số ít bài tín dụng nhóm gặp có
+phân cụm mờ, dùng như một thành phần của mô hình có giám sát cùng mạng GRU.
+
+Shang và cộng sự~\cite{shang2021psokfcm} (bài 03) nêu một hạn chế của FCM: độ thuộc tỉ lệ nghịch với khoảng cách Euclid nên
+FCM nhạy với nhiễu và điểm ngoại lai (tr.~50347), lý do bài chuyển sang kernel FCM. Hai điểm yếu liên quan trực tiếp tới
+tiểu luận là phụ thuộc khởi tạo và coi mọi thuộc tính ngang nhau.
+
+\emph{Điểm yếu thứ nhất: phụ thuộc khởi tạo.} Các bài phân cụm trong danh sách đều mở đầu bằng cùng một lập luận: FCM là thuật toán tìm kiếm cục bộ, phụ thuộc khởi
+tạo và dễ dừng ở cực tiểu địa phương, nên cần một bộ tối ưu toàn cục. Bảng~\ref{tab:ch1-nhan-dinh} liệt kê nhận định trong
+từng bài; bài 03 nói điều tương tự về KFCM (tr.~50347).
+
+\begin{table}[htbp]
+\centering
+\caption{Nhận định về hạn chế của FCM trong các bài đã đọc}
+\label{tab:ch1-nhan-dinh}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{9.2cm}>{\raggedright\arraybackslash}p{3.0cm}@{}}
+\toprule
+Bài & Nhận định (ý chính) & Loại \\
+\midrule
+01~\cite{cui2022fpsoueba} & Khó chọn tham số khởi tạo, kết quả dễ rơi vào tối ưu địa phương (tr.~3) & Khẳng định, dẫn lại \\
+02~\cite{qian2022psofcm} & FCM dễ rơi vào bẫy cực tiểu địa phương, kết quả có thể rất nhạy với giá trị khởi tạo (tr.~2) & Khẳng định, dẫn lại \\
+04~\cite{zhang2025qpsofcm} & FCM về bản chất là leo đồi, thường gặp hội tụ địa phương và nhạy với điểm khởi tạo (tr.~11) & Khẳng định \\
+05~\cite{sun2024mstsofcm} & FCM phụ thuộc khởi tạo nên dễ rơi vào tối ưu địa phương; các nghiên cứu trước chưa khắc phục được (tr.~2) & Khẳng định \\
+06~\cite{liu2021msgwo} & FCM nhạy với khởi tạo và không bảo đảm kết quả tối ưu toàn cục (tr.~1) & Khẳng định \\
+10~\cite{valdez2021bioinspired} & Công thức cập nhật suy ra từ điều kiện đạo hàm riêng bằng không, cần để có cực tiểu địa phương của $J_m$ (tr.~2) & Mô tả cách suy ra công thức; bài không nêu đây là hạn chế \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Không nhận định nào trong Bảng~\ref{tab:ch1-nhan-dinh} kèm số liệu cho biết FCM dừng ở cực tiểu kém thường xuyên tới mức
+nào trên dữ liệu của bài; các con số so sánh với FCM ở phần kết quả đo chất lượng của phương pháp đề xuất, không đo số cực
+tiểu của $J_m$. Qian và cộng sự~\cite{qian2022psofcm} là bài gần nhất với một phép đo như vậy: FCM giảm nhanh trong khoảng
+20 vòng đầu rồi đứng yên, 3 biến thể PSO--FCM chỉ vượt FCM sau khoảng 180 vòng (Hình~6--7, tr.~14--15), và sau 1.000 vòng
+$J$ của FCM là 168,15 so với 143,64 của biến thể tốt nhất (Bảng~5, tr.~15). Tuy nhiên bài chỉ chạy FCM với khởi tạo ngẫu
+nhiên, trong khi PSO--FCM được khởi tạo bằng lý thuyết đồ thị, và chính tác giả viết rằng cả PSO lẫn phương pháp khởi tạo
+đều ảnh hưởng tới kết quả (tr.~16). Từ lý thuyết hội tụ của FCM (mục~\ref{sec:fcm-khoi-tao}) có thể suy ra kết quả phụ thuộc
+khởi tạo khi $J_m$ có nhiều cực tiểu~\cite{bezdek1987counterexamples}, nhưng trong thực nghiệm Hathaway và
+Bezdek~\cite{hathaway1988recent} lại thấy FCM khá ít phụ thuộc khởi tạo (tr.~242--243). FCM có hay dừng ở cực tiểu kém
+trên một bộ dữ liệu cụ thể hay không vì vậy là câu hỏi thực nghiệm mà các bài trong Bảng~\ref{tab:ch1-nhan-dinh} chưa kiểm tra.
+
+\emph{Điểm yếu thứ hai: coi mọi thuộc tính ngang nhau.} Một hạn chế ít được nhắc hơn nhưng liên quan trực tiếp tới dữ liệu tín dụng là FCM dùng khoảng cách Euclid, coi mọi thuộc
+tính đã chuẩn hoá có tầm quan trọng như nhau. Liu và cộng sự~\cite{liu2021msgwo} (bài 06) nêu đây là một trong 2 điểm yếu
+của FCM, bên cạnh phụ thuộc khởi tạo: thuật toán ``bỏ qua khác biệt tầm quan trọng giữa các thuộc tính'' (tóm tắt, tr.~1).
+Hồ sơ tín dụng có nhiều chỉ tiêu đo gần cùng một thứ, như các tỉ số nợ trên vốn chủ sở hữu và trên tổng tài sản của doanh
+nghiệp, hay dư nợ của nhiều tháng liên tiếp của chủ thẻ; với trọng số bằng nhau, nhóm chỉ tiêu nào nhiều cột hơn sẽ chi
+phối khoảng cách. Hướng xử lý là FCM có trọng số thuộc tính (WFCM): Keller và Klawonn~\cite{keller2000weighting} tính trọng
+số bằng công thức suy ra cùng lúc với công thức cập nhật của FCM, bài 06 dùng một biến thể có trọng số riêng cho từng cụm.
+Công thức này chỉ làm các cụm chặt hơn, và như Chương~\ref{chap:phuong-phap} chỉ ra, bản thân hàm mục tiêu của FCM không
+chọn được trọng số; đó là chỗ để một thuật toán tối ưu như PSO tham gia.
+
+
+% Giang — 1.3, 1.4
+\section{Tối ưu bầy đàn trong các bài đã đọc}
+\label{sec:pso-tong-quan}
+
+PSO do Kennedy và Eberhart đề xuất năm 1995~\cite{kennedy1995pso}. Mỗi hạt trong bầy là một nghiệm ứng viên, di chuyển
+theo một vận tốc bị kéo về vị trí tốt nhất nó từng đi qua (pbest) và vị trí tốt nhất cả bầy từng gặp (gbest). Bản gốc giữ
+nguyên vận tốc cũ rồi cộng thêm hai lực kéo này, nên bầy khó thu hẹp vùng tìm kiếm về quanh gbest. Shi và
+Eberhart~\cite{shi1998inertia,shi1999empirical} thêm trọng số quán tính $\omega$ cho vận tốc cũ để bầy đi xa lúc đầu rồi
+chậm lại quanh pbest và gbest. Lịch cho $\omega$ giảm tuyến tính từ 0,9 xuống 0,4, thường được quy cho bài năm 1999 của
+hai tác giả (nhóm chưa đọc được toàn văn), được dùng rộng rãi về sau. Qian và cộng sự (bài 02) giữ trọng số quán tính nhưng so lịch tuyến tính
+với một lịch bậc hai và một lịch logarit ngay trong PSO--FCM. QPSO của Sun và cộng sự~\cite{sun2004qpso,sun2004global}
+bỏ hẳn vận tốc: hạt được lấy mẫu quanh một điểm hút nằm giữa pbest và gbest theo phân phối mũ hai phía (Laplace); Zhang và cộng sự~\cite{zhang2025qpsofcm}
+(bài 04) dùng QPSO để tìm tâm cho FCM. PSO gốc và 4 phiên bản cải tiến
+được trình bày ở mục~\ref{sec:pso-goc} và~\ref{sec:pso-cai-tien}.
+
+Lý do chọn metaheuristic cũng giống nhau giữa các bài: dễ dùng và không cần đạo hàm (bài 10, tr.~2), có khả năng tìm
+kiếm toàn cục (bài 06~\cite{liu2021msgwo} với thuật toán bầy sói xám, tr.~1; bài 04~\cite{zhang2025qpsofcm}
+với QPSO, tr.~3), hội tụ nhanh và ít tham số (bài 06, tr.~1). Đây là khẳng định chung về thuật toán, chưa được đo trên bài toán phân cụm. Trong 4 thuật toán Valdez và cộng sự khảo
+sát, giải thuật di truyền (GA) và PSO là 2 thuật toán được dùng nhiều nhất (tr.~18--19); truy vấn PSO kết hợp phân cụm mờ
+trên Web of Science cho 508 kết quả, truy vấn GA cho 369 (Hình~7, 11, tr.~11, 13). Các bài dùng PSO cũng thừa nhận PSO dễ hội tụ sớm (bài 04, tr.~12) và có thể rơi
+vào tối ưu địa phương (bài 09, tr.~127294). PSO vì vậy cũng không bảo đảm tìm được cực tiểu toàn cục; lợi thế so với
+FCM, nếu có, là khám phá nhiều vùng cùng lúc, đổi lại chi phí tính toán lớn hơn nhiều.
+
+\section{Hai cách ghép PSO với FCM}
+\label{sec:metaheuristic}
+
+Trong các bài đã đọc, metaheuristic được ghép với FCM theo 2 cách. Cách thứ nhất tối ưu cùng hàm $J_m$ với FCM: PSO thay
+FCM tìm tâm (bài 02), hoặc PSO chạy trước để tìm tâm rồi FCM chạy tiếp (bài 04). Cách mã hoá hạt là bộ tâm, với $J_m$ rút
+gọn theo tâm làm fitness, đã có từ Runkler và Katz~\cite{runkler2006psofcm}. Khi đó PSO chỉ có ích nếu $J_m$ có nhiều cực
+tiểu và FCM dừng ở cực tiểu kém. Bài 01 và 03 cũng dùng PSO tìm tâm nhưng đổi hàm mục tiêu (fitness cosine ở bài 01, hàm
+mục tiêu của kernel FCM ở bài 03). Mane và Gaikwad~\cite{mane2014hpso}, một tài liệu nền, dùng đúng thiết kế tuần tự:
+PSO tìm tâm ban đầu, rồi khi fitness gần như không đổi qua nhiều vòng thì chuyển sang fuzzy k-means, tức FCM (công thức 8--9; tr.~1, 3--4). Fitness
+của PSO ở bài này là sai số lượng tử (tr.~3), và kết quả chỉ được trình bày bằng biểu đồ, kèm nhận xét bản lai tốn thời
+gian hơn (tr.~4--5). Cách thứ hai tối ưu một thứ FCM không tự tối ưu được, như chỉ số
+hợp lệ để chọn $(m, c)$ trong các nghiên cứu bài 10 tổng hợp, hay trọng số thuộc tính và tham số kernel; phân hoạch thu được
+khi đó khác phân hoạch của FCM và cần được đánh giá bằng tiêu chí độc lập. Lu và cộng sự~\cite{lu2011psovw} và O'Neill và
+cộng sự~\cite{oneill2018psofw} dùng PSO tìm trọng số thuộc tính cho phân cụm cứng trên dữ liệu nhiều chiều; bài 06 thì giữ
+trọng số bằng công thức và để bầy sói tìm tâm; trong 10 bài, chính bài 06 cho thấy phần đánh trọng số đóng góp nhiều hơn
+hẳn phần tìm tâm (mục~\ref{sec:cac-nghien-cuu}). Nhóm bắt đầu với dạng đơn giản nhất của cách thứ nhất, PSO tìm tâm khởi tạo rồi FCM chạy tiếp
+(mục~\ref{sec:pso-khoi-tao}), vì đó là cách được dùng nhiều nhất trong tài liệu. Khi cách này không cải thiện FCM trên dữ
+liệu tín dụng (mục~\ref{sec:diem-xuat-phat}), nhóm chuyển sang cách thứ hai và lấy nó làm trục chính: dùng PSO tìm trọng số
+thuộc tính cho FCM (mục~\ref{sec:pso-trong-so-pp}).
+
+% Hà — 1.5.1; Hải — 1.5.2, 1.5.3
+\section{Tình hình nghiên cứu}
+\label{sec:tinh-hinh-nghien-cuu}
+
+\subsection{Các nghiên cứu chính đã khảo sát}
+\label{sec:cac-nghien-cuu}
+
+Bảng~\ref{tab:ch1-muoi-bai} đặt 10 bài cạnh nhau theo bài toán, cách kết hợp metaheuristic với phân cụm, dữ liệu, và 2
+câu hỏi về phương pháp so sánh: có đối chứng FCM thuần hay không, và có đo thời gian chạy hay không.
+
+\begin{table}[htbp]
+\centering
+\caption{Tổng hợp 10 bài đã đọc}
+\label{tab:ch1-muoi-bai}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.0cm}@{}}
+\toprule
+Bài & Bài toán & Kết hợp & Dữ liệu & Đối chứng FCM thuần & Đo thời gian \\
+\midrule
+01 Cui 2022~\cite{cui2022fpsoueba} & Phát hiện hành vi bất thường & PSO thay FCM, fitness cosine & NSL-KDD & Chỉ đường hội tụ, khác thang đo & Không \\
+02 Qian 2022~\cite{qian2022psofcm} & Chọn tổ hợp quan sát BeiDou-3 & PSO thay FCM, 3 lịch $\omega$ & Iris, BDS-3 & Có, khác khởi tạo & Không \\
+03 Shang 2021~\cite{shang2021psokfcm} & Dự báo phụ tải điện & PSO rồi kernel FCM & Phụ tải NSW & Có, không nêu số lần chạy & Chỉ cả quy trình \\
+04 Zhang 2025~\cite{zhang2025qpsofcm} & Phân loại làn điệu hí khúc & QPSO rồi FCM & Chuỗi cao độ & Không & Không \\
+05 Sun 2024~\cite{sun2024mstsofcm} & Cải tiến FCM tổng quát & Bầy cá ngừ, cá thể là $U$ & 2 bộ nhân tạo, 5 bộ UCI & Có & Không \\
+06 Liu 2021~\cite{liu2021msgwo} & Cải tiến FCM có trọng số & GWO tìm tâm WFCM & 6 bộ UCI & Có & Không \\
+07 Bosker 2025~\cite{bosker2025clustered} & Dự báo LGD theo cụm & Không có metaheuristic & Khoản vay vỡ nợ & Không áp dụng & Không \\
+08 Vasheghani 2025~\cite{vasheghani2025loan} & Phân khúc và dự báo vỡ nợ & K-means; GA--PSO chỉnh mạng nơ-ron & Ngân hàng Iran & Không áp dụng & Chỉ mô hình đề xuất \\
+09 Lakra 2025~\cite{lakra2025wcapso} & Chấm điểm tín dụng & PSO chỉnh XGBoost & German, Taiwan, P2P, Kaggle & Không áp dụng & Không \\
+10 Valdez 2021~\cite{valdez2021bioinspired} & Tổng quan trắc lượng & Tối ưu $(m, c)$ theo chỉ số hợp lệ & Web of Science & Không có thực nghiệm & Không \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Bảng~\ref{tab:ch1-muoi-bai} cho thấy ba điều. Thứ nhất, 2 nhóm bài không giao nhau: 6 bài có FCM kết hợp metaheuristic
+đều không dùng dữ liệu tín dụng, còn 3 bài tín dụng không dùng phân cụm mờ. Thứ hai, không bài nào đo thời gian của bước
+phân cụm, dù các phương pháp ghép metaheuristic thường tính hàm mục tiêu hàng nghìn lần (bài 02: khoảng $10^5$ lần), nhiều
+hơn hẳn số vòng lặp của một lần chạy FCM. Bài 03 chỉ đo thời gian của cả quy trình dự báo (20--33~s, tr.~50355), bài 08 chỉ đo
+thời gian huấn luyện mô hình đề xuất. Thứ ba, đối
+chứng FCM thuần thường thiếu hoặc không cùng điều kiện: bài 04 không có FCM thuần; bài 02 khởi tạo FCM ngẫu nhiên nhưng
+khởi tạo PSO--FCM bằng đồ thị; bài 01 so đường hội tụ của hai hàm mục tiêu khác nhau (tr.~12). Không bài nào cho FCM cùng
+ngân sách tính toán, chẳng hạn chạy lại FCM nhiều lần, và không bài nào báo FCM chạy với bao nhiêu khởi tạo đã cho cùng một
+nghiệm.
+
+Chỉ 2 bài tách được phần đóng góp của từng thành phần. Ở Shang và cộng sự, Silhouette tăng từ 0,376 (FCM) lên 0,417 nhờ
+kernel và lên 0,496 nhờ thêm PSO (Bảng~2, tr.~50353), nhưng mỗi phương pháp chỉ có một con số, không nêu số lần chạy. Ở Liu
+và cộng sự, trên bộ Hab, WFCM đã nâng độ chính xác của FCM từ 51,96\% lên 75,42\%, bầy sói chỉ thêm 1,51 điểm (Bảng~7,
+tr.~11), còn bản PSO--FCM đối chứng thua FCM trên ba trong 6 bộ.
+
+\subsection{PSO--FCM so với FCM: kết quả trái chiều}
+\label{sec:trai-chieu}
+
+Ngoài 10 bài, nhóm đọc thêm các nghiên cứu có so sánh trực tiếp PSO--FCM với FCM. Trong các so sánh đó, số trường hợp hoà
+hoặc thua nhiều hơn số trường hợp thắng, và PSO--FCM thắng chủ yếu khi FCM dừng ở cực tiểu kém.
+
+\begin{itemize}
+  \item Hoà khi dữ liệu dễ. Mehdizadeh và cộng sự~\cite{mehdizadeh2008hybrid} gieo nghiệm FCM vào bầy PSO; trên Iris, $J$ của
+  FCM và của bản lai lần lượt là 60,575960 và 60,575956, trùng tới sáu chữ số (Bảng~4, tr.~10).
+  \item Thắng khi FCM dừng ở cực tiểu kém. Cùng bài đó, trên bộ Zoo với $c = 7$, $J$ trung bình của FCM là 89,153 so với
+  88,269 của bản lai (Bảng~4, tr.~10); lợi thế xuất hiện ở bộ có nhiều cụm, nơi kết quả FCM dao động theo khởi tạo.
+  \item Thua và chậm hơn. Ghamisi và cộng sự~\cite{ghamisi2015swarm} báo PSO--FCM có độ chính xác tổng thể thấp hơn FCM
+  trên 2 bộ ảnh siêu phổ (86,22\% so với 87,24\% và 95,92\% so với 96,29\%) trong khi tốn 3,35~s và 3,59~s so với 0,27~s
+  và 0,17~s của FCM (Bảng~IV, V). Omran~\cite{omran2004thesis} cho PSO phân cụm (không ghép FCM) và FCM cùng 5.000 lần tính
+  hàm mục tiêu và thấy FCM cho sai số lượng tử tốt hơn trên hai trong ba ảnh. Izakian và cộng sự~\cite{izakian2009hybrid}
+  thấy PSO đứng riêng (hạt là ma trận độ thuộc) thua FCM trên bốn trong 6 bộ (Bảng~1, tr.~1694).
+\end{itemize}
+
+Các so sánh này có chung một số lỗi phương pháp. Hai bên hiếm khi có cùng ngân sách tính toán, thời gian thực ít khi được đo,
+tác dụng của PSO thường bị trộn với một thành phần khác như khởi tạo đồ thị, kernel hay trọng số thuộc tính, và FCM hầu như
+luôn khởi tạo ngẫu nhiên, không có bản FCM khởi tạo tốt làm đối chứng. Kết quả hoà trên dữ liệu dễ và chỉ thắng khi FCM
+dừng ở cực tiểu kém khớp với lập luận ở mục~\ref{sec:metaheuristic}. Các bài đề xuất PSO--FCM, trong đó có bài 02 và 04,
+báo phương pháp của mình tốt hơn FCM, còn các so sánh độc lập ở trên cho thấy hoà hoặc thua. Khác biệt chủ yếu nằm ở đối
+chứng: nhóm đầu thường so với FCM khởi tạo ngẫu nhiên và không cùng ngân sách, nhóm sau cho FCM điều kiện tương đương. Vì
+vậy nhóm kiểm tra lại cách ghép này trên dữ liệu tín dụng trước khi dùng nó.
+
+\subsection{Những điểm còn để ngỏ}
+\label{sec:diem-de-ngo}
+
+Từ 2 phần trên, nhóm thấy 4 điểm mà tài liệu đã đọc chưa trả lời rõ. Chúng được xếp theo thứ tự nhóm kiểm tra, và mỗi
+điểm ứng với một câu hỏi nghiên cứu ở phần Mở đầu.
+
+\begin{enumerate}
+  \item \emph{Khi tìm tâm, dữ liệu có nhiều cực tiểu không, và so với khởi tạo nào? (CH1)} Lý thuyết cho biết khởi tạo chỉ
+  quan trọng khi $J_m$ có nhiều cực tiểu, nhưng không bài nào đo số cực tiểu trên dữ liệu của mình. FCM đối chứng hầu như luôn
+  khởi tạo ngẫu nhiên; các khởi tạo rẻ mà tốt như k-means++~\cite{arthur2007kmeanspp} không được đưa vào so sánh, và thời
+  gian thực ít khi được đo.
+  \item \emph{Khi tìm trọng số, lợi ích đến từ PSO hay từ việc đánh trọng số? (CH2)} Khi PSO tìm trọng số thuộc tính
+  (\cite{lu2011psovw,oneill2018psofw}), phép so thường là với thuật toán không có trọng số. Thiếu đối chứng tính trọng số
+  bằng công thức và đối chứng tìm ngẫu nhiên cùng ngân sách, nên không tách được phần do việc đánh trọng số với phần do cơ
+  chế bầy đàn.
+  \item \emph{PSO gốc hay phiên bản cải tiến? (CH3)} Ở mọi vai trò, các bài dùng một biến thể PSO duy nhất (bài 04: QPSO) hoặc
+  so các biến thể trong vai trò thay FCM (bài 02: 3 lịch quán tính). Tiền lệ gần nhất là Zhang và Ma~\cite{zhang2020elpso}: bài so PSO
+  chuẩn với 4 bản có lịch quán tính khác nhau (tuyến tính, mũ, ngẫu nhiên, logarit), cùng ghép với FCM, trên 8 bộ UCI
+  với 30 lần chạy (tr.~7--10). Ở đó PSO và FCM chạy xen kẽ, mỗi lượt tối đa 95 vòng PSO rồi 5 vòng FCM (Thuật toán~2,
+  tr.~6), không có FCM thuần làm đối chứng và không đo thời gian. Nhóm chưa gặp bài nào so PSO gốc với các phiên bản cải
+  tiến khi PSO chỉ làm bộ khởi tạo hay khi PSO tìm trọng số.
+  \item \emph{Trọng số tìm được có dùng được cho dữ liệu tín dụng không? (CH4)} Chưa bài nào tìm trọng số thuộc tính bằng PSO
+  trên dữ liệu tín dụng, cũng chưa bài nào kiểm trọng số tìm được trên một mẫu độc lập. Fitness của phân cụm không dùng nhãn,
+  nên một phân hoạch đẹp hơn về hình học chưa chắc tách rủi ro tốt hơn; bài 07 ghi nhận điều tương tự khi chọn biến cho phân
+  cụm (mục~\ref{sec:rui-ro-tin-dung}).
+\end{enumerate}
+
+Mỗi điểm quyết định một phần của thực nghiệm. Do điểm thứ nhất, hướng tìm tâm được so với cả khởi tạo ngẫu nhiên lẫn
+k-means++, có đo thời gian và đo trực tiếp số cực tiểu thay vì giả định. Điểm thứ hai cho ra 3 đối chứng của thí nghiệm
+tìm trọng số, điểm thứ ba dẫn tới thí nghiệm so 5 phiên bản PSO, và điểm thứ tư dẫn tới thí nghiệm kiểm trọng số trên
+mẫu độc lập.
+
+\section*{Tiểu kết Chương 1}
+\addcontentsline{toc}{section}{Tiểu kết Chương 1}
+\label{sec:tieu-ket-ch1}
+
+Phân nhóm khách hàng là một bước cần trong đánh giá rủi ro tín dụng, cả theo yêu cầu quản lý lẫn để dựng mô hình theo cụm,
+và phân cụm mờ phù hợp với nhóm khách hàng nằm giữa các mức rủi ro. FCM có 2 điểm yếu được tài liệu nêu: phụ thuộc khởi tạo
+và coi mọi thuộc tính ngang nhau. Phần lớn các bài ghép PSO với FCM nhắm vào điểm yếu thứ nhất bằng cách để PSO tìm tâm, dựa
+trên lập luận FCM dừng ở cực tiểu kém; lập luận này đúng về lý thuyết nhưng ít khi được kiểm tra trên dữ liệu cụ thể. Điểm
+yếu thứ hai là chỗ FCM thật sự không tự tối ưu được, và ở bài 06 phần đánh trọng số đóng góp nhiều hơn hẳn phần tìm tâm.
+Tiểu luận vì vậy lấy PSO tìm trọng số thuộc tính làm trục chính và trả lời 4 câu hỏi đã nêu ở phần Mở đầu: CH1 PSO tìm tâm
+khởi tạo có giúp FCM không (hướng ban đầu), CH2 PSO tìm trọng số có làm phân khúc tách rủi ro tốt hơn không và lợi ích có do
+cơ chế bầy đàn không, CH3 phiên bản PSO nào phù hợp với vai trò này, CH4 lợi ích có giữ trên mẫu độc lập không. Thứ tự
+câu hỏi cũng là thứ tự nhóm thực hiện: thử hướng phổ biến trước, rồi chuyển hướng khi có bằng chứng.
+Chương~\ref{chap:phuong-phap} trình bày phương pháp, Chương~\ref{chap:thuc-nghiem} trả lời 4 câu hỏi bằng thực nghiệm.

@@ -1,0 +1,186 @@
+=== Trung vị theo (bộ dữ liệu, c, phương pháp)
+                              auc_cum_rui_ro  chenh_ty_le  silhouette    PC       XB  cum_nho_nhat       t
+dataset    c method                                                                                       
+taiwan_moi 2 c1_tuan_tu                0.451       0.0362       0.286 0.578     1.06         0.331    1.39
+             c2_fcm_gieo               0.451       0.0362       0.286 0.578     1.06         0.331    0.14
+             c3_xen_ke                 0.451       0.0362       0.286 0.578     1.06         0.331   0.889
+             c4_pso_tam                0.456       0.0338       0.279 0.569     1.14         0.343    1.92
+             c5_pso_U                  0.501      0.00391   -3.18e-06 0.552 1.83e+03         0.495   0.763
+             c6_pso_xb                 0.591       0.0936       0.357 0.796   0.0814          0.05    3.06
+             c7_pso_trong_so           0.566       0.0147       0.323 0.764    0.383         0.239    5.88
+             c7_wfcm                   0.442       0.0187       0.302  0.66    0.567         0.294   0.144
+             c8_kfcm                   0.502      0.00784       0.121   0.5 6.09e+08          0.41  0.0508
+             c8_pso_kfcm               0.501      0.00662       0.117   0.5 8.31e+08          0.41    1.59
+             fcm                       0.451       0.0362       0.286 0.578     1.06         0.331   0.024
+             fcm_lap                   0.451       0.0362       0.286 0.578     1.06         0.331   0.382
+             kmeans                    0.504      0.00693       0.323     1    0.357         0.251  0.0143
+           3 c1_tuan_tu                0.434        0.155       0.129 0.395 3.79e+09         0.251    1.23
+             c2_fcm_gieo               0.434        0.155       0.129 0.395 1.35e+10         0.251   0.185
+             c3_xen_ke                 0.434        0.148       0.128 0.395 1.26e+09         0.251    1.15
+             c4_pso_tam                0.538       0.0992      0.0983 0.377     2.09         0.201    1.65
+             c5_pso_U                  0.508       0.0165    -0.00472 0.375 2.59e+03         0.327    1.03
+             c6_pso_xb                 0.665        0.226       0.217 0.459    0.113          0.05    4.46
+             c7_pso_trong_so           0.586       0.0717       0.122 0.512     2.54         0.186    15.7
+             c7_wfcm                   0.423       0.0141       0.123 0.435 1.98e+07         0.208   0.553
+             c8_kfcm                   0.503       0.0481    -0.00387 0.333 5.21e+11        0.0665   0.131
+             c8_pso_kfcm               0.501       0.0211      0.0167 0.333 9.42e+09         0.116    2.57
+             fcm                       0.434        0.155       0.129 0.395 1.56e+09         0.251  0.0424
+             fcm_lap                   0.434        0.156       0.129 0.395 1.61e+10         0.251   0.596
+             kmeans                    0.666        0.386       0.207     1    0.615         0.195  0.0123
+           4 c1_tuan_tu                0.423        0.218       0.116 0.296 4.29e+09        0.0018   0.751
+             c2_fcm_gieo               0.423        0.304       0.116 0.296 1.34e+11        0.0009    0.21
+             c3_xen_ke                 0.423        0.224      0.0813 0.296 2.59e+09         0.018    1.79
+             c4_pso_tam                0.611        0.213      0.0807 0.289     1.51         0.149   0.669
+             c5_pso_U                  0.508       0.0223     -0.0096 0.284 2.47e+03         0.243    1.12
+             c6_pso_xb                 0.651         0.34       0.142 0.284    0.113        0.0517    5.07
+             c7_pso_trong_so           0.619        0.228       0.114 0.417     1.93         0.142    30.3
+             c7_wfcm                   0.457        0.235       0.121  0.34 4.23e+12         0.151    1.32
+             c8_kfcm                   0.503       0.0943     -0.0149  0.25  5.9e+12        0.0038   0.102
+             c8_pso_kfcm               0.504       0.0816     -0.0038  0.25 8.17e+10        0.0038   0.566
+             fcm                       0.423        0.304       0.116 0.296  1.1e+10        0.0008  0.0763
+             fcm_lap                   0.423        0.168       0.116 0.296 1.11e+11        0.0022   0.839
+             kmeans                    0.651        0.446       0.196     1     0.52          0.14  0.0155
+viet_nam   2 c1_tuan_tu                0.784        0.284       0.229 0.555     1.45         0.419   0.614
+             c2_fcm_gieo               0.784        0.284       0.229 0.555     1.45         0.419  0.0681
+             c3_xen_ke                 0.784        0.284       0.229 0.555     1.45         0.419   0.342
+             c4_pso_tam                0.765        0.279       0.222 0.535     2.27         0.429   0.586
+             c5_pso_U                   0.51      0.00835   -2.89e-05 0.551 1.29e+03         0.491   0.275
+             c6_pso_xb                 0.941        0.774       0.398  0.76    0.107         0.054    1.32
+             c7_pso_trong_so           0.868        0.379       0.276 0.739    0.486         0.296    2.73
+             c7_wfcm                   0.815        0.313       0.245 0.658    0.634         0.371  0.0723
+             c8_kfcm                     0.6        0.226       0.197 0.518      3.5         0.474  0.0354
+             c8_pso_kfcm                 0.6        0.226       0.197 0.518      3.5         0.474   0.816
+             fcm                       0.784        0.284       0.229 0.555     1.45         0.419  0.0168
+             fcm_lap                   0.784        0.284       0.229 0.555     1.45         0.419   0.203
+             kmeans                    0.843        0.373       0.274     1    0.434         0.306 0.00626
+           3 c1_tuan_tu                 0.84        0.341      0.0799 0.373 4.66e+03         0.248    1.14
+             c2_fcm_gieo                0.84        0.341      0.0799 0.373 4.66e+03         0.248   0.548
+             c3_xen_ke                  0.84        0.341      0.0799 0.373 4.66e+03         0.248   0.796
+             c4_pso_tam                0.819        0.344      0.0983 0.371     3.22         0.281   0.665
+             c5_pso_U                  0.516       0.0186    -0.00515 0.375 1.48e+03         0.326   0.342
+             c6_pso_xb                 0.918        0.681       0.253 0.429    0.129        0.0555    1.41
+             c7_pso_trong_so           0.888         0.48       0.141  0.54    0.843         0.224    5.68
+             c7_wfcm                   0.897        0.478        0.13 0.574    0.922         0.211  0.0927
+             c8_kfcm                   0.653        0.253      0.0243 0.346      211         0.145   0.486
+             c8_pso_kfcm               0.653        0.253      0.0243 0.346      209         0.145    1.34
+             fcm                        0.84        0.341      0.0799 0.373 3.68e+03         0.248   0.447
+             fcm_lap                    0.84        0.341      0.0799 0.373 4.67e+03         0.248    9.13
+             kmeans                    0.855        0.571       0.159     1    0.644         0.181 0.00923
+           4 c1_tuan_tu                0.866         0.42      0.0219 0.282 2.12e+05        0.0818   0.964
+             c2_fcm_gieo               0.866         0.42      0.0219 0.282 2.12e+05        0.0818   0.309
+             c3_xen_ke                 0.866         0.42      0.0219 0.282 2.12e+05        0.0818   0.829
+             c4_pso_tam                0.791        0.375      0.0703 0.278     2.52         0.138    1.06
+             c5_pso_U                  0.513       0.0256    -0.00995 0.284 1.32e+03         0.243    0.59
+             c6_pso_xb                 0.903        0.733       0.171 0.314    0.116        0.0537    2.01
+             c7_pso_trong_so           0.909        0.551       0.108 0.458    0.873         0.155    11.7
+             c7_wfcm                   0.922        0.618       0.083 0.612    0.858         0.116   0.139
+             c8_kfcm                   0.674        0.295   -0.000763  0.26  1.3e+06        0.0748    0.26
+             c8_pso_kfcm               0.674        0.295   -0.000763  0.26 1.33e+06        0.0748    1.13
+             fcm                       0.866         0.42      0.0219 0.282  9.5e+04        0.0818   0.212
+             fcm_lap                   0.866         0.42      0.0219 0.282 2.13e+05        0.0818    3.75
+             kmeans                    0.838        0.693        0.15     1    0.528         0.132 0.00987 
+
+=== So với FCM 1 lần (AUC tách rủi ro; Holm trên 72 phép so)
+   dataset  c          method   auc  auc_fcm  cum_nho_nhat      t  t_fcm  p_holm  cai_thien  kem_hon
+taiwan_moi  2      c1_tuan_tu 0.451    0.451         0.331  1.385  0.024 1.0e+00      False    False
+taiwan_moi  2     c2_fcm_gieo 0.451    0.451         0.331  0.140  0.024 2.4e-03       True    False
+taiwan_moi  2       c3_xen_ke 0.451    0.451         0.331  0.889  0.024 2.5e-01      False    False
+taiwan_moi  2      c4_pso_tam 0.456    0.451         0.343  1.915  0.024 9.9e-01      False    False
+taiwan_moi  2        c5_pso_U 0.501    0.451         0.495  0.763  0.024 1.4e-04       True    False
+taiwan_moi  2       c6_pso_xb 0.591    0.451         0.050  3.058  0.024 1.4e-04       True    False
+taiwan_moi  2 c7_pso_trong_so 0.566    0.451         0.239  5.880  0.024 7.2e-02      False    False
+taiwan_moi  2         c7_wfcm 0.442    0.451         0.294  0.144  0.024 1.4e-04      False     True
+taiwan_moi  2         c8_kfcm 0.502    0.451         0.410  0.051  0.024 1.4e-04       True    False
+taiwan_moi  2     c8_pso_kfcm 0.501    0.451         0.410  1.588  0.024 1.4e-04       True    False
+taiwan_moi  2         fcm_lap 0.451    0.451         0.331  0.382  0.024 9.9e-01      False    False
+taiwan_moi  2          kmeans 0.504    0.451         0.251  0.014  0.024 1.4e-04       True    False
+taiwan_moi  3      c1_tuan_tu 0.434    0.434         0.251  1.231  0.042 5.6e-01      False    False
+taiwan_moi  3     c2_fcm_gieo 0.434    0.434         0.251  0.185  0.042 3.3e-02      False     True
+taiwan_moi  3       c3_xen_ke 0.434    0.434         0.251  1.150  0.042 1.0e+00      False    False
+taiwan_moi  3      c4_pso_tam 0.538    0.434         0.201  1.652  0.042 1.4e-04       True    False
+taiwan_moi  3        c5_pso_U 0.508    0.434         0.327  1.035  0.042 1.4e-04       True    False
+taiwan_moi  3       c6_pso_xb 0.665    0.434         0.050  4.455  0.042 1.4e-04       True    False
+taiwan_moi  3 c7_pso_trong_so 0.586    0.434         0.186 15.719  0.042 1.4e-04       True    False
+taiwan_moi  3         c7_wfcm 0.423    0.434         0.208  0.553  0.042 1.4e-04      False     True
+taiwan_moi  3         c8_kfcm 0.503    0.434         0.067  0.131  0.042 1.4e-04       True    False
+taiwan_moi  3     c8_pso_kfcm 0.501    0.434         0.116  2.574  0.042 1.4e-04       True    False
+taiwan_moi  3         fcm_lap 0.434    0.434         0.251  0.596  0.042 4.8e-04      False     True
+taiwan_moi  3          kmeans 0.666    0.434         0.195  0.012  0.042 1.4e-04       True    False
+taiwan_moi  4      c1_tuan_tu 0.423    0.423         0.002  0.751  0.076 1.0e+00      False    False
+taiwan_moi  4     c2_fcm_gieo 0.423    0.423         0.001  0.210  0.076 6.9e-01      False    False
+taiwan_moi  4       c3_xen_ke 0.423    0.423         0.018  1.791  0.076 1.2e-02      False    False
+taiwan_moi  4      c4_pso_tam 0.611    0.423         0.149  0.669  0.076 1.4e-04       True    False
+taiwan_moi  4        c5_pso_U 0.508    0.423         0.243  1.124  0.076 1.4e-04       True    False
+taiwan_moi  4       c6_pso_xb 0.651    0.423         0.052  5.068  0.076 1.4e-04       True    False
+taiwan_moi  4 c7_pso_trong_so 0.619    0.423         0.142 30.310  0.076 1.4e-04       True    False
+taiwan_moi  4         c7_wfcm 0.457    0.423         0.151  1.319  0.076 1.9e-03       True    False
+taiwan_moi  4         c8_kfcm 0.503    0.423         0.004  0.102  0.076 1.4e-04      False    False
+taiwan_moi  4     c8_pso_kfcm 0.504    0.423         0.004  0.566  0.076 1.4e-04      False    False
+taiwan_moi  4         fcm_lap 0.423    0.423         0.002  0.839  0.076 1.0e+00      False    False
+taiwan_moi  4          kmeans 0.651    0.423         0.140  0.016  0.076 1.4e-04       True    False
+  viet_nam  2      c1_tuan_tu 0.784    0.784         0.419  0.614  0.017 1.4e-04       True    False
+  viet_nam  2     c2_fcm_gieo 0.784    0.784         0.419  0.068  0.017 1.4e-04       True    False
+  viet_nam  2       c3_xen_ke 0.784    0.784         0.419  0.342  0.017 1.4e-04       True    False
+  viet_nam  2      c4_pso_tam 0.765    0.784         0.429  0.586  0.017 1.0e+00      False    False
+  viet_nam  2        c5_pso_U 0.510    0.784         0.491  0.275  0.017 1.4e-04      False     True
+  viet_nam  2       c6_pso_xb 0.941    0.784         0.054  1.317  0.017 1.4e-04       True    False
+  viet_nam  2 c7_pso_trong_so 0.868    0.784         0.296  2.731  0.017 1.4e-04       True    False
+  viet_nam  2         c7_wfcm 0.815    0.784         0.371  0.072  0.017 1.4e-04       True    False
+  viet_nam  2         c8_kfcm 0.600    0.784         0.474  0.035  0.017 1.4e-04      False     True
+  viet_nam  2     c8_pso_kfcm 0.600    0.784         0.474  0.816  0.017 1.4e-04      False     True
+  viet_nam  2         fcm_lap 0.784    0.784         0.419  0.203  0.017 1.4e-04       True    False
+  viet_nam  2          kmeans 0.843    0.784         0.306  0.006  0.017 1.4e-04       True    False
+  viet_nam  3      c1_tuan_tu 0.840    0.840         0.248  1.141  0.447 1.4e-04      False     True
+  viet_nam  3     c2_fcm_gieo 0.840    0.840         0.248  0.548  0.447 1.4e-04      False     True
+  viet_nam  3       c3_xen_ke 0.840    0.840         0.248  0.796  0.447 1.4e-04      False     True
+  viet_nam  3      c4_pso_tam 0.819    0.840         0.281  0.665  0.447 1.9e-02      False     True
+  viet_nam  3        c5_pso_U 0.516    0.840         0.326  0.342  0.447 1.4e-04      False     True
+  viet_nam  3       c6_pso_xb 0.918    0.840         0.056  1.411  0.447 1.4e-04       True    False
+  viet_nam  3 c7_pso_trong_so 0.888    0.840         0.224  5.685  0.447 7.8e-02      False    False
+  viet_nam  3         c7_wfcm 0.897    0.840         0.211  0.093  0.447 1.4e-04       True    False
+  viet_nam  3         c8_kfcm 0.653    0.840         0.145  0.486  0.447 1.4e-04      False     True
+  viet_nam  3     c8_pso_kfcm 0.653    0.840         0.145  1.344  0.447 1.4e-04      False     True
+  viet_nam  3         fcm_lap 0.840    0.840         0.248  9.132  0.447 1.4e-04      False     True
+  viet_nam  3          kmeans 0.855    0.840         0.181  0.009  0.447 1.4e-04       True    False
+  viet_nam  4      c1_tuan_tu 0.866    0.866         0.082  0.964  0.212 1.0e+00      False    False
+  viet_nam  4     c2_fcm_gieo 0.866    0.866         0.082  0.309  0.212 1.0e+00      False    False
+  viet_nam  4       c3_xen_ke 0.866    0.866         0.082  0.829  0.212 1.0e+00      False    False
+  viet_nam  4      c4_pso_tam 0.791    0.866         0.138  1.057  0.212 2.8e-03      False     True
+  viet_nam  4        c5_pso_U 0.513    0.866         0.243  0.590  0.212 1.4e-04      False     True
+  viet_nam  4       c6_pso_xb 0.903    0.866         0.054  2.014  0.212 1.0e+00      False    False
+  viet_nam  4 c7_pso_trong_so 0.909    0.866         0.155 11.734  0.212 1.5e-03       True    False
+  viet_nam  4         c7_wfcm 0.922    0.866         0.116  0.139  0.212 1.4e-04       True    False
+  viet_nam  4         c8_kfcm 0.674    0.866         0.075  0.260  0.212 1.4e-04      False     True
+  viet_nam  4     c8_pso_kfcm 0.674    0.866         0.075  1.128  0.212 1.4e-04      False     True
+  viet_nam  4         fcm_lap 0.866    0.866         0.082  3.750  0.212 1.0e+00      False    False
+  viet_nam  4          kmeans 0.838    0.866         0.132  0.010  0.212 1.4e-04      False     True 
+
+=== Số cấu hình (trên 6) cải thiện / kém hơn có ý nghĩa so với FCM
+                 cai_thien  kem_hon
+method                             
+kmeans                   5        1
+c6_pso_xb                5        0
+c7_pso_trong_so          4        0
+c7_wfcm                  4        2
+c5_pso_U                 3        3
+c8_kfcm                  2        3
+c4_pso_tam               2        2
+c2_fcm_gieo              2        2
+c8_pso_kfcm              2        3
+c1_tuan_tu               1        1
+c3_xen_ke                1        1
+fcm_lap                  1        2 
+
+=== Tách riêng đóng góp của PSO: c7_pso_trong_so so với c7_wfcm; c8_pso_kfcm so với c8_kfcm
+c7_pso_trong_so vs c7_wfcm | taiwan_moi c=2: AUC 0.566 / 0.442, p = 3.2e-04, cụm nhỏ nhất 0.239 / 0.294
+c7_pso_trong_so vs c7_wfcm | taiwan_moi c=3: AUC 0.586 / 0.423, p = 1.9e-06, cụm nhỏ nhất 0.186 / 0.208
+c7_pso_trong_so vs c7_wfcm | taiwan_moi c=4: AUC 0.619 / 0.457, p = 1.9e-06, cụm nhỏ nhất 0.142 / 0.151
+c7_pso_trong_so vs c7_wfcm | viet_nam c=2: AUC 0.868 / 0.815, p = 1.9e-06, cụm nhỏ nhất 0.296 / 0.371
+c7_pso_trong_so vs c7_wfcm | viet_nam c=3: AUC 0.888 / 0.897, p = 5.3e-02, cụm nhỏ nhất 0.224 / 0.211
+c7_pso_trong_so vs c7_wfcm | viet_nam c=4: AUC 0.909 / 0.922, p = 1.7e-02, cụm nhỏ nhất 0.155 / 0.116
+c8_pso_kfcm vs c8_kfcm | taiwan_moi c=2: AUC 0.501 / 0.502, p = 3.5e-01, cụm nhỏ nhất 0.410 / 0.410
+c8_pso_kfcm vs c8_kfcm | taiwan_moi c=3: AUC 0.501 / 0.503, p = 6.5e-01, cụm nhỏ nhất 0.116 / 0.067
+c8_pso_kfcm vs c8_kfcm | taiwan_moi c=4: AUC 0.504 / 0.503, p = 5.8e-02, cụm nhỏ nhất 0.004 / 0.004
+c8_pso_kfcm vs c8_kfcm | viet_nam c=2: AUC 0.600 / 0.600, p = 1.7e-01, cụm nhỏ nhất 0.474 / 0.474
+c8_pso_kfcm vs c8_kfcm | viet_nam c=3: AUC 0.653 / 0.653, p = 8.7e-01, cụm nhỏ nhất 0.145 / 0.145
+c8_pso_kfcm vs c8_kfcm | viet_nam c=4: AUC 0.674 / 0.674, p = 2.1e-01, cụm nhỏ nhất 0.075 / 0.075

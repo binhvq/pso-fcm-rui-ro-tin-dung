@@ -1,0 +1,8 @@
+Bỏ 1 cột không phải số: ['purpose']
+lending-club-openml.csv: 5000 dòng × 12 thuộc tính số; nhãn dương 16.0%
+ c  so_muc_J  u_ngau_nhien_dat  diem_ngau_nhien_dat  kmeans_pp_dat  pso_w_dat  sup_%  pc_tv  cum_nho_tv_%  auc_tv
+ 2         1               100                  100            100        100    100  0.500          46.3   0.607
+ 3         1               100                  100            100        100    100  0.333           0.0   0.607
+ 4         1               100                  100            100        100    100  0.250           0.0   0.607
+ 5         1               100                  100            100        100    100  0.200           0.0   0.607
+ 6         1               100                  100            100        100    100  0.167           0.0   0.607

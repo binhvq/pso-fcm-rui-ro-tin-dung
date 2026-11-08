@@ -1,0 +1,753 @@
+% Tài liệu tham khảo: Ứng dụng PSO kết hợp Fuzzy C-means trong phân cụm dữ liệu
+% phục vụ đánh giá rủi ro tín dụng.
+% Metadata đối chiếu với Crossref và OpenAlex ngày 2026-10-13. Mọi DOI đều resolve được.
+
+% ===================== 10 BÀI CHÍNH =====================
+
+% (a) PSO + FCM
+@article{cui2022fpsoueba,
+  author    = {Cui, Jingyang and Zhang, Guanghua and Chen, Zhenguo and Yu, Naiwen},
+  title     = {Multi-homed abnormal behavior detection algorithm based on fuzzy particle swarm cluster in user and entity behavior analytics},
+  journal   = {Scientific Reports},
+  year      = {2022},
+  volume    = {12},
+  eid       = {22349},
+  doi       = {10.1038/s41598-022-26142-w},
+  url       = {https://doi.org/10.1038/s41598-022-26142-w},
+  note      = {Bài 01}
+}
+
+@article{zhang2020elpso,
+  author    = {Zhang, Jian and Ma, Zongheng},
+  title     = {Hybrid Fuzzy Clustering Method Based on {FCM} and Enhanced Logarithmical {PSO} ({ELPSO})},
+  journal   = {Computational Intelligence and Neuroscience},
+  year      = {2020},
+  volume    = {2020},
+  eid       = {1386839},
+  pages     = {1--12},
+  doi       = {10.1155/2020/1386839},
+  url       = {https://doi.org/10.1155/2020/1386839},
+  note      = {Tài liệu nền: công thức quán tính logarit mà bài 02 kế thừa}
+}
+
+@article{qian2022psofcm,
+  author    = {Qian, Zhaoyong and Cao, Yuhua and Sun, Xiaoshuang and Ni, Lei and Wang, Zhiyu and Chen, Xiaowei},
+  title     = {Clustering Optimization for Triple-Frequency Combined Observations of {BDS-3} Based on Improved {PSO-FCM} Algorithm},
+  journal   = {Remote Sensing},
+  year      = {2022},
+  volume    = {14},
+  number    = {15},
+  pages     = {3713},
+  doi       = {10.3390/rs14153713},
+  url       = {https://doi.org/10.3390/rs14153713},
+  note      = {Bài 02}
+}
+
+@article{shang2021psokfcm,
+  author    = {Shang, Chuan and Gao, Junwei and Liu, Huabo and Liu, Fuzheng},
+  title     = {Short-Term Load Forecasting Based on {PSO-KFCM} Daily Load Curve Clustering and {CNN-LSTM} Model},
+  journal   = {IEEE Access},
+  year      = {2021},
+  volume    = {9},
+  pages     = {50344--50357},
+  doi       = {10.1109/ACCESS.2021.3067043},
+  url       = {https://doi.org/10.1109/ACCESS.2021.3067043},
+  note      = {Bài 03}
+}
+
+@article{zhang2025qpsofcm,
+  author    = {Zhang, Yuhang and Wu, Xiaofeng and Xu, Jiawei and Ning, Zihao and Han, Xiao},
+  title     = {Clustering analysis of {Yue} opera character tone trends based on quantum particle swarm optimization for fuzzy {C}-means},
+  journal   = {PLOS ONE},
+  year      = {2025},
+  volume    = {20},
+  number    = {1},
+  pages     = {e0313065},
+  doi       = {10.1371/journal.pone.0313065},
+  url       = {https://doi.org/10.1371/journal.pone.0313065},
+  note      = {Bài 04}
+}
+
+% (c) Metaheuristic khác lai FCM (đối chứng)
+@article{sun2024mstsofcm,
+  author    = {Sun, Changkang and Shao, Qinglong and Zhou, Ziqi and Zhang, Junxiao},
+  title     = {An Enhanced {FCM} Clustering Method Based on Multi-Strategy Tuna Swarm Optimization},
+  journal   = {Mathematics},
+  year      = {2024},
+  volume    = {12},
+  number    = {3},
+  pages     = {453},
+  doi       = {10.3390/math12030453},
+  url       = {https://doi.org/10.3390/math12030453},
+  note      = {Bài 05}
+}
+
+@article{liu2021msgwo,
+  author    = {Liu, Yongli and Wang, Zhonghui and Chao, Hao},
+  title     = {A Feature Weighted Fuzzy Clustering Algorithm Based on Multistrategy Grey Wolf Optimization},
+  journal   = {Journal of Electrical and Computer Engineering},
+  year      = {2021},
+  volume    = {2021},
+  eid       = {7387153},
+  pages     = {1--13},
+  doi       = {10.1155/2021/7387153},
+  url       = {https://doi.org/10.1155/2021/7387153},
+  note      = {Bài 06}
+}
+
+% (b) Phân cụm / metaheuristic trong rủi ro tín dụng
+@article{bosker2025clustered,
+  author    = {Bosker, Joost and G{\"u}rtler, Marc and Z{\"o}llner, Marvin},
+  title     = {Machine learning-based variable selection for clustered credit risk modeling},
+  journal   = {Journal of Business Economics},
+  year      = {2025},
+  volume    = {95},
+  number    = {4},
+  pages     = {617--652},
+  doi       = {10.1007/s11573-024-01213-8},
+  url       = {https://doi.org/10.1007/s11573-024-01213-8},
+  note      = {Bài 07. Online first 2024-12-03}
+}
+
+@article{paz2025creditreview,
+  author    = {Paz, {\'A}lex and Crawford, Broderick and Monfroy, Eric and Barrera-Garc{\'i}a, Jos{\'e} and Pe{\~n}a Fritz, {\'A}lvaro and Soto, Ricardo and Cisternas-Caneo, Felipe and Y{\'a}{\~n}ez, Andr{\'e}s},
+  title     = {Machine Learning and Metaheuristics Approach for Individual Credit Risk Assessment: A Systematic Literature Review},
+  journal   = {Biomimetics},
+  year      = {2025},
+  volume    = {10},
+  number    = {5},
+  pages     = {326},
+  doi       = {10.3390/biomimetics10050326},
+  url       = {https://doi.org/10.3390/biomimetics10050326},
+  note      = {Tài liệu nền cho Chương 1 (tổng quan, danh mục bộ dữ liệu); nhường vị trí bài 08 cho bài ứng dụng}
+}
+
+@article{yi2025gru,
+  author    = {Yi, Zhifei},
+  title     = {Credit Default Risk Measurement and Statistical Analysis Based on Improved {GRU} Model},
+  journal   = {Engineering Reports},
+  year      = {2025},
+  volume    = {7},
+  number    = {2},
+  eid       = {e70014},
+  doi       = {10.1002/eng2.70014},
+  url       = {https://doi.org/10.1002/eng2.70014},
+  note      = {Tài liệu nền cho Ch.1: phân cụm mờ kết hợp GRU đo rủi ro vỡ nợ}
+}
+
+@article{ahelegbey2023p2p,
+  author    = {Ahelegbey, Daniel Felix and Giudici, Paolo},
+  title     = {Credit Scoring for Peer-to-Peer Lending},
+  journal   = {Risks},
+  year      = {2023},
+  volume    = {11},
+  number    = {7},
+  pages     = {123},
+  doi       = {10.3390/risks11070123},
+  url       = {https://doi.org/10.3390/risks11070123},
+  note      = {Tài liệu nền cho Ch.1: phân cụm người vay trước khi chấm điểm}
+}
+
+@article{lakra2025wcapso,
+  author    = {Lakra, Atul Vikas and Jena, Sudarson and Mishra, Kaushik},
+  title     = {Optimizing {XGBoost} Hyperparameters for Credit Scoring Classification Using Weighted Cognitive Avoidance Particle Swarm},
+  journal   = {IEEE Access},
+  year      = {2025},
+  volume    = {13},
+  pages     = {127292--127306},
+  doi       = {10.1109/ACCESS.2025.3585980},
+  url       = {https://doi.org/10.1109/ACCESS.2025.3585980},
+  note      = {Bài 09}
+}
+
+@article{qin2021apso,
+  author    = {Qin, Chao and Zhang, Yunfeng and Bao, Fangxun and Zhang, Caiming and Liu, Peide and Liu, Peipei},
+  title     = {{XGBoost} Optimized by Adaptive Particle Swarm Optimization for Credit Scoring},
+  journal   = {Mathematical Problems in Engineering},
+  year      = {2021},
+  volume    = {2021},
+  eid       = {6655510},
+  pages     = {1--18},
+  doi       = {10.1155/2021/6655510},
+  url       = {https://doi.org/10.1155/2021/6655510},
+  note      = {Đã thay: tạp chí bị Clarivate loại khỏi Web of Science 03/2023 và Wiley đóng 09/2024; bài không bị rút}
+}
+
+% (d) Survey
+@article{valdez2021bioinspired,
+  author    = {Valdez, Fevrier and Castillo, Oscar and Melin, Patricia},
+  title     = {Bio-Inspired Algorithms and Its Applications for Optimization in Fuzzy Clustering},
+  journal   = {Algorithms},
+  year      = {2021},
+  volume    = {14},
+  number    = {4},
+  pages     = {122},
+  doi       = {10.3390/a14040122},
+  url       = {https://doi.org/10.3390/a14040122},
+  note      = {Bài 10}
+}
+
+% ===================== TÀI LIỆU NỀN TẢNG =====================
+
+@article{bezdek1984fcm,
+  author    = {Bezdek, James C. and Ehrlich, Robert and Full, William},
+  title     = {{FCM}: The fuzzy c-means clustering algorithm},
+  journal   = {Computers \& Geosciences},
+  year      = {1984},
+  volume    = {10},
+  number    = {2--3},
+  pages     = {191--203},
+  doi       = {10.1016/0098-3004(84)90020-7},
+  url       = {https://doi.org/10.1016/0098-3004(84)90020-7},
+  note      = {PDF: nen-tang/bezdek-1984-fcm.pdf}
+}
+
+@article{bezdek1980convergence,
+  author    = {Bezdek, James C.},
+  title     = {A convergence theorem for the fuzzy {ISODATA} clustering algorithms},
+  journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year      = {1980},
+  volume    = {PAMI-2},
+  number    = {1},
+  pages     = {1--8},
+  doi       = {10.1109/TPAMI.1980.4766964},
+  url       = {https://doi.org/10.1109/TPAMI.1980.4766964},
+  note      = {PDF: nen-tang/bezdek-1980-convergence-theorem-fuzzy-isodata.pdf}
+}
+
+@article{bezdek1987counterexamples,
+  author    = {Bezdek, James C. and Hathaway, Richard J. and Sabin, Michael J. and Tucker, William T.},
+  title     = {Convergence theory for fuzzy c-means: Counterexamples and repairs},
+  journal   = {IEEE Transactions on Systems, Man, and Cybernetics},
+  year      = {1987},
+  volume    = {17},
+  number    = {5},
+  pages     = {873--877},
+  doi       = {10.1109/TSMC.1987.6499296},
+  url       = {https://doi.org/10.1109/TSMC.1987.6499296},
+  note      = {PDF: nen-tang/bezdek-1987-fcm-convergence-counterexamples-repairs.pdf}
+}
+
+@article{hathaway1988recent,
+  author    = {Hathaway, Richard J. and Bezdek, James C.},
+  title     = {Recent convergence results for the fuzzy c-means clustering algorithms},
+  journal   = {Journal of Classification},
+  year      = {1988},
+  volume    = {5},
+  number    = {2},
+  pages     = {237--247},
+  doi       = {10.1007/BF01897166},
+  url       = {https://doi.org/10.1007/BF01897166},
+  note      = {PDF: nen-tang/hathaway-bezdek-1988-recent-convergence-results-fcm.pdf}
+}
+
+@article{hathaway1986local,
+  author    = {Hathaway, Richard J. and Bezdek, James C.},
+  title     = {Local convergence of the fuzzy c-means algorithms},
+  journal   = {Pattern Recognition},
+  year      = {1986},
+  volume    = {19},
+  number    = {6},
+  pages     = {477--480},
+  doi       = {10.1016/0031-3203(86)90047-6},
+  url       = {https://doi.org/10.1016/0031-3203(86)90047-6},
+  note      = {PDF: nen-tang/hathaway-bezdek-1986-local-convergence-fcm.pdf}
+}
+
+@article{kim1988optimality,
+  author    = {Kim, Taehwan and Bezdek, James C. and Hathaway, Richard J.},
+  title     = {Optimality tests for fixed points of the fuzzy c-means algorithm},
+  journal   = {Pattern Recognition},
+  year      = {1988},
+  volume    = {21},
+  number    = {6},
+  pages     = {651--663},
+  doi       = {10.1016/0031-3203(88)90037-4},
+  url       = {https://doi.org/10.1016/0031-3203(88)90037-4},
+  note      = {PDF: nen-tang/kim-1988-optimality-tests-fcm-fixed-points.pdf}
+}
+
+@article{hoppner2003convergence,
+  author    = {H{\"o}ppner, Frank and Klawonn, Frank},
+  title     = {A contribution to convergence theory of fuzzy c-means and derivatives},
+  journal   = {IEEE Transactions on Fuzzy Systems},
+  year      = {2003},
+  volume    = {11},
+  number    = {5},
+  pages     = {682--694},
+  doi       = {10.1109/TFUZZ.2003.817858},
+  url       = {https://doi.org/10.1109/TFUZZ.2003.817858},
+  note      = {PDF: nen-tang/hoppner-klawonn-2003-convergence-theory-fcm.pdf}
+}
+
+@article{groll2005convergence,
+  author    = {Gr{\"o}ll, Lutz and J{\"a}kel, Jens},
+  title     = {A new convergence proof of fuzzy c-means},
+  journal   = {IEEE Transactions on Fuzzy Systems},
+  year      = {2005},
+  volume    = {13},
+  number    = {5},
+  pages     = {717--720},
+  doi       = {10.1109/TFUZZ.2005.856560},
+  url       = {https://doi.org/10.1109/TFUZZ.2005.856560},
+  note      = {PDF: nen-tang/groll-jakel-2005-new-convergence-proof-fcm.pdf}
+}
+
+@inproceedings{kennedy1995pso,
+  author    = {Kennedy, James and Eberhart, Russell},
+  title     = {Particle swarm optimization},
+  booktitle = {Proceedings of ICNN'95 -- International Conference on Neural Networks},
+  year      = {1995},
+  volume    = {4},
+  pages     = {1942--1948},
+  publisher = {IEEE},
+  doi       = {10.1109/ICNN.1995.488968},
+  url       = {https://doi.org/10.1109/ICNN.1995.488968},
+  note      = {PDF: nen-tang/kennedy-eberhart-1995-particle-swarm-optimization.pdf (bản đọc của khoá học Đại học Tufts)}
+}
+
+@inproceedings{shi1998inertia,
+  author    = {Shi, Yuhui and Eberhart, Russell},
+  title     = {A modified particle swarm optimizer},
+  booktitle = {1998 IEEE International Conference on Evolutionary Computation Proceedings. IEEE World Congress on Computational Intelligence},
+  year      = {1998},
+  pages     = {69--73},
+  publisher = {IEEE},
+  doi       = {10.1109/ICEC.1998.699146},
+  url       = {https://doi.org/10.1109/ICEC.1998.699146},
+  note      = {PDF: nen-tang/shi-eberhart-1998-modified-pso.pdf (bản lưu Internet Archive 2017 của dsp.szu.edu.cn)}
+}
+
+@article{mane2014hpso,
+  author    = {Mane, Sandeep U. and Gaikwad, Pankaj G.},
+  title     = {Hybrid Particle Swarm Optimization ({HPSO}) for Data Clustering},
+  journal   = {International Journal of Computer Applications},
+  year      = {2014},
+  volume    = {97},
+  number    = {19},
+  pages     = {1--5},
+  doi       = {10.5120/17112-7514},
+  url       = {https://doi.org/10.5120/17112-7514},
+  note      = {Tài liệu thầy gợi ý}
+}
+
+@article{omran2005psoimage,
+  author    = {Omran, Mahamed and Engelbrecht, Andries P. and Salman, Ayed},
+  title     = {Particle swarm optimization method for image clustering},
+  journal   = {International Journal of Pattern Recognition and Artificial Intelligence},
+  year      = {2005},
+  volume    = {19},
+  number    = {3},
+  pages     = {297--321},
+  doi       = {10.1142/S0218001405004083},
+  url       = {https://doi.org/10.1142/S0218001405004083},
+  note      = {Tài liệu thầy gợi ý; bản bài báo không truy cập mở}
+}
+
+@phdthesis{omran2004thesis,
+  author      = {Omran, Mahamed G. H.},
+  title       = {Particle Swarm Optimization Methods for Pattern Recognition and Image Processing},
+  school      = {University of Pretoria},
+  year        = {2004},
+  url         = {https://repository.up.ac.za/handle/2263/29826},
+  note        = {Chương 4 trình bày thuật toán phân cụm dựa trên PSO của bài omran2005psoimage}
+}
+
+% ===================== DỰ PHÒNG (chưa tải PDF) =====================
+
+@article{baser2023cbfc,
+  author    = {Baser, Furkan and Koc, Oguz and Selcuk-Kestel, A. Sevtap},
+  title     = {Credit risk evaluation using clustering based fuzzy classification method},
+  journal   = {Expert Systems with Applications},
+  year      = {2023},
+  volume    = {223},
+  pages     = {119882},
+  doi       = {10.1016/j.eswa.2023.119882},
+  url       = {https://doi.org/10.1016/j.eswa.2023.119882},
+  note      = {Không truy cập mở; kho lưu trữ METU chỉ có metadata}
+}
+
+@article{vasheghani2025loan,
+  author    = {Vasheghani, Mahtab and Farokhi, Ebrahim Nazari and Dolatshah, Behrooz},
+  title     = {Forecasting loan, deferred rate and customer segmentation in banking industry: A computational intelligence approach},
+  journal   = {Array},
+  year      = {2025},
+  volume    = {27},
+  pages     = {100460},
+  doi       = {10.1016/j.array.2025.100460},
+  url       = {https://doi.org/10.1016/j.array.2025.100460},
+  note      = {Bài 08}
+}
+
+% Dữ liệu
+@report{gromping2019sgc,
+  author      = {Gr{\"o}mping, Ulrike},
+  title       = {South German Credit Data: Correcting a Widely Used Data Set},
+  type        = {Reports in Mathematics, Physics and Chemistry},
+  number      = {4/2019},
+  institution = {Beuth University of Applied Sciences Berlin},
+  year        = {2019},
+  url         = {https://www1.beuth-hochschule.de/FB_II/reports/Report-2019-004.pdf},
+  note        = {Bộ chính Chương 3; dữ liệu UCI id 522, DOI 10.24432/C5X89F. PDF: nen-tang/gromping-2019-south-german-credit.pdf}
+}
+
+% Tiền lệ cho đề xuất "PSO tối ưu trọng số thuộc tính" (tra cứu 13/10)
+@article{lu2011psovw,
+  author    = {Lu, Yanping and Wang, Shengrui and Li, Shaozi and Zhou, Changle},
+  title     = {Particle swarm optimizer for variable weighting in clustering high-dimensional data},
+  journal   = {Machine Learning},
+  year      = {2011},
+  volume    = {82},
+  number    = {1},
+  pages     = {43--70},
+  doi       = {10.1007/s10994-009-5154-2},
+  note      = {PSOVW: hạt = ma trận trọng số theo cụm, k-means cứng}
+}
+
+@inproceedings{oneill2018psofw,
+  author    = {O'Neill, Damien and Lensen, Andrew and Xue, Bing and Zhang, Mengjie},
+  title     = {Particle Swarm Optimisation for Feature Selection and Weighting in High-Dimensional Clustering},
+  booktitle = {2018 IEEE Congress on Evolutionary Computation (CEC)},
+  year      = {2018},
+  pages     = {1--8},
+  doi       = {10.1109/CEC.2018.8477974},
+  note      = {PSO-FSW: vector trọng số toàn cục; AP/DBSCAN/agglomerative/KNN; fitness CSC. PDF: nen-tang/oneill-2018-pso-feature-selection-weighting-clustering.pdf}
+}
+
+@inproceedings{zhu2012mossc,
+  author    = {Zhu, Lin and Cao, Longbing and Yang, Jie},
+  title     = {Multiobjective evolutionary algorithm-based soft subspace clustering},
+  booktitle = {2012 IEEE Congress on Evolutionary Computation (CEC)},
+  year      = {2012},
+  pages     = {1--8},
+  doi       = {10.1109/CEC.2012.6252896},
+  note      = {MOSSC: NSGA-II, FCM có trọng số, Soft Subspace Xie-Beni}
+}
+
+% ================================================================
+% Khoá bổ sung cho Chương 2
+% Metadata đối chiếu với Crossref (api.crossref.org) ngày 2026-10-13; Mehdizadeh 2008 đối chiếu doi.org và trang
+% tạp chí (ijfs.usb.ac.ir, trang 1–14); Arthur & Vassilvitskii 2007 đối chiếu trang Google Research và BibSonomy
+% (DOI ACM 10.5555/... không resolve qua doi.org nên không ghi DOI).
+
+@article{mehdizadeh2008hybrid,
+  author    = {Mehdizadeh, E. and Sadi-Nezhad, S. and Tavakkoli-Moghaddam, R.},
+  title     = {Optimization of Fuzzy Clustering Criteria by a Hybrid {PSO} and Fuzzy {C}-Means Clustering Algorithm},
+  journal   = {Iranian Journal of Fuzzy Systems},
+  year      = {2008},
+  volume    = {5},
+  number    = {3},
+  pages     = {1--14},
+  doi       = {10.22111/ijfs.2008.339},
+  note      = {Cách 2: nghiệm FCM gieo vào bầy PSO}
+}
+
+@inproceedings{izakian2009hybrid,
+  author    = {Izakian, Hesam and Abraham, Ajith and Sn{\'a}{\v{s}}el, V{\'a}clav},
+  title     = {Fuzzy clustering using hybrid fuzzy c-means and fuzzy particle swarm optimization},
+  booktitle = {2009 World Congress on Nature \& Biologically Inspired Computing (NaBIC)},
+  year      = {2009},
+  pages     = {1690--1694},
+  publisher = {IEEE},
+  doi       = {10.1109/NABIC.2009.5393618},
+  note      = {FPSO (hạt là U) và FCM-FPSO}
+}
+
+@article{izakian2011fcmfpso,
+  author    = {Izakian, Hesam and Abraham, Ajith},
+  title     = {Fuzzy {C}-means and fuzzy swarm for fuzzy clustering problem},
+  journal   = {Expert Systems with Applications},
+  year      = {2011},
+  volume    = {38},
+  number    = {3},
+  pages     = {1835--1838},
+  doi       = {10.1016/j.eswa.2010.07.112},
+  note      = {Cách 3: xen kẽ PSO và FCM}
+}
+
+@inproceedings{runkler2006psofcm,
+  author    = {Runkler, Thomas A. and Katz, Christina},
+  title     = {Fuzzy Clustering by Particle Swarm Optimization},
+  booktitle = {2006 IEEE International Conference on Fuzzy Systems},
+  year      = {2006},
+  pages     = {601--608},
+  publisher = {IEEE},
+  doi       = {10.1109/FUZZY.2006.1681773},
+  note      = {PSO-V (hạt là tâm) và PSO-U (hạt là độ thuộc)}
+}
+
+@article{ghamisi2015swarm,
+  author    = {Ghamisi, Pedram and Ali, Abder-Rahman and Couceiro, Micael S. and Benediktsson, J{\'o}n Atli},
+  title     = {A Novel Evolutionary Swarm Fuzzy Clustering Approach for Hyperspectral Imagery},
+  journal   = {IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing},
+  year      = {2015},
+  volume    = {8},
+  number    = {6},
+  pages     = {2447--2456},
+  doi       = {10.1109/JSTARS.2015.2398835},
+  note      = {Cách 1: PSO rồi FCM; so với FCM thuần}
+}
+
+@article{zhang2014shadowed,
+  author    = {Zhang, Jian and Shen, Ling},
+  title     = {An Improved Fuzzy c-Means Clustering Algorithm Based on Shadowed Sets and {PSO}},
+  journal   = {Computational Intelligence and Neuroscience},
+  year      = {2014},
+  volume    = {2014},
+  pages     = {1--10},
+  doi       = {10.1155/2014/368628},
+  note      = {Cách 8: PSO kèm shadowed sets}
+}
+
+@inproceedings{arthur2007kmeanspp,
+  author    = {Arthur, David and Vassilvitskii, Sergei},
+  title     = {k-means++: The Advantages of Careful Seeding},
+  booktitle = {Proceedings of the Eighteenth Annual ACM-SIAM Symposium on Discrete Algorithms (SODA '07)},
+  year      = {2007},
+  pages     = {1027--1035},
+  publisher = {Society for Industrial and Applied Mathematics},
+  address   = {Philadelphia, PA, USA}
+}
+
+@article{keller2000weighting,
+  author    = {Keller, Annette and Klawonn, Frank},
+  title     = {Fuzzy Clustering with Weighting of Data Variables},
+  journal   = {International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems},
+  year      = {2000},
+  volume    = {8},
+  number    = {6},
+  pages     = {735--746},
+  doi       = {10.1142/S0218488500000538}
+}
+
+@article{xie1991validity,
+  author    = {Xie, Xuanli Lisa and Beni, Gerardo},
+  title     = {A validity measure for fuzzy clustering},
+  journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year      = {1991},
+  volume    = {13},
+  number    = {8},
+  pages     = {841--847},
+  doi       = {10.1109/34.85677}
+}
+
+@article{davies1979separation,
+  author    = {Davies, David L. and Bouldin, Donald W.},
+  title     = {A Cluster Separation Measure},
+  journal   = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year      = {1979},
+  volume    = {PAMI-1},
+  number    = {2},
+  pages     = {224--227},
+  doi       = {10.1109/TPAMI.1979.4766909}
+}
+
+@article{rousseeuw1987silhouettes,
+  author    = {Rousseeuw, Peter J.},
+  title     = {Silhouettes: A graphical aid to the interpretation and validation of cluster analysis},
+  journal   = {Journal of Computational and Applied Mathematics},
+  year      = {1987},
+  volume    = {20},
+  pages     = {53--65},
+  doi       = {10.1016/0377-0427(87)90125-7}
+}
+
+@article{wang2011gobl,
+  author    = {Wang, Hui and Wu, Zhijian and Rahnamayan, Shahryar and Liu, Yong and Ventresca, Mario},
+  title     = {Enhancing particle swarm optimization using generalized opposition-based learning},
+  journal   = {Information Sciences},
+  year      = {2011},
+  volume    = {181},
+  number    = {20},
+  pages     = {4699--4714},
+  doi       = {10.1016/j.ins.2011.03.016},
+  note      = {Dạng GOBL dùng cho thuật toán C (bài 06 không cho công thức)}
+}
+
+@inproceedings{sun2004qpso,
+  author    = {Sun, Jun and Feng, Bin and Xu, Wenbo},
+  title     = {Particle swarm optimization with particles having quantum behavior},
+  booktitle = {Proceedings of the 2004 Congress on Evolutionary Computation},
+  year      = {2004},
+  volume    = {1},
+  pages     = {325--331},
+  publisher = {IEEE},
+  doi       = {10.1109/CEC.2004.1330875},
+  note      = {QPSO chuẩn; dùng để sửa lỗi in Eq. 17 bài 04}
+}
+
+@article{mirjalili2014gwo,
+  author    = {Mirjalili, Seyedali and Mirjalili, Seyed Mohammad and Lewis, Andrew},
+  title     = {Grey Wolf Optimizer},
+  journal   = {Advances in Engineering Software},
+  year      = {2014},
+  volume    = {69},
+  pages     = {46--61},
+  doi       = {10.1016/j.advengsoft.2013.12.007}
+}
+
+@book{bezdek1981pattern,
+  author    = {Bezdek, James C.},
+  title     = {Pattern Recognition with Fuzzy Objective Function Algorithms},
+  publisher = {Springer US (Plenum Press)},
+  address   = {New York},
+  year      = {1981},
+  doi       = {10.1007/978-1-4757-0450-1}
+}
+
+@article{fawcett2006roc,
+  author    = {Fawcett, Tom},
+  title     = {An introduction to {ROC} analysis},
+  journal   = {Pattern Recognition Letters},
+  year      = {2006},
+  volume    = {27},
+  number    = {8},
+  pages     = {861--874},
+  doi       = {10.1016/j.patrec.2005.10.010}
+}
+
+@article{hathaway1995reformulation,
+  author    = {Hathaway, Richard J. and Bezdek, James C.},
+  title     = {Optimization of clustering criteria by reformulation},
+  journal   = {IEEE Transactions on Fuzzy Systems},
+  year      = {1995},
+  volume    = {3},
+  number    = {2},
+  pages     = {241--245},
+  doi       = {10.1109/91.388178},
+  note      = {J_m rút gọn thành hàm của tâm R_m(V): cơ sở cho mã hoá hạt là tâm}
+}
+
+% ================================================================
+% Khoá bổ sung cho Chương 3
+% Metadata tra ngày 13/10/2026: bài báo qua Crossref (api.crossref.org), bộ dữ liệu UCI qua DataCite
+% (api.datacite.org); Holm 1979 không có trên Crossref, đối chiếu JSTOR 4615733.
+
+% ---------------------------------------------------------------- nguồn dữ liệu
+@article{tran2022distress,
+  author  = {Tran, Kim Long and Le, Hoang Anh and Nguyen, Thanh Hien and Nguyen, Duc Trung},
+  title   = {Explainable Machine Learning for Financial Distress Prediction: Evidence from {Vietnam}},
+  journal = {Data},
+  volume  = {7},
+  number  = {11},
+  pages   = {160},
+  year    = {2022},
+  doi     = {10.3390/data7110160}
+}
+
+@article{yeh2009default,
+  author  = {Yeh, I-Cheng and Lien, Che-hui},
+  title   = {The comparisons of data mining techniques for the predictive accuracy of probability of default of credit card clients},
+  journal = {Expert Systems with Applications},
+  volume  = {36},
+  number  = {2},
+  pages   = {2473--2480},
+  year    = {2009},
+  doi     = {10.1016/j.eswa.2007.12.020}
+}
+
+@misc{uciTaiwanDefault2009,
+  author       = {Yeh, I-Cheng},
+  title        = {Default of Credit Card Clients},
+  howpublished = {UCI Machine Learning Repository},
+  year         = {2009},
+  doi          = {10.24432/C55S3H}
+}
+
+@misc{uciGermanStatlog1994,
+  author       = {Hofmann, Hans},
+  title        = {Statlog ({German} Credit Data)},
+  howpublished = {UCI Machine Learning Repository},
+  year         = {1994},
+  doi          = {10.24432/C5NC77}
+}
+
+@misc{uciAustralian1987,
+  author       = {Quinlan, Ross},
+  title        = {Statlog ({Australian} Credit Approval)},
+  howpublished = {UCI Machine Learning Repository},
+  year         = {1987},
+  doi          = {10.24432/C59012}
+}
+
+@misc{uciPolish2016,
+  author       = {Tomczak, Sebastian},
+  title        = {Polish Companies Bankruptcy},
+  howpublished = {UCI Machine Learning Repository},
+  year         = {2016},
+  doi          = {10.24432/C5F600}
+}
+
+@article{zieba2016polish,
+  author  = {Zi{\k{e}}ba, Maciej and Tomczak, Sebastian K. and Tomczak, Jakub M.},
+  title   = {Ensemble boosted trees with synthetic features generation in application to bankruptcy prediction},
+  journal = {Expert Systems with Applications},
+  volume  = {58},
+  pages   = {93--101},
+  year    = {2016},
+  doi     = {10.1016/j.eswa.2016.04.001}
+}
+
+@misc{uciTaiwanBankruptcy2020,
+  title        = {Taiwanese Bankruptcy Prediction},
+  howpublished = {UCI Machine Learning Repository},
+  year         = {2020},
+  doi          = {10.24432/C5004D},
+  note         = {DataCite ghi tác giả ``Unknown''}
+}
+
+@article{liang2016bankruptcy,
+  author  = {Liang, Deron and Lu, Chia-Chi and Tsai, Chih-Fong and Shih, Guan-An},
+  title   = {Financial ratios and corporate governance indicators in bankruptcy prediction: A comprehensive study},
+  journal = {European Journal of Operational Research},
+  volume  = {252},
+  number  = {2},
+  pages   = {561--572},
+  year    = {2016},
+  doi     = {10.1016/j.ejor.2016.01.012}
+}
+
+% ---------------------------------------------------------------- phương pháp thống kê
+@article{wilcoxon1945,
+  author  = {Wilcoxon, Frank},
+  title   = {Individual Comparisons by Ranking Methods},
+  journal = {Biometrics Bulletin},
+  volume  = {1},
+  number  = {6},
+  pages   = {80--83},
+  year    = {1945},
+  doi     = {10.2307/3001968}
+}
+
+@article{holm1979,
+  author  = {Holm, Sture},
+  title   = {A Simple Sequentially Rejective Multiple Test Procedure},
+  journal = {Scandinavian Journal of Statistics},
+  volume  = {6},
+  number  = {2},
+  pages   = {65--70},
+  year    = {1979},
+  url     = {https://www.jstor.org/stable/4615733}
+}
+
+@inproceedings{shi1999empirical,
+  author    = {Shi, Yuhui and Eberhart, Russell C.},
+  title     = {Empirical study of particle swarm optimization},
+  booktitle = {Proceedings of the 1999 Congress on Evolutionary Computation (CEC99)},
+  year      = {1999},
+  volume    = {3},
+  pages     = {1945--1950},
+  publisher = {IEEE},
+  doi       = {10.1109/CEC.1999.785511},
+}
+
+@inproceedings{sun2004global,
+  author    = {Sun, Jun and Xu, Wenbo and Feng, Bin},
+  title     = {A global search strategy of quantum-behaved particle swarm optimization},
+  booktitle = {IEEE Conference on Cybernetics and Intelligent Systems, 2004},
+  year      = {2004},
+  volume    = {1},
+  pages     = {111--116},
+  publisher = {IEEE},
+  doi       = {10.1109/ICCIS.2004.1460396},
+}

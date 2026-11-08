@@ -1,0 +1,124 @@
+% ============================================================
+% phu-luc-b-ma-nguon.tex — Phụ lục mã nguồn: mã nguồn, lệnh chạy lại, phân công đọc hiểu code, (Giang)
+% ============================================================
+\chapter{MÃ NGUỒN VÀ DỮ LIỆU}
+\label{app:code}
+
+\section*{Cấu trúc thư mục}
+
+Mã nguồn viết bằng Python 3.9 với NumPy, SciPy, pandas và scikit-learn (phiên bản ghim trong
+\texttt{requirements.txt}). FCM và các phiên bản PSO được cài bằng NumPy. scikit-learn chỉ dùng cho Silhouette và AUC, còn
+scikit-fuzzy chỉ dùng trong phép thử để đối chiếu FCM. Bảng~\ref{tab:pl-ma-nguon} liệt kê các tệp dùng cho kết quả trong
+bài. Thư mục \texttt{code/} còn chứa các phương pháp của phiên bản trước (thuật toán GWO, các cách ghép khác), không trình bày ở đây.
+
+{\footnotesize
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}p{10.4cm}@{}}
+\caption{Các tệp mã nguồn dùng trong bài}\label{tab:pl-ma-nguon}\\
+\toprule
+\textbf{Tệp} & \textbf{Nội dung} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Tệp} & \textbf{Nội dung} \\
+\midrule
+\endhead
+\texttt{fcm.py} & FCM (mục~\ref{sec:fcm}), khởi tạo U ngẫu nhiên hoặc k-means++ \\
+\texttt{pso\_co\_so.py} & PSO có vận tốc dùng chung cho PSO gốc, PSO-W, PSO-S, PSO-LOG (mục~\ref{sec:pso-goc}) \\
+\texttt{thuat\_toan\_a.py}, \texttt{thuat\_toan\_b.py} & Lịch quán tính S và LOG (mục~\ref{sec:pso-s-log}); QPSO (mục~\ref{sec:qpso}) \\
+\texttt{cach\_ket\_hop.py} & Bài toán trọng số (fitness Silhouette trên không gian gốc, phạt cụm nhỏ), phân hoạch theo trọng số, WFCM giải tích (mục~\ref{sec:wfcm}, \ref{sec:pso-trong-so-pp}) \\
+\texttt{pso\_trong\_so.py} & PSO tìm trọng số thuộc tính với 5 phiên bản, tìm ngẫu nhiên cùng ngân sách (mục~\ref{sec:pso-trong-so-pp}) \\
+\texttt{pso\_khoi\_tao.py} & PSO tìm tâm khởi tạo cho FCM, 5 phiên bản, đối chứng điểm ngẫu nhiên (mục~\ref{sec:pso-khoi-tao}) \\
+\texttt{giao\_dien.py} & Giao diện chung \texttt{fit(X, c, m, rng, max\_fe)}, FCM k-means++, FCM tinh chỉnh từ bộ tâm \\
+\texttt{chi\_so\_danh\_gia.py}, \texttt{danh\_gia.py} & PC, PE, XB, Silhouette, AUC, chênh tỉ lệ vỡ nợ, đánh giá một lượt \\
+\texttt{tien\_xu\_ly.py}, \texttt{mo\_ta\_du\_lieu.py} & Nạp, tiền xử lý dữ liệu (mục~\ref{sec:tien-xu-ly}), 2 nửa bộ Việt Nam theo doanh nghiệp, hồ sơ chất lượng các bộ \\
+\texttt{chay\_e5.py}, \texttt{phan\_tich\_e5.py}, \texttt{chay\_e7.py} & TN1 (mã E5, E7; PSO tìm tâm, cấu hình nhiều cực tiểu, quỹ đạo gbest) \\
+\texttt{chay\_thuc\_nghiem.py}, \texttt{phan\_tich.py} & TN2 phần chẩn đoán 7 bộ (mã E3), profile cụm (mã E4) và phân tích tương ứng \\
+\texttt{chay\_e6.py} & TN2 phần quét $m$, $c$ (mã E6): bảng, macro \texttt{results/so-lieu-e6.tex} \\
+\texttt{chay\_e8.py} & TN3 (mã E8; PSO-W tìm trọng số so với 3 đối chứng): bảng, hình, macro \texttt{results/so-lieu-e8.tex} \\
+\texttt{chay\_e8\_kmeans.py} & TN3: K-means không trọng số làm mốc tham chiếu, Holm riêng; macro \texttt{results/so-lieu-e8-kmeans.tex} \\
+\texttt{chay\_e9.py} & TN4 (mã E9; 5 phiên bản PSO tìm trọng số, 2 ngân sách): bảng, hình, macro \texttt{results/so-lieu-e9.tex} \\
+\texttt{chay\_e10.py} & TN5 (mã E10; trọng số học trên mẫu nguồn áp lên mẫu đích): bảng, macro \texttt{results/so-lieu-e10.tex} \\
+\texttt{kiem\_thu\_*.py} & 9 tệp phép thử, tổng 97 phép thử; mẫu hồi quy tiền xử lý \texttt{mau\_kiem\_thu/hoi-quy-X.npz} sinh bằng \texttt{tao\_mau\_hoi\_quy.py} \\
+\bottomrule
+\end{longtable}
+}
+
+\section*{Khả dụng dữ liệu và mã nguồn}
+
+Bảng~\ref{tab:pl-du-lieu} liệt kê nguồn và giấy phép của các bộ dữ liệu dùng trong bài. Tệp thô nằm trong
+\texttt{data/raw/}, mỗi bộ một thư mục; \texttt{data/README.md} ghi đường dẫn tải, ngày tải và mã SHA-256 của từng tệp
+nén. Mã không sửa tệp thô; mọi bước tiền xử lý chạy trong bộ nhớ. Mẫu con 5.000 quan sát được lấy phân tầng theo nhãn với
+seed cố định: mẫu thiết kế Taiwan Default dùng seed 0, mẫu kiểm chứng dùng seed 1 trên phần còn lại; 2 bộ phá sản dùng
+seed 0 (\texttt{tien\_xu\_ly.py}). Bộ Việt Nam được tác giả công bố kèm bài báo; kho dữ liệu không ghi giấy phép riêng nên
+nhóm chỉ dùng để nghiên cứu và không phân phối lại. Mã nguồn, các tệp CSV kết quả và bảng, hình, macro sinh tự động nằm
+trong thư mục tiểu luận theo cấu trúc ở Bảng~\ref{tab:pl-ma-nguon}.
+
+{\footnotesize
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{3.8cm}@{}}
+\caption{Nguồn và giấy phép dữ liệu}\label{tab:pl-du-lieu}\\
+\toprule
+\textbf{Bộ dữ liệu} & \textbf{Nguồn} & \textbf{Giấy phép} & \textbf{Dùng ở} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Bộ dữ liệu} & \textbf{Nguồn} & \textbf{Giấy phép} & \textbf{Dùng ở} \\
+\midrule
+\endhead
+Việt Nam (khó khăn tài chính) & Trần và cộng sự~\parencite{tran2022distress} & không ghi riêng & TN1--TN5, profile cụm \\
+Taiwan Default & UCI id 350~\parencite{uciTaiwanDefault2009} & CC BY 4.0 & TN1--TN5, profile cụm \\
+South German Credit & Grömping~\parencite{gromping2019sgc}, UCI id 573 & CC BY 4.0 & TN2, TN3 \\
+German Credit (bản số) & UCI id 144~\parencite{uciGermanStatlog1994} & CC BY 4.0 & TN2, TN3 \\
+Australian Credit & UCI id 143~\parencite{uciAustralian1987} & CC BY 4.0 & TN2, TN3 \\
+Polish Bankruptcy & UCI id 365~\parencite{uciPolish2016} & CC BY 4.0 & TN2, TN3 \\
+Taiwan Bankruptcy & UCI id 572~\parencite{uciTaiwanBankruptcy2020} & CC BY 4.0 & TN2, TN3 \\
+\bottomrule
+\end{longtable}
+}
+
+\section*{Chạy lại thực nghiệm}
+
+Các lệnh dưới đây chạy trong thư mục \texttt{code/}.
+\begin{Verbatim}[fontsize=\footnotesize,frame=single]
+pip install -r ../requirements.txt
+for f in kiem_thu_*.py; do python3 $f; done        # 97 phép thử
+python3 chay_e5.py --tien-trinh 8                  # TN1
+python3 phan_tich_e5.py                            # bảng, hình, so-lieu-e5.tex
+python3 chay_e7.py --tien-trinh 12                 # TN1, nhiều cực tiểu (gồm phân tích)
+python3 chay_thuc_nghiem.py --thi-nghiem E3        # TN2, chẩn đoán 7 bộ
+python3 chay_e6.py --tien-trinh 12                 # TN2, quét m, c (gồm phân tích)
+python3 chay_e8.py --tien-trinh 16                 # TN3 (gồm phân tích)
+python3 chay_e8_kmeans.py --tien-trinh 8           # TN3, mốc K-means (gồm phân tích)
+python3 chay_e9.py --tien-trinh 12                 # TN4 (gồm phân tích)
+python3 chay_e10.py --tien-trinh 12                # TN5 (gồm phân tích)
+python3 chay_thuc_nghiem.py --thi-nghiem E4        # profile cụm
+python3 mo_ta_du_lieu.py ../results/mo-ta-du-lieu.csv  # mô tả dữ liệu
+python3 phan_tich.py                               # bảng TN2 (E3), profile cụm, so-lieu.tex
+cd .. && ./compile.sh                              # dựng build/main.pdf
+\end{Verbatim}
+Trên máy của nhóm (Intel Xeon E-2278G, 16 luồng, một luồng BLAS mỗi tiến trình), phần chẩn đoán của TN2 và profile cụm
+mất dưới một phút, phần quét $m$, $c$ dưới 10 phút; TN1 khoảng 25 phút; TN3 khoảng 2 giờ 20 phút; TN4 và TN5 lâu nhất vì mỗi
+lần tính fitness là một lần chạy FCM và một lần tính Silhouette (thời gian ghi trong \texttt{results/log-chay-e*.txt}). Seed cố
+định là 1000--1029 nên chạy lại cho cùng kết quả, trừ cột thời gian. Các trình chạy bỏ qua tác vụ đã có trong CSV, nên khi bị ngắt chỉ cần chạy
+lại cùng lệnh. Tệp \texttt{results/kiem-tra.txt} lưu các kiểm tra tự động trên kết quả chẩn đoán (TN2), gồm chẩn đoán tỉ lệ 39/100 nêu ở
+mục~\ref{sec:vi-sao}.
+
+\section*{Phân công đọc hiểu mã nguồn}
+
+Mỗi thành viên nhận một phần mã nguồn để đọc hiểu, chạy phép thử và trình bày
+khi vấn đáp (Bảng~\ref{tab:pl-phan-cong}).
+
+\begin{table}[H]
+\centering
+\caption{Phân công đọc hiểu mã nguồn}\label{tab:pl-phan-cong}
+\small
+\begin{tabular}{@{}l>{\raggedright\arraybackslash}p{7.6cm}>{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+\textbf{Người} & \textbf{Phần mã đọc hiểu} & \textbf{Mục trình bày} \\
+\midrule
+Bình & FCM, WFCM giải tích, quy trình đề xuất, kiểm chứng trên mẫu độc lập & \ref{sec:fcm}, \ref{sec:wfcm}, \ref{sec:de-xuat}, \ref{sec:kiem-chung} \\
+Giang & PSO gốc, PSO-W, khung PSO tìm trọng số, tiền xử lý dữ liệu, lý do chuyển hướng, TN3 & \ref{sec:pso-goc}, \ref{sec:pso-w}, \ref{sec:pso-trong-so-pp}, \ref{sec:du-lieu}, \ref{sec:chuyen-huong}, \ref{sec:pso-trong-so} \\
+Hà & PSO-S, PSO-LOG, chỉ số đánh giá, kiểm định Wilcoxon, Holm, TN4 phần so phiên bản, profile cụm, đánh giá chung & \ref{sec:pso-s-log}, \ref{sec:chi-so}, \ref{sec:kiem-dinh}, \ref{sec:phien-ban-trong-so}, \ref{sec:dien-giai}, \ref{sec:danh-gia-chung} \\
+Hải & QPSO, PSO tìm tâm (TN1), chẩn đoán số cực tiểu (TN2), quỹ đạo gbest, chi phí & \ref{sec:qpso}, \ref{sec:pso-khoi-tao}, \ref{sec:e5-dat-j}, \ref{sec:vi-sao} \\
+\bottomrule
+\end{tabular}
+\end{table}

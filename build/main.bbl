@@ -1,0 +1,1950 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{bosker2025clustered}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=7083ad379932b625310904425ae93887}{%
+           family={Bosker},
+           familyi={B\bibinitperiod},
+           given={Joost},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d0d652a77ba7dba8ecf3c427e218fa49}{%
+           family={Gürtler},
+           familyi={G\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cf7f9ff8d3f184d18faef4064612eece}{%
+           family={Zöllner},
+           familyi={Z\bibinitperiod},
+           given={Marvin},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{fullhash}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{fullhashraw}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{bibnamehash}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{authorbibnamehash}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{authornamehash}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{authorfullhash}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \strng{authorfullhashraw}{d79b34b2f1367e5e6dcba0525988b7ec}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Business Economics}
+      \field{number}{4}
+      \field{title}{Machine learning-based variable selection for clustered credit risk modeling}
+      \field{volume}{95}
+      \field{year}{2025}
+      \field{pages}{617\bibrangedash 652}
+      \range{pages}{36}
+      \verb{doi}
+      \verb 10.1007/s11573-024-01213-8
+      \endverb
+    \endentry
+    \entry{ahelegbey2023p2p}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=f2bd753e6c63d98b01c4183dc59c3a98}{%
+           family={Ahelegbey},
+           familyi={A\bibinitperiod},
+           given={Daniel\bibnamedelima Felix},
+           giveni={D\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=3c81d4f45cf4aced45782e3f1978b2ac}{%
+           family={Giudici},
+           familyi={G\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{248855ca8ad5231cc3addde611b2468a}
+      \strng{fullhash}{248855ca8ad5231cc3addde611b2468a}
+      \strng{fullhashraw}{248855ca8ad5231cc3addde611b2468a}
+      \strng{bibnamehash}{248855ca8ad5231cc3addde611b2468a}
+      \strng{authorbibnamehash}{248855ca8ad5231cc3addde611b2468a}
+      \strng{authornamehash}{248855ca8ad5231cc3addde611b2468a}
+      \strng{authorfullhash}{248855ca8ad5231cc3addde611b2468a}
+      \strng{authorfullhashraw}{248855ca8ad5231cc3addde611b2468a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Risks}
+      \field{number}{7}
+      \field{title}{Credit Scoring for Peer-to-Peer Lending}
+      \field{volume}{11}
+      \field{year}{2023}
+      \field{pages}{123}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/risks11070123
+      \endverb
+    \endentry
+    \entry{bezdek1987counterexamples}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=9bc317c854b8895530b7b24770d46267}{%
+           family={Bezdek},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=7a3e1a01c877134909dc50f0f9810c88}{%
+           family={Hathaway},
+           familyi={H\bibinitperiod},
+           given={Richard\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=76cf3c567afc0923f87d99f664cc4047}{%
+           family={Sabin},
+           familyi={S\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=c0ae58f05c3356616fc4580a281d3ed1}{%
+           family={Tucker},
+           familyi={T\bibinitperiod},
+           given={William\bibnamedelima T.},
+           giveni={W\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{a7bcc469bc113c75bbef7e2675bfe57a}
+      \strng{fullhash}{aef6cdab4fda168650ea70bf3c17cbf7}
+      \strng{fullhashraw}{aef6cdab4fda168650ea70bf3c17cbf7}
+      \strng{bibnamehash}{aef6cdab4fda168650ea70bf3c17cbf7}
+      \strng{authorbibnamehash}{aef6cdab4fda168650ea70bf3c17cbf7}
+      \strng{authornamehash}{a7bcc469bc113c75bbef7e2675bfe57a}
+      \strng{authorfullhash}{aef6cdab4fda168650ea70bf3c17cbf7}
+      \strng{authorfullhashraw}{aef6cdab4fda168650ea70bf3c17cbf7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Systems, Man, and Cybernetics}
+      \field{number}{5}
+      \field{title}{Convergence theory for fuzzy c-means: Counterexamples and repairs}
+      \field{volume}{17}
+      \field{year}{1987}
+      \field{pages}{873\bibrangedash 877}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/TSMC.1987.6499296
+      \endverb
+    \endentry
+    \entry{qian2022psofcm}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=2b1312fbff9e30b4bf871ca89a9410e4}{%
+           family={Qian},
+           familyi={Q\bibinitperiod},
+           given={Zhaoyong},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=7a78e5fefbf74ed266d21356577becc7}{%
+           family={Cao},
+           familyi={C\bibinitperiod},
+           given={Yuhua},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=ac1ce40d67ed863474867e945edc5b18}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Xiaoshuang},
+           giveni={X\bibinitperiod}}}%
+        {{hash=f2f9c2cfc454187a960d2079e10faa50}{%
+           family={Ni},
+           familyi={N\bibinitperiod},
+           given={Lei},
+           giveni={L\bibinitperiod}}}%
+        {{hash=553a56dd8a2fea57403873c192fc465d}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Zhiyu},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=757000857f6d5a5f350d4187b81b9272}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Xiaowei},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{7d8007f18b8450670ee9524701fcbffd}
+      \strng{fullhash}{76a35c153cdf9c5cc8ee51d87178baa9}
+      \strng{fullhashraw}{76a35c153cdf9c5cc8ee51d87178baa9}
+      \strng{bibnamehash}{76a35c153cdf9c5cc8ee51d87178baa9}
+      \strng{authorbibnamehash}{76a35c153cdf9c5cc8ee51d87178baa9}
+      \strng{authornamehash}{7d8007f18b8450670ee9524701fcbffd}
+      \strng{authorfullhash}{76a35c153cdf9c5cc8ee51d87178baa9}
+      \strng{authorfullhashraw}{76a35c153cdf9c5cc8ee51d87178baa9}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Remote Sensing}
+      \field{number}{15}
+      \field{title}{Clustering Optimization for Triple-Frequency Combined Observations of {BDS-3} Based on Improved {PSO-FCM} Algorithm}
+      \field{volume}{14}
+      \field{year}{2022}
+      \field{pages}{3713}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/rs14153713
+      \endverb
+    \endentry
+    \entry{zhang2025qpsofcm}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=bff5c5bb6df21ecdfa30344aecc773da}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yuhang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=f7f70f3ac6c59c12704cb798b4390933}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Xiaofeng},
+           giveni={X\bibinitperiod}}}%
+        {{hash=200fc57a11eee07e89779b8575fba40f}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Jiawei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6fa39fd45ddb55fb25ffdcb52a86ae1e}{%
+           family={Ning},
+           familyi={N\bibinitperiod},
+           given={Zihao},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=e455b4baac829220a95ebc58f137271d}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Xiao},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{6436ca83301706385e2a8e210312ec1f}
+      \strng{fullhash}{610af70e1047662f4351da4dbd4fa86a}
+      \strng{fullhashraw}{610af70e1047662f4351da4dbd4fa86a}
+      \strng{bibnamehash}{610af70e1047662f4351da4dbd4fa86a}
+      \strng{authorbibnamehash}{610af70e1047662f4351da4dbd4fa86a}
+      \strng{authornamehash}{6436ca83301706385e2a8e210312ec1f}
+      \strng{authorfullhash}{610af70e1047662f4351da4dbd4fa86a}
+      \strng{authorfullhashraw}{610af70e1047662f4351da4dbd4fa86a}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PLOS ONE}
+      \field{number}{1}
+      \field{title}{Clustering analysis of {Yue} opera character tone trends based on quantum particle swarm optimization for fuzzy {C}-means}
+      \field{volume}{20}
+      \field{year}{2025}
+      \field{pages}{e0313065}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0313065
+      \endverb
+    \endentry
+    \entry{mane2014hpso}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=3ef8535c86aaf3adcec19887d961a07c}{%
+           family={Mane},
+           familyi={M\bibinitperiod},
+           given={Sandeep\bibnamedelima U.},
+           giveni={S\bibinitperiod\bibinitdelim U\bibinitperiod}}}%
+        {{hash=8be20fe638915bf17de9866b31f7836e}{%
+           family={Gaikwad},
+           familyi={G\bibinitperiod},
+           given={Pankaj\bibnamedelima G.},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{fullhash}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{fullhashraw}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{bibnamehash}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{authorbibnamehash}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{authornamehash}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{authorfullhash}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \strng{authorfullhashraw}{a0d4a47e57b8d2b590170c7560a0eb21}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Computer Applications}
+      \field{number}{19}
+      \field{title}{Hybrid Particle Swarm Optimization ({HPSO}) for Data Clustering}
+      \field{volume}{97}
+      \field{year}{2014}
+      \field{pages}{1\bibrangedash 5}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.5120/17112-7514
+      \endverb
+    \endentry
+    \entry{hathaway1988recent}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=7a3e1a01c877134909dc50f0f9810c88}{%
+           family={Hathaway},
+           familyi={H\bibinitperiod},
+           given={Richard\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=9bc317c854b8895530b7b24770d46267}{%
+           family={Bezdek},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{fullhash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{fullhashraw}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{bibnamehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authorbibnamehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authornamehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authorfullhash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authorfullhashraw}{8ba1d77941e64d5b0c9d15341e10de16}
+      \field{extraname}{1}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Classification}
+      \field{number}{2}
+      \field{title}{Recent convergence results for the fuzzy c-means clustering algorithms}
+      \field{volume}{5}
+      \field{year}{1988}
+      \field{pages}{237\bibrangedash 247}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1007/BF01897166
+      \endverb
+    \endentry
+    \entry{liu2021msgwo}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=a359b2569de6f1580416842c7ebda41a}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yongli},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=861a236ea8ffd6c66d133f6e9f654814}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Zhonghui},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=02f1a0c3e66ddf6f652ccab3f10bcf73}{%
+           family={Chao},
+           familyi={C\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{161e2939e947feed728f6861c2980b1d}
+      \strng{fullhash}{161e2939e947feed728f6861c2980b1d}
+      \strng{fullhashraw}{161e2939e947feed728f6861c2980b1d}
+      \strng{bibnamehash}{161e2939e947feed728f6861c2980b1d}
+      \strng{authorbibnamehash}{161e2939e947feed728f6861c2980b1d}
+      \strng{authornamehash}{161e2939e947feed728f6861c2980b1d}
+      \strng{authorfullhash}{161e2939e947feed728f6861c2980b1d}
+      \strng{authorfullhashraw}{161e2939e947feed728f6861c2980b1d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eid}{7387153}
+      \field{journaltitle}{Journal of Electrical and Computer Engineering}
+      \field{title}{A Feature Weighted Fuzzy Clustering Algorithm Based on Multistrategy Grey Wolf Optimization}
+      \field{volume}{2021}
+      \field{year}{2021}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1155/2021/7387153
+      \endverb
+    \endentry
+    \entry{keller2000weighting}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=cf36d4a9dcb2df763ac089bb29a34ce1}{%
+           family={Keller},
+           familyi={K\bibinitperiod},
+           given={Annette},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8b210c061079950a34adef98ff801a30}{%
+           family={Klawonn},
+           familyi={K\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{fullhash}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{fullhashraw}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{bibnamehash}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{authorbibnamehash}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{authornamehash}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{authorfullhash}{8bff4cac1e50b5be43a3909def0786bc}
+      \strng{authorfullhashraw}{8bff4cac1e50b5be43a3909def0786bc}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems}
+      \field{number}{6}
+      \field{title}{Fuzzy Clustering with Weighting of Data Variables}
+      \field{volume}{8}
+      \field{year}{2000}
+      \field{pages}{735\bibrangedash 746}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1142/S0218488500000538
+      \endverb
+    \endentry
+    \entry{arthur2007kmeanspp}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=9490d5d9532dc965f9f300a7a5c9fa13}{%
+           family={Arthur},
+           familyi={A\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b6fa64c3195f752823d0759db3cbca91}{%
+           family={Vassilvitskii},
+           familyi={V\bibinitperiod},
+           given={Sergei},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Philadelphia, PA, USA}%
+      }
+      \list{publisher}{2}{%
+        {Society for Industrial}%
+        {Applied Mathematics}%
+      }
+      \strng{namehash}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{fullhash}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{fullhashraw}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{bibnamehash}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{authorbibnamehash}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{authornamehash}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{authorfullhash}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \strng{authorfullhashraw}{c59974bc84d7d18b3663c2ec2a4eaad7}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Eighteenth Annual ACM-SIAM Symposium on Discrete Algorithms (SODA '07)}
+      \field{title}{k-means++: The Advantages of Careful Seeding}
+      \field{year}{2007}
+      \field{pages}{1027\bibrangedash 1035}
+      \range{pages}{9}
+    \endentry
+    \entry{wilcoxon1945}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=405b308b1e8e33ef3275bf6cb9c9b281}{%
+           family={Wilcoxon},
+           familyi={W\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{fullhash}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{fullhashraw}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{bibnamehash}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{authorbibnamehash}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{authornamehash}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{authorfullhash}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \strng{authorfullhashraw}{405b308b1e8e33ef3275bf6cb9c9b281}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biometrics Bulletin}
+      \field{number}{6}
+      \field{title}{Individual Comparisons by Ranking Methods}
+      \field{volume}{1}
+      \field{year}{1945}
+      \field{pages}{80\bibrangedash 83}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.2307/3001968
+      \endverb
+    \endentry
+    \entry{holm1979}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=23b6a8c4d3d9710bb3b84d15d65dc86e}{%
+           family={Holm},
+           familyi={H\bibinitperiod},
+           given={Sture},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{fullhash}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{fullhashraw}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{bibnamehash}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{authorbibnamehash}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{authornamehash}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{authorfullhash}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \strng{authorfullhashraw}{23b6a8c4d3d9710bb3b84d15d65dc86e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Scandinavian Journal of Statistics}
+      \field{number}{2}
+      \field{title}{A Simple Sequentially Rejective Multiple Test Procedure}
+      \field{volume}{6}
+      \field{year}{1979}
+      \field{pages}{65\bibrangedash 70}
+      \range{pages}{6}
+      \verb{urlraw}
+      \verb https://www.jstor.org/stable/4615733
+      \endverb
+      \verb{url}
+      \verb https://www.jstor.org/stable/4615733
+      \endverb
+    \endentry
+    \entry{cui2022fpsoueba}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=38d36d93a08bd9c5c1c4dfb40a822e75}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Jingyang},
+           giveni={J\bibinitperiod}}}%
+        {{hash=37015aca4df40cf5e6da0ffaf8e82338}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Guanghua},
+           giveni={G\bibinitperiod}}}%
+        {{hash=5527f44931040c57bd3ecbee6ba1f97b}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zhenguo},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=82ddb747d783c265964c81002776f50e}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Naiwen},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9b117645c5841894b58a73c5f27fdd6}
+      \strng{fullhash}{d1727effffdd034be1ca91b15eb31640}
+      \strng{fullhashraw}{d1727effffdd034be1ca91b15eb31640}
+      \strng{bibnamehash}{d1727effffdd034be1ca91b15eb31640}
+      \strng{authorbibnamehash}{d1727effffdd034be1ca91b15eb31640}
+      \strng{authornamehash}{b9b117645c5841894b58a73c5f27fdd6}
+      \strng{authorfullhash}{d1727effffdd034be1ca91b15eb31640}
+      \strng{authorfullhashraw}{d1727effffdd034be1ca91b15eb31640}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eid}{22349}
+      \field{journaltitle}{Scientific Reports}
+      \field{title}{Multi-homed abnormal behavior detection algorithm based on fuzzy particle swarm cluster in user and entity behavior analytics}
+      \field{volume}{12}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1038/s41598-022-26142-w
+      \endverb
+    \endentry
+    \entry{shang2021psokfcm}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=3fb17f4b9b21476374977807d6889b24}{%
+           family={Shang},
+           familyi={S\bibinitperiod},
+           given={Chuan},
+           giveni={C\bibinitperiod}}}%
+        {{hash=102e000c8d017aa6c8ddc2e6086fc85a}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Junwei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=19c529925ad2f9c58bf023efe079c1b1}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Huabo},
+           giveni={H\bibinitperiod}}}%
+        {{hash=a0622862561ce585a582db6a8af0c456}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Fuzheng},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{4e914efb8fdaf5ac13e95be1c13f126f}
+      \strng{fullhash}{d6a2a17c64522c1c41c56f7067869b2a}
+      \strng{fullhashraw}{d6a2a17c64522c1c41c56f7067869b2a}
+      \strng{bibnamehash}{d6a2a17c64522c1c41c56f7067869b2a}
+      \strng{authorbibnamehash}{d6a2a17c64522c1c41c56f7067869b2a}
+      \strng{authornamehash}{4e914efb8fdaf5ac13e95be1c13f126f}
+      \strng{authorfullhash}{d6a2a17c64522c1c41c56f7067869b2a}
+      \strng{authorfullhashraw}{d6a2a17c64522c1c41c56f7067869b2a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Short-Term Load Forecasting Based on {PSO-KFCM} Daily Load Curve Clustering and {CNN-LSTM} Model}
+      \field{volume}{9}
+      \field{year}{2021}
+      \field{pages}{50344\bibrangedash 50357}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2021.3067043
+      \endverb
+    \endentry
+    \entry{sun2024mstsofcm}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=1e6195fa95e352865ff6a00f93746751}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Changkang},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1f8a7a6b7ba57dbf44bf73a92931e420}{%
+           family={Shao},
+           familyi={S\bibinitperiod},
+           given={Qinglong},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=975b8998dda01dc6f3e303b47073fb80}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Ziqi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=f2266372790200268b53d30f3eab10c0}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Junxiao},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{d814022d5cee88387a2ea30941d0dae3}
+      \strng{fullhash}{4d1e5bec44b4c137082500bdc8e9e7d5}
+      \strng{fullhashraw}{4d1e5bec44b4c137082500bdc8e9e7d5}
+      \strng{bibnamehash}{4d1e5bec44b4c137082500bdc8e9e7d5}
+      \strng{authorbibnamehash}{4d1e5bec44b4c137082500bdc8e9e7d5}
+      \strng{authornamehash}{d814022d5cee88387a2ea30941d0dae3}
+      \strng{authorfullhash}{4d1e5bec44b4c137082500bdc8e9e7d5}
+      \strng{authorfullhashraw}{4d1e5bec44b4c137082500bdc8e9e7d5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematics}
+      \field{number}{3}
+      \field{title}{An Enhanced {FCM} Clustering Method Based on Multi-Strategy Tuna Swarm Optimization}
+      \field{volume}{12}
+      \field{year}{2024}
+      \field{pages}{453}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/math12030453
+      \endverb
+    \endentry
+    \entry{vasheghani2025loan}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=08237f629941a536b17123087151e219}{%
+           family={Vasheghani},
+           familyi={V\bibinitperiod},
+           given={Mahtab},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3d46ac3584c69734b01f085de83b1e09}{%
+           family={Farokhi},
+           familyi={F\bibinitperiod},
+           given={Ebrahim\bibnamedelima Nazari},
+           giveni={E\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=3b252510fe96068ef676783f4041002d}{%
+           family={Dolatshah},
+           familyi={D\bibinitperiod},
+           given={Behrooz},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{fullhash}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{fullhashraw}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{bibnamehash}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{authorbibnamehash}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{authornamehash}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{authorfullhash}{93202b8eaebf3100b3e82a65c0655ce1}
+      \strng{authorfullhashraw}{93202b8eaebf3100b3e82a65c0655ce1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Array}
+      \field{title}{Forecasting loan, deferred rate and customer segmentation in banking industry: A computational intelligence approach}
+      \field{volume}{27}
+      \field{year}{2025}
+      \field{pages}{100460}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.array.2025.100460
+      \endverb
+    \endentry
+    \entry{lakra2025wcapso}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=aee0d095d06c94d6c3f8291e0db833bc}{%
+           family={Lakra},
+           familyi={L\bibinitperiod},
+           given={Atul\bibnamedelima Vikas},
+           giveni={A\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=2a1d41bc6c627aaca41ee67d72b1b415}{%
+           family={Jena},
+           familyi={J\bibinitperiod},
+           given={Sudarson},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0b0284b821e161ed80f5d14bfc8e6a8a}{%
+           family={Mishra},
+           familyi={M\bibinitperiod},
+           given={Kaushik},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{fullhash}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{fullhashraw}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{bibnamehash}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{authorbibnamehash}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{authornamehash}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{authorfullhash}{9fe210f13a28b4589bda794f0353d5d1}
+      \strng{authorfullhashraw}{9fe210f13a28b4589bda794f0353d5d1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{title}{Optimizing {XGBoost} Hyperparameters for Credit Scoring Classification Using Weighted Cognitive Avoidance Particle Swarm}
+      \field{volume}{13}
+      \field{year}{2025}
+      \field{pages}{127292\bibrangedash 127306}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/ACCESS.2025.3585980
+      \endverb
+    \endentry
+    \entry{valdez2021bioinspired}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=1d711ed6e4d0e3a094cef060c40bd892}{%
+           family={Valdez},
+           familyi={V\bibinitperiod},
+           given={Fevrier},
+           giveni={F\bibinitperiod}}}%
+        {{hash=4a8825374b750380dcfa37ae0de7592e}{%
+           family={Castillo},
+           familyi={C\bibinitperiod},
+           given={Oscar},
+           giveni={O\bibinitperiod}}}%
+        {{hash=6d9568187e2f11eee97cbdb13402bd8f}{%
+           family={Melin},
+           familyi={M\bibinitperiod},
+           given={Patricia},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{0343b12e27dd909962022bb88242e085}
+      \strng{fullhash}{0343b12e27dd909962022bb88242e085}
+      \strng{fullhashraw}{0343b12e27dd909962022bb88242e085}
+      \strng{bibnamehash}{0343b12e27dd909962022bb88242e085}
+      \strng{authorbibnamehash}{0343b12e27dd909962022bb88242e085}
+      \strng{authornamehash}{0343b12e27dd909962022bb88242e085}
+      \strng{authorfullhash}{0343b12e27dd909962022bb88242e085}
+      \strng{authorfullhashraw}{0343b12e27dd909962022bb88242e085}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Algorithms}
+      \field{number}{4}
+      \field{title}{Bio-Inspired Algorithms and Its Applications for Optimization in Fuzzy Clustering}
+      \field{volume}{14}
+      \field{year}{2021}
+      \field{pages}{122}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/a14040122
+      \endverb
+    \endentry
+    \entry{paz2025creditreview}{article}{}{}
+      \name{author}{8}{}{%
+        {{hash=6e4e5bd566781ce540ff5115a5447967}{%
+           family={Paz},
+           familyi={P\bibinitperiod},
+           given={Álex},
+           giveni={Á\bibinitperiod}}}%
+        {{hash=20526d5d1170863bbd4449a7e51bd3e4}{%
+           family={Crawford},
+           familyi={C\bibinitperiod},
+           given={Broderick},
+           giveni={B\bibinitperiod}}}%
+        {{hash=0eb9fb2b50b0887917b2c37f48b18be9}{%
+           family={Monfroy},
+           familyi={M\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=631cfae62776956601c3530fdc47ff54}{%
+           family={Barrera-García},
+           familyi={B\bibinithyphendelim G\bibinitperiod},
+           given={José},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6507b3fc49bba938feaca1ed3ec6711e}{%
+           family={Peña\bibnamedelima Fritz},
+           familyi={P\bibinitperiod\bibinitdelim F\bibinitperiod},
+           given={Álvaro},
+           giveni={Á\bibinitperiod}}}%
+        {{hash=263f2f255927e1fdd953799c7473ee03}{%
+           family={Soto},
+           familyi={S\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod}}}%
+        {{hash=41abe3f776b019b15b5a449280b343c3}{%
+           family={Cisternas-Caneo},
+           familyi={C\bibinithyphendelim C\bibinitperiod},
+           given={Felipe},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7be019dc80db4b063a5cb7a714e22d8c}{%
+           family={Yáñez},
+           familyi={Y\bibinitperiod},
+           given={Andrés},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{442840f34e69ffd41b5ab9069f16543e}
+      \strng{fullhash}{b14868aef079fa0d7d1c4255415b201b}
+      \strng{fullhashraw}{b14868aef079fa0d7d1c4255415b201b}
+      \strng{bibnamehash}{b14868aef079fa0d7d1c4255415b201b}
+      \strng{authorbibnamehash}{b14868aef079fa0d7d1c4255415b201b}
+      \strng{authornamehash}{442840f34e69ffd41b5ab9069f16543e}
+      \strng{authorfullhash}{b14868aef079fa0d7d1c4255415b201b}
+      \strng{authorfullhashraw}{b14868aef079fa0d7d1c4255415b201b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Biomimetics}
+      \field{number}{5}
+      \field{title}{Machine Learning and Metaheuristics Approach for Individual Credit Risk Assessment: A Systematic Literature Review}
+      \field{volume}{10}
+      \field{year}{2025}
+      \field{pages}{326}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/biomimetics10050326
+      \endverb
+    \endentry
+    \entry{bezdek1981pattern}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=9bc317c854b8895530b7b24770d46267}{%
+           family={Bezdek},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer US (Plenum Press)}%
+      }
+      \strng{namehash}{9bc317c854b8895530b7b24770d46267}
+      \strng{fullhash}{9bc317c854b8895530b7b24770d46267}
+      \strng{fullhashraw}{9bc317c854b8895530b7b24770d46267}
+      \strng{bibnamehash}{9bc317c854b8895530b7b24770d46267}
+      \strng{authorbibnamehash}{9bc317c854b8895530b7b24770d46267}
+      \strng{authornamehash}{9bc317c854b8895530b7b24770d46267}
+      \strng{authorfullhash}{9bc317c854b8895530b7b24770d46267}
+      \strng{authorfullhashraw}{9bc317c854b8895530b7b24770d46267}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Pattern Recognition with Fuzzy Objective Function Algorithms}
+      \field{year}{1981}
+      \verb{doi}
+      \verb 10.1007/978-1-4757-0450-1
+      \endverb
+    \endentry
+    \entry{bezdek1984fcm}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=9bc317c854b8895530b7b24770d46267}{%
+           family={Bezdek},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=a7fb5380f5d565382001ad436b8b1834}{%
+           family={Ehrlich},
+           familyi={E\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=5a293b45dc0ad31577d7caa77052cb53}{%
+           family={Full},
+           familyi={F\bibinitperiod},
+           given={William},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{fullhash}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{fullhashraw}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{bibnamehash}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{authorbibnamehash}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{authornamehash}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{authorfullhash}{ba52eb0cf5e26778824a8085209c1b26}
+      \strng{authorfullhashraw}{ba52eb0cf5e26778824a8085209c1b26}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers \& Geosciences}
+      \field{number}{2--3}
+      \field{title}{{FCM}: The fuzzy c-means clustering algorithm}
+      \field{volume}{10}
+      \field{year}{1984}
+      \field{pages}{191\bibrangedash 203}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/0098-3004(84)90020-7
+      \endverb
+    \endentry
+    \entry{yi2025gru}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=25721f6e32a311258aeb7726a6d14768}{%
+           family={Yi},
+           familyi={Y\bibinitperiod},
+           given={Zhifei},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{25721f6e32a311258aeb7726a6d14768}
+      \strng{fullhash}{25721f6e32a311258aeb7726a6d14768}
+      \strng{fullhashraw}{25721f6e32a311258aeb7726a6d14768}
+      \strng{bibnamehash}{25721f6e32a311258aeb7726a6d14768}
+      \strng{authorbibnamehash}{25721f6e32a311258aeb7726a6d14768}
+      \strng{authornamehash}{25721f6e32a311258aeb7726a6d14768}
+      \strng{authorfullhash}{25721f6e32a311258aeb7726a6d14768}
+      \strng{authorfullhashraw}{25721f6e32a311258aeb7726a6d14768}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eid}{e70014}
+      \field{journaltitle}{Engineering Reports}
+      \field{number}{2}
+      \field{title}{Credit Default Risk Measurement and Statistical Analysis Based on Improved {GRU} Model}
+      \field{volume}{7}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.1002/eng2.70014
+      \endverb
+    \endentry
+    \entry{kennedy1995pso}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=24fc7a255aa314e71ac724efd7ca5193}{%
+           family={Kennedy},
+           familyi={K\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=21da0cb6f60840b2b15a6264d64909d8}{%
+           family={Eberhart},
+           familyi={E\bibinitperiod},
+           given={Russell},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{fullhash}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{fullhashraw}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{bibnamehash}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{authorbibnamehash}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{authornamehash}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{authorfullhash}{66c6dcfa4d8d0a108681f149b4837715}
+      \strng{authorfullhashraw}{66c6dcfa4d8d0a108681f149b4837715}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of ICNN'95 -- International Conference on Neural Networks}
+      \field{title}{Particle swarm optimization}
+      \field{volume}{4}
+      \field{year}{1995}
+      \field{pages}{1942\bibrangedash 1948}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/ICNN.1995.488968
+      \endverb
+    \endentry
+    \entry{shi1998inertia}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=12d92c08cbd739cb423645113fab45fd}{%
+           family={Shi},
+           familyi={S\bibinitperiod},
+           given={Yuhui},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=21da0cb6f60840b2b15a6264d64909d8}{%
+           family={Eberhart},
+           familyi={E\bibinitperiod},
+           given={Russell},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{95007e6456950127144455bdf8110beb}
+      \strng{fullhash}{95007e6456950127144455bdf8110beb}
+      \strng{fullhashraw}{95007e6456950127144455bdf8110beb}
+      \strng{bibnamehash}{95007e6456950127144455bdf8110beb}
+      \strng{authorbibnamehash}{95007e6456950127144455bdf8110beb}
+      \strng{authornamehash}{95007e6456950127144455bdf8110beb}
+      \strng{authorfullhash}{95007e6456950127144455bdf8110beb}
+      \strng{authorfullhashraw}{95007e6456950127144455bdf8110beb}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{1998 IEEE International Conference on Evolutionary Computation Proceedings. IEEE World Congress on Computational Intelligence}
+      \field{title}{A modified particle swarm optimizer}
+      \field{year}{1998}
+      \field{pages}{69\bibrangedash 73}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/ICEC.1998.699146
+      \endverb
+    \endentry
+    \entry{shi1999empirical}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=12d92c08cbd739cb423645113fab45fd}{%
+           family={Shi},
+           familyi={S\bibinitperiod},
+           given={Yuhui},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=98ac4c1098613a375ef08a85d355cc76}{%
+           family={Eberhart},
+           familyi={E\bibinitperiod},
+           given={Russell\bibnamedelima C.},
+           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{fullhash}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{fullhashraw}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{bibnamehash}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{authorbibnamehash}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{authornamehash}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{authorfullhash}{e1571f090b9d0355bb5d372c407d7e24}
+      \strng{authorfullhashraw}{e1571f090b9d0355bb5d372c407d7e24}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 1999 Congress on Evolutionary Computation (CEC99)}
+      \field{title}{Empirical study of particle swarm optimization}
+      \field{volume}{3}
+      \field{year}{1999}
+      \field{pages}{1945\bibrangedash 1950}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/CEC.1999.785511
+      \endverb
+    \endentry
+    \entry{sun2004qpso}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=47a982292c4e01be785c75d9b6d61d48}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=2a325920e39be526f4290ba647c95e5b}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Bin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=19ca74216a599e395df080e79931eba9}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Wenbo},
+           giveni={W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{70440ec2a26c80916902cbccb4eab285}
+      \strng{fullhash}{70440ec2a26c80916902cbccb4eab285}
+      \strng{fullhashraw}{70440ec2a26c80916902cbccb4eab285}
+      \strng{bibnamehash}{70440ec2a26c80916902cbccb4eab285}
+      \strng{authorbibnamehash}{70440ec2a26c80916902cbccb4eab285}
+      \strng{authornamehash}{70440ec2a26c80916902cbccb4eab285}
+      \strng{authorfullhash}{70440ec2a26c80916902cbccb4eab285}
+      \strng{authorfullhashraw}{70440ec2a26c80916902cbccb4eab285}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2004 Congress on Evolutionary Computation}
+      \field{title}{Particle swarm optimization with particles having quantum behavior}
+      \field{volume}{1}
+      \field{year}{2004}
+      \field{pages}{325\bibrangedash 331}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/CEC.2004.1330875
+      \endverb
+    \endentry
+    \entry{sun2004global}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=47a982292c4e01be785c75d9b6d61d48}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Jun},
+           giveni={J\bibinitperiod}}}%
+        {{hash=19ca74216a599e395df080e79931eba9}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Wenbo},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2a325920e39be526f4290ba647c95e5b}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Bin},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{fullhash}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{fullhashraw}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{bibnamehash}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{authorbibnamehash}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{authornamehash}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{authorfullhash}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \strng{authorfullhashraw}{86030dfd772c3a9d0a6e9cc3a7624695}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{IEEE Conference on Cybernetics and Intelligent Systems, 2004}
+      \field{title}{A global search strategy of quantum-behaved particle swarm optimization}
+      \field{volume}{1}
+      \field{year}{2004}
+      \field{pages}{111\bibrangedash 116}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICCIS.2004.1460396
+      \endverb
+    \endentry
+    \entry{runkler2006psofcm}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=7b50dfa113f01c6579c0d7887473a99f}{%
+           family={Runkler},
+           familyi={R\bibinitperiod},
+           given={Thomas\bibnamedelima A.},
+           giveni={T\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=3721d26254317a6f979f9d77ad9285c9}{%
+           family={Katz},
+           familyi={K\bibinitperiod},
+           given={Christina},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{fullhash}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{fullhashraw}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{bibnamehash}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{authorbibnamehash}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{authornamehash}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{authorfullhash}{ed429331ec4118ab38b702acf8bdd573}
+      \strng{authorfullhashraw}{ed429331ec4118ab38b702acf8bdd573}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2006 IEEE International Conference on Fuzzy Systems}
+      \field{title}{Fuzzy Clustering by Particle Swarm Optimization}
+      \field{year}{2006}
+      \field{pages}{601\bibrangedash 608}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/FUZZY.2006.1681773
+      \endverb
+    \endentry
+    \entry{lu2011psovw}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=a17482e603c32d4f6e441bb2c867ac11}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Yanping},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b934f5e6f85264ff51c62cf81248a8a5}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shengrui},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bc6feb32222eb9129e27d20dbc31167a}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Shaozi},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d42a4bcc65a6c90d549cd154e0cce50f}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Changle},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{7bfe6786c070b3b3295b7b5842d5209e}
+      \strng{fullhash}{924489ffcc039ea05f8d8bd5b1d028a5}
+      \strng{fullhashraw}{924489ffcc039ea05f8d8bd5b1d028a5}
+      \strng{bibnamehash}{924489ffcc039ea05f8d8bd5b1d028a5}
+      \strng{authorbibnamehash}{924489ffcc039ea05f8d8bd5b1d028a5}
+      \strng{authornamehash}{7bfe6786c070b3b3295b7b5842d5209e}
+      \strng{authorfullhash}{924489ffcc039ea05f8d8bd5b1d028a5}
+      \strng{authorfullhashraw}{924489ffcc039ea05f8d8bd5b1d028a5}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Machine Learning}
+      \field{number}{1}
+      \field{title}{Particle swarm optimizer for variable weighting in clustering high-dimensional data}
+      \field{volume}{82}
+      \field{year}{2011}
+      \field{pages}{43\bibrangedash 70}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1007/s10994-009-5154-2
+      \endverb
+    \endentry
+    \entry{oneill2018psofw}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=a7213a50217425386239bb39ff36ea67}{%
+           family={O'Neill},
+           familyi={O\bibinitperiod},
+           given={Damien},
+           giveni={D\bibinitperiod}}}%
+        {{hash=dde2ec4b2a56d05bbce83b3911171eee}{%
+           family={Lensen},
+           familyi={L\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5ef459c2d19ba2eb901e63e3eb6e2d20}{%
+           family={Xue},
+           familyi={X\bibinitperiod},
+           given={Bing},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e678527db27127baf2e337470c642bc4}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Mengjie},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{158d69e65586a5354b8f905f9f5f2e81}
+      \strng{fullhash}{1e138d4c5d03b2864f45ec1c6ad66bed}
+      \strng{fullhashraw}{1e138d4c5d03b2864f45ec1c6ad66bed}
+      \strng{bibnamehash}{1e138d4c5d03b2864f45ec1c6ad66bed}
+      \strng{authorbibnamehash}{1e138d4c5d03b2864f45ec1c6ad66bed}
+      \strng{authornamehash}{158d69e65586a5354b8f905f9f5f2e81}
+      \strng{authorfullhash}{1e138d4c5d03b2864f45ec1c6ad66bed}
+      \strng{authorfullhashraw}{1e138d4c5d03b2864f45ec1c6ad66bed}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 IEEE Congress on Evolutionary Computation (CEC)}
+      \field{title}{Particle Swarm Optimisation for Feature Selection and Weighting in High-Dimensional Clustering}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/CEC.2018.8477974
+      \endverb
+    \endentry
+    \entry{mehdizadeh2008hybrid}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=d3bbfc667bedef4c984fdeb60b97aacd}{%
+           family={Mehdizadeh},
+           familyi={M\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=391841a4a30c2ba3078f9a9b397874a0}{%
+           family={Sadi-Nezhad},
+           familyi={S\bibinithyphendelim N\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=9dbc11a63b968c9e1f67f306238bb93b}{%
+           family={Tavakkoli-Moghaddam},
+           familyi={T\bibinithyphendelim M\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{dac239185eb660e0274f73c546a96d2a}
+      \strng{fullhash}{dac239185eb660e0274f73c546a96d2a}
+      \strng{fullhashraw}{dac239185eb660e0274f73c546a96d2a}
+      \strng{bibnamehash}{dac239185eb660e0274f73c546a96d2a}
+      \strng{authorbibnamehash}{dac239185eb660e0274f73c546a96d2a}
+      \strng{authornamehash}{dac239185eb660e0274f73c546a96d2a}
+      \strng{authorfullhash}{dac239185eb660e0274f73c546a96d2a}
+      \strng{authorfullhashraw}{dac239185eb660e0274f73c546a96d2a}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Iranian Journal of Fuzzy Systems}
+      \field{number}{3}
+      \field{title}{Optimization of Fuzzy Clustering Criteria by a Hybrid {PSO} and Fuzzy {C}-Means Clustering Algorithm}
+      \field{volume}{5}
+      \field{year}{2008}
+      \field{pages}{1\bibrangedash 14}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.22111/ijfs.2008.339
+      \endverb
+    \endentry
+    \entry{ghamisi2015swarm}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=b7a0824fabf03ed7bba30c6eb62f2bbb}{%
+           family={Ghamisi},
+           familyi={G\bibinitperiod},
+           given={Pedram},
+           giveni={P\bibinitperiod}}}%
+        {{hash=da331ac135730fe14da7a2813f50f26b}{%
+           family={Ali},
+           familyi={A\bibinitperiod},
+           given={Abder-Rahman},
+           giveni={A\bibinithyphendelim R\bibinitperiod}}}%
+        {{hash=94e407968cf363a5b6e4062dbb5fae92}{%
+           family={Couceiro},
+           familyi={C\bibinitperiod},
+           given={Micael\bibnamedelima S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=3ec65ceec20cb6d75401ebc409c3d3fe}{%
+           family={Benediktsson},
+           familyi={B\bibinitperiod},
+           given={Jón\bibnamedelima Atli},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{50400106ded86d1807290197a0f1cc66}
+      \strng{fullhash}{5adb11e99e2b186e54f1bf8c163f9d7b}
+      \strng{fullhashraw}{5adb11e99e2b186e54f1bf8c163f9d7b}
+      \strng{bibnamehash}{5adb11e99e2b186e54f1bf8c163f9d7b}
+      \strng{authorbibnamehash}{5adb11e99e2b186e54f1bf8c163f9d7b}
+      \strng{authornamehash}{50400106ded86d1807290197a0f1cc66}
+      \strng{authorfullhash}{5adb11e99e2b186e54f1bf8c163f9d7b}
+      \strng{authorfullhashraw}{5adb11e99e2b186e54f1bf8c163f9d7b}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing}
+      \field{number}{6}
+      \field{title}{A Novel Evolutionary Swarm Fuzzy Clustering Approach for Hyperspectral Imagery}
+      \field{volume}{8}
+      \field{year}{2015}
+      \field{pages}{2447\bibrangedash 2456}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/JSTARS.2015.2398835
+      \endverb
+    \endentry
+    \entry{omran2004thesis}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{hash=493ef10fe53552a6342f20e8cabaa670}{%
+           family={Omran},
+           familyi={O\bibinitperiod},
+           given={Mahamed\bibnamedelimb G.\bibnamedelimi H.},
+           giveni={M\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of Pretoria}%
+      }
+      \strng{namehash}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{fullhash}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{fullhashraw}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{bibnamehash}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{authorbibnamehash}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{authornamehash}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{authorfullhash}{493ef10fe53552a6342f20e8cabaa670}
+      \strng{authorfullhashraw}{493ef10fe53552a6342f20e8cabaa670}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Particle Swarm Optimization Methods for Pattern Recognition and Image Processing}
+      \field{type}{phdthesis}
+      \field{year}{2004}
+      \verb{urlraw}
+      \verb https://repository.up.ac.za/handle/2263/29826
+      \endverb
+      \verb{url}
+      \verb https://repository.up.ac.za/handle/2263/29826
+      \endverb
+    \endentry
+    \entry{izakian2009hybrid}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=5508a673c5bad60904fbc1e57392740a}{%
+           family={Izakian},
+           familyi={I\bibinitperiod},
+           given={Hesam},
+           giveni={H\bibinitperiod}}}%
+        {{hash=504ef9be34aef151081b41093b347caa}{%
+           family={Abraham},
+           familyi={A\bibinitperiod},
+           given={Ajith},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4f341350f03f0b0781dbeb54a65dc157}{%
+           family={Snášel},
+           familyi={S\bibinitperiod},
+           given={Václav},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{fullhash}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{fullhashraw}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{bibnamehash}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{authorbibnamehash}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{authornamehash}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{authorfullhash}{9fe65661dd1143e66e6dd59954bab11e}
+      \strng{authorfullhashraw}{9fe65661dd1143e66e6dd59954bab11e}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2009 World Congress on Nature \& Biologically Inspired Computing (NaBIC)}
+      \field{title}{Fuzzy clustering using hybrid fuzzy c-means and fuzzy particle swarm optimization}
+      \field{year}{2009}
+      \field{pages}{1690\bibrangedash 1694}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/NABIC.2009.5393618
+      \endverb
+    \endentry
+    \entry{zhang2020elpso}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=112faefb37293f52cd92c3bb36fcc08b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ae840d21b2c9e784704906a200338957}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Zongheng},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{fullhash}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{fullhashraw}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{bibnamehash}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{authorbibnamehash}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{authornamehash}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{authorfullhash}{a1e2f558e9af13d96614834b1474b7e6}
+      \strng{authorfullhashraw}{a1e2f558e9af13d96614834b1474b7e6}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eid}{1386839}
+      \field{journaltitle}{Computational Intelligence and Neuroscience}
+      \field{title}{Hybrid Fuzzy Clustering Method Based on {FCM} and Enhanced Logarithmical {PSO} ({ELPSO})}
+      \field{volume}{2020}
+      \field{year}{2020}
+      \field{pages}{1\bibrangedash 12}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1155/2020/1386839
+      \endverb
+    \endentry
+    \entry{hathaway1995reformulation}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=7a3e1a01c877134909dc50f0f9810c88}{%
+           family={Hathaway},
+           familyi={H\bibinitperiod},
+           given={Richard\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=9bc317c854b8895530b7b24770d46267}{%
+           family={Bezdek},
+           familyi={B\bibinitperiod},
+           given={James\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{fullhash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{fullhashraw}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{bibnamehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authorbibnamehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authornamehash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authorfullhash}{8ba1d77941e64d5b0c9d15341e10de16}
+      \strng{authorfullhashraw}{8ba1d77941e64d5b0c9d15341e10de16}
+      \field{extraname}{2}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Fuzzy Systems}
+      \field{number}{2}
+      \field{title}{Optimization of clustering criteria by reformulation}
+      \field{volume}{3}
+      \field{year}{1995}
+      \field{pages}{241\bibrangedash 245}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/91.388178
+      \endverb
+    \endentry
+    \entry{groll2005convergence}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=6c3ed8efed588c6f85d5d3498bfaeebb}{%
+           family={Gröll},
+           familyi={G\bibinitperiod},
+           given={Lutz},
+           giveni={L\bibinitperiod}}}%
+        {{hash=192d0c7cc7e5416237f5eae320aac869}{%
+           family={Jäkel},
+           familyi={J\bibinitperiod},
+           given={Jens},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{fullhash}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{fullhashraw}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{bibnamehash}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{authorbibnamehash}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{authornamehash}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{authorfullhash}{4ab5207ec220e831dea7d94c01bb4b94}
+      \strng{authorfullhashraw}{4ab5207ec220e831dea7d94c01bb4b94}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Fuzzy Systems}
+      \field{number}{5}
+      \field{title}{A new convergence proof of fuzzy c-means}
+      \field{volume}{13}
+      \field{year}{2005}
+      \field{pages}{717\bibrangedash 720}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1109/TFUZZ.2005.856560
+      \endverb
+    \endentry
+    \entry{fawcett2006roc}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=9c15aa0b2a7683cefeaa12c991d0b1c2}{%
+           family={Fawcett},
+           familyi={F\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{fullhash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{fullhashraw}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{bibnamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{authorbibnamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{authornamehash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{authorfullhash}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \strng{authorfullhashraw}{9c15aa0b2a7683cefeaa12c991d0b1c2}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Pattern Recognition Letters}
+      \field{number}{8}
+      \field{title}{An introduction to {ROC} analysis}
+      \field{volume}{27}
+      \field{year}{2006}
+      \field{pages}{861\bibrangedash 874}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1016/j.patrec.2005.10.010
+      \endverb
+    \endentry
+    \entry{xie1991validity}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=529f068b5fdf40343e73182bcf659053}{%
+           family={Xie},
+           familyi={X\bibinitperiod},
+           given={Xuanli\bibnamedelima Lisa},
+           giveni={X\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=46cfc0b80d3cc8b9d6e1868c97c46b33}{%
+           family={Beni},
+           familyi={B\bibinitperiod},
+           given={Gerardo},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{fullhash}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{fullhashraw}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{bibnamehash}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{authorbibnamehash}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{authornamehash}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{authorfullhash}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \strng{authorfullhashraw}{7c23b4cc88c6e389084aa95ff8de7b5e}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Pattern Analysis and Machine Intelligence}
+      \field{number}{8}
+      \field{title}{A validity measure for fuzzy clustering}
+      \field{volume}{13}
+      \field{year}{1991}
+      \field{pages}{841\bibrangedash 847}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/34.85677
+      \endverb
+    \endentry
+    \entry{rousseeuw1987silhouettes}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=72d8129c9f4e6afddacb834fb2d8226f}{%
+           family={Rousseeuw},
+           familyi={R\bibinitperiod},
+           given={Peter\bibnamedelima J.},
+           giveni={P\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{fullhash}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{fullhashraw}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{bibnamehash}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{authorbibnamehash}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{authornamehash}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{authorfullhash}{72d8129c9f4e6afddacb834fb2d8226f}
+      \strng{authorfullhashraw}{72d8129c9f4e6afddacb834fb2d8226f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Computational and Applied Mathematics}
+      \field{title}{Silhouettes: A graphical aid to the interpretation and validation of cluster analysis}
+      \field{volume}{20}
+      \field{year}{1987}
+      \field{pages}{53\bibrangedash 65}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1016/0377-0427(87)90125-7
+      \endverb
+    \endentry
+    \entry{tran2022distress}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=26c3904c006b709d0127982f68bf899d}{%
+           family={Tran},
+           familyi={T\bibinitperiod},
+           given={Kim\bibnamedelima Long},
+           giveni={K\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=9e5e3f0d8b6527c37045f33269df3409}{%
+           family={Le},
+           familyi={L\bibinitperiod},
+           given={Hoang\bibnamedelima Anh},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=8d416fa5e4378c49f58480e945290fbd}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Thanh\bibnamedelima Hien},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=b86d216799c250eedcf6391f1b8f09bc}{%
+           family={Nguyen},
+           familyi={N\bibinitperiod},
+           given={Duc\bibnamedelima Trung},
+           giveni={D\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{134f35a3b803f4e79e32d1a1f176bf4c}
+      \strng{fullhash}{076c6b5ae92ad48254260410b40fc41b}
+      \strng{fullhashraw}{076c6b5ae92ad48254260410b40fc41b}
+      \strng{bibnamehash}{076c6b5ae92ad48254260410b40fc41b}
+      \strng{authorbibnamehash}{076c6b5ae92ad48254260410b40fc41b}
+      \strng{authornamehash}{134f35a3b803f4e79e32d1a1f176bf4c}
+      \strng{authorfullhash}{076c6b5ae92ad48254260410b40fc41b}
+      \strng{authorfullhashraw}{076c6b5ae92ad48254260410b40fc41b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Data}
+      \field{number}{11}
+      \field{title}{Explainable Machine Learning for Financial Distress Prediction: Evidence from {Vietnam}}
+      \field{volume}{7}
+      \field{year}{2022}
+      \field{pages}{160}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/data7110160
+      \endverb
+    \endentry
+    \entry{yeh2009default}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=3a67f9945f2ec943e92faeea663f90da}{%
+           family={Yeh},
+           familyi={Y\bibinitperiod},
+           given={I-Cheng},
+           giveni={I\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=37a90d1211a8bf68ab6b4387eb3816d1}{%
+           family={Lien},
+           familyi={L\bibinitperiod},
+           given={Che-hui},
+           giveni={C\bibinithyphendelim h\bibinitperiod}}}%
+      }
+      \strng{namehash}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{fullhash}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{fullhashraw}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{bibnamehash}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{authorbibnamehash}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{authornamehash}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{authorfullhash}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \strng{authorfullhashraw}{17f92d2aa54ad525fcc1dd52f66cec30}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Expert Systems with Applications}
+      \field{number}{2}
+      \field{title}{The comparisons of data mining techniques for the predictive accuracy of probability of default of credit card clients}
+      \field{volume}{36}
+      \field{year}{2009}
+      \field{pages}{2473\bibrangedash 2480}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/j.eswa.2007.12.020
+      \endverb
+    \endentry
+    \entry{uciTaiwanDefault2009}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3a67f9945f2ec943e92faeea663f90da}{%
+           family={Yeh},
+           familyi={Y\bibinitperiod},
+           given={I-Cheng},
+           giveni={I\bibinithyphendelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{fullhash}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{fullhashraw}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{bibnamehash}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{authorbibnamehash}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{authornamehash}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{authorfullhash}{3a67f9945f2ec943e92faeea663f90da}
+      \strng{authorfullhashraw}{3a67f9945f2ec943e92faeea663f90da}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{UCI Machine Learning Repository}
+      \field{title}{Default of Credit Card Clients}
+      \field{year}{2009}
+      \verb{doi}
+      \verb 10.24432/C55S3H
+      \endverb
+    \endentry
+    \entry{gromping2019sgc}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=fb7665cbb74f4ebc72a8c21cefe13ab1}{%
+           family={Grömping},
+           familyi={G\bibinitperiod},
+           given={Ulrike},
+           giveni={U\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Beuth University of Applied Sciences Berlin}%
+      }
+      \strng{namehash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{fullhash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{fullhashraw}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{bibnamehash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{authorbibnamehash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{authornamehash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{authorfullhash}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \strng{authorfullhashraw}{fb7665cbb74f4ebc72a8c21cefe13ab1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{4/2019}
+      \field{title}{South German Credit Data: Correcting a Widely Used Data Set}
+      \field{type}{Reports in Mathematics, Physics and Chemistry}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb https://www1.beuth-hochschule.de/FB_II/reports/Report-2019-004.pdf
+      \endverb
+      \verb{url}
+      \verb https://www1.beuth-hochschule.de/FB_II/reports/Report-2019-004.pdf
+      \endverb
+    \endentry
+    \entry{uciGermanStatlog1994}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f6c6cb891f2fb3cd1421a6db04d9efef}{%
+           family={Hofmann},
+           familyi={H\bibinitperiod},
+           given={Hans},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{fullhash}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{fullhashraw}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{bibnamehash}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{authorbibnamehash}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{authornamehash}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{authorfullhash}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \strng{authorfullhashraw}{f6c6cb891f2fb3cd1421a6db04d9efef}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{UCI Machine Learning Repository}
+      \field{title}{Statlog ({German} Credit Data)}
+      \field{year}{1994}
+      \verb{doi}
+      \verb 10.24432/C5NC77
+      \endverb
+    \endentry
+    \entry{uciAustralian1987}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=777f8460c8c759c82bb1d5a9136a9002}{%
+           family={Quinlan},
+           familyi={Q\bibinitperiod},
+           given={Ross},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{fullhash}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{fullhashraw}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{bibnamehash}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{authorbibnamehash}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{authornamehash}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{authorfullhash}{777f8460c8c759c82bb1d5a9136a9002}
+      \strng{authorfullhashraw}{777f8460c8c759c82bb1d5a9136a9002}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{UCI Machine Learning Repository}
+      \field{title}{Statlog ({Australian} Credit Approval)}
+      \field{year}{1987}
+      \verb{doi}
+      \verb 10.24432/C59012
+      \endverb
+    \endentry
+    \entry{uciPolish2016}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=ff535bff832f4640725d3a18bdbd42d5}{%
+           family={Tomczak},
+           familyi={T\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{fullhash}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{fullhashraw}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{bibnamehash}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{authorbibnamehash}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{authornamehash}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{authorfullhash}{ff535bff832f4640725d3a18bdbd42d5}
+      \strng{authorfullhashraw}{ff535bff832f4640725d3a18bdbd42d5}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{UCI Machine Learning Repository}
+      \field{title}{Polish Companies Bankruptcy}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.24432/C5F600
+      \endverb
+    \endentry
+    \entry{zieba2016polish}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=baee78f9a53022631cf86cbb5a9c10cf}{%
+           family={Zięba},
+           familyi={Z\bibinitperiod},
+           given={Maciej},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1b28982b780e6ae69f03333668d4e52f}{%
+           family={Tomczak},
+           familyi={T\bibinitperiod},
+           given={Sebastian\bibnamedelima K.},
+           giveni={S\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=55defc0f4c0419ceb9d0d1350c2c0cb2}{%
+           family={Tomczak},
+           familyi={T\bibinitperiod},
+           given={Jakub\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{d74962a538cb91def7fa4f46fe756721}
+      \strng{fullhash}{d74962a538cb91def7fa4f46fe756721}
+      \strng{fullhashraw}{d74962a538cb91def7fa4f46fe756721}
+      \strng{bibnamehash}{d74962a538cb91def7fa4f46fe756721}
+      \strng{authorbibnamehash}{d74962a538cb91def7fa4f46fe756721}
+      \strng{authornamehash}{d74962a538cb91def7fa4f46fe756721}
+      \strng{authorfullhash}{d74962a538cb91def7fa4f46fe756721}
+      \strng{authorfullhashraw}{d74962a538cb91def7fa4f46fe756721}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Expert Systems with Applications}
+      \field{title}{Ensemble boosted trees with synthetic features generation in application to bankruptcy prediction}
+      \field{volume}{58}
+      \field{year}{2016}
+      \field{pages}{93\bibrangedash 101}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1016/j.eswa.2016.04.001
+      \endverb
+    \endentry
+    \entry{uciTaiwanBankruptcy2020}{misc}{}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{UCI Machine Learning Repository}
+      \field{title}{Taiwanese Bankruptcy Prediction}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.24432/C5004D
+      \endverb
+    \endentry
+    \entry{liang2016bankruptcy}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=2c423db58085708998a28c8df2725b3e}{%
+           family={Liang},
+           familyi={L\bibinitperiod},
+           given={Deron},
+           giveni={D\bibinitperiod}}}%
+        {{hash=1d6e35f644571bd57c3666e1f766c67a}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Chia-Chi},
+           giveni={C\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=aa5bbe1755c12dbf3df72371c08af9d7}{%
+           family={Tsai},
+           familyi={T\bibinitperiod},
+           given={Chih-Fong},
+           giveni={C\bibinithyphendelim F\bibinitperiod}}}%
+        {{hash=2df07242d31d273bc5489e2d5488634b}{%
+           family={Shih},
+           familyi={S\bibinitperiod},
+           given={Guan-An},
+           giveni={G\bibinithyphendelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{13fb3f71010e1dbce7252649a0b58ab4}
+      \strng{fullhash}{beacad10734046e028df545963864774}
+      \strng{fullhashraw}{beacad10734046e028df545963864774}
+      \strng{bibnamehash}{beacad10734046e028df545963864774}
+      \strng{authorbibnamehash}{beacad10734046e028df545963864774}
+      \strng{authornamehash}{13fb3f71010e1dbce7252649a0b58ab4}
+      \strng{authorfullhash}{beacad10734046e028df545963864774}
+      \strng{authorfullhashraw}{beacad10734046e028df545963864774}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{European Journal of Operational Research}
+      \field{number}{2}
+      \field{title}{Financial ratios and corporate governance indicators in bankruptcy prediction: A comprehensive study}
+      \field{volume}{252}
+      \field{year}{2016}
+      \field{pages}{561\bibrangedash 572}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.ejor.2016.01.012
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

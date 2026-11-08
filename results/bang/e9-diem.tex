@@ -1,0 +1,27 @@
+\begin{table}[htbp]
+\centering
+\caption{TN4 -- Silhouette − phạt của 5 phiên bản PSO khi tìm trọng số thuộc tính}
+\label{tab:e9-diem}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lllrrrrrrr@{}}
+\toprule
+Bộ dữ liệu & c & Ngân sách & FCM & NN & Gốc & W & S & LOG & QPSO \\
+\midrule
+Việt Nam & 2 & 500 & -- & 0,260 & 0,293\textsuperscript{+} & \textbf{0,296\textsuperscript{+}} & 0,292\textsuperscript{+} & \textbf{0,296\textsuperscript{+}} & 0,295\textsuperscript{+} \\
+ &  & 1.000 &  & 0,263 & 0,296\textsuperscript{+} & 0,298\textsuperscript{+} & 0,295\textsuperscript{+} & 0,294\textsuperscript{+} & \textbf{0,303\textsuperscript{+}} \\
+ & 3 & 500 & -- & 0,147 & 0,167\textsuperscript{+} & 0,169\textsuperscript{+} & 0,169\textsuperscript{+} & 0,170\textsuperscript{+} & \textbf{0,172\textsuperscript{+}} \\
+ &  & 1.000 &  & 0,148 & 0,177\textsuperscript{+} & 0,175\textsuperscript{+} & 0,176\textsuperscript{+} & \textbf{0,180\textsuperscript{+}} & \textbf{0,180\textsuperscript{+}} \\
+ & 4 & 500 & -- & 0,104 & 0,132\textsuperscript{+} & 0,133\textsuperscript{+} & 0,130\textsuperscript{+} & \textbf{0,135\textsuperscript{+}} & 0,130\textsuperscript{+} \\
+ &  & 1.000 &  & 0,106 & 0,131\textsuperscript{+} & 0,134\textsuperscript{+} & 0,131\textsuperscript{+} & 0,132\textsuperscript{+} & \textbf{0,136\textsuperscript{+}} \\
+\midrule
+Taiwan Default & 2 & 500 & -- & 0,310 & 0,328\textsuperscript{+} & 0,329\textsuperscript{+} & 0,329\textsuperscript{+} & 0,331\textsuperscript{+} & \textbf{0,331\textsuperscript{+}} \\
+ &  & 1.000 &  & 0,310 & 0,332\textsuperscript{+} & 0,331\textsuperscript{+} & 0,330\textsuperscript{+} & 0,332\textsuperscript{+} & \textbf{0,333\textsuperscript{+}} \\
+ & 3 & 500 & -- & 0,144 & \textbf{0,160\textsuperscript{+}} & 0,157\textsuperscript{+} & 0,158\textsuperscript{+} & 0,159\textsuperscript{+} & 0,154\textsuperscript{+} \\
+ &  & 1.000 &  & 0,144 & 0,163\textsuperscript{+} & 0,163\textsuperscript{+} & \textbf{0,165\textsuperscript{+}} & 0,164\textsuperscript{+} & 0,161\textsuperscript{+} \\
+ & 4 & 500 & -- & 0,126 & 0,133 & 0,135 & \textbf{0,138\textsuperscript{+}} & 0,135 & 0,137\textsuperscript{+} \\
+ &  & 1.000 &  & 0,129 & 0,145\textsuperscript{+} & 0,143\textsuperscript{+} & 0,148\textsuperscript{+} & 0,144\textsuperscript{+} & \textbf{0,150\textsuperscript{+}} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Trung vị 30 seed, m = 2; ngân sách là số lần tính fitness (10 hạt với 500, 20 hạt với 1.000). NN: tìm ngẫu nhiên cùng ngân sách. Đậm: cao nhất trong các phương pháp tìm kiếm cùng ngân sách. \textsuperscript{+} / \textsuperscript{--}: tốt hơn / kém hơn NN có ý nghĩa; \textsuperscript{*} / \textsuperscript{\dag}: tốt hơn / kém hơn PSO gốc có ý nghĩa (Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$).}
+\end{table}

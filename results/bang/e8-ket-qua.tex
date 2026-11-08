@@ -1,0 +1,43 @@
+\begin{table}[htbp]
+\centering
+\caption{TN3 -- PSO tìm trọng số thuộc tính so với 3 đối chứng trên 7 bộ dữ liệu tín dụng}
+\label{tab:e8-ket-qua}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llrrrrrrrr@{}}
+\toprule
+& & \multicolumn{4}{c}{AUC phân hoạch} & \multicolumn{4}{c}{Chênh tỉ lệ vỡ nợ} \\
+\cmidrule(lr){3-6} \cmidrule(lr){7-10}
+Bộ dữ liệu & c & FCM & WFCM & NN & PSO & FCM & WFCM & NN & PSO \\
+\midrule
+Việt Nam & 2 & 0,799\textsuperscript{+} & 0,816\textsuperscript{+} & 0,840\textsuperscript{+} & \textbf{0,850} & 0,284\textsuperscript{+} & 0,313\textsuperscript{+} & 0,356\textsuperscript{+} & \textbf{0,438} \\
+ & 3 & 0,834\textsuperscript{+} & \textbf{0,860\textsuperscript{--}} & 0,843 & 0,844 & 0,341\textsuperscript{+} & \textbf{0,478} & 0,415\textsuperscript{+} & 0,465 \\
+ & 4 & 0,863\textsuperscript{+} & 0,871 & 0,870 & \textbf{0,876} & 0,420\textsuperscript{+} & \textbf{0,618} & 0,498\textsuperscript{+} & 0,557 \\
+\midrule
+Taiwan Default & 2 & \textbf{0,523\textsuperscript{--}} & 0,511 & 0,505\textsuperscript{+} & 0,517 & \textbf{0,036} & 0,019\textsuperscript{+} & 0,009\textsuperscript{+} & 0,033 \\
+ & 3 & 0,601\textsuperscript{+} & 0,510\textsuperscript{+} & 0,655 & \textbf{0,664} & 0,155\textsuperscript{+} & 0,014\textsuperscript{+} & 0,238 & \textbf{0,261} \\
+ & 4 & 0,526\textsuperscript{+} & 0,633 & \textbf{0,649} & 0,645 & 0,168\textsuperscript{+} & 0,235\textsuperscript{+} & 0,266 & \textbf{0,315} \\
+\midrule
+Polish Bankruptcy & 2 & \textbf{0,664\textsuperscript{--}} & \textbf{0,664\textsuperscript{--}} & 0,651 & 0,639 & \textbf{0,059\textsuperscript{--}} & \textbf{0,059\textsuperscript{--}} & 0,055 & 0,051 \\
+ & 3 & \textbf{0,678} & 0,677 & 0,675 & 0,673 & 0,064 & 0,064 & \textbf{0,065} & 0,064 \\
+ & 4 & 0,673 & 0,677 & \textbf{0,684} & 0,675 & 0,063 & 0,064 & 0,072 & \textbf{0,074} \\
+\midrule
+Taiwan Bankruptcy & 2 & \textbf{0,731\textsuperscript{--}} & \textbf{0,731} & 0,723 & 0,722 & \textbf{0,058\textsuperscript{--}} & \textbf{0,058} & 0,056 & 0,056 \\
+ & 3 & 0,731 & 0,731 & \textbf{0,744} & 0,732 & 0,058 & 0,058 & \textbf{0,061} & 0,059 \\
+ & 4 & \textbf{0,731} & \textbf{0,731} & \textbf{0,731} & 0,725 & 0,058 & 0,058 & \textbf{0,060} & 0,058 \\
+\midrule
+South German Credit & 2 & \textbf{0,525\textsuperscript{--}} & \textbf{0,525\textsuperscript{--}} & 0,516 & 0,507 & \textbf{0,042\textsuperscript{--}} & \textbf{0,042\textsuperscript{--}} & 0,028 & 0,013 \\
+ & 3 & 0,529\textsuperscript{+} & 0,529\textsuperscript{+} & \textbf{0,612} & 0,610 & 0,207 & 0,211 & \textbf{0,261} & 0,256 \\
+ & 4 & 0,530\textsuperscript{+} & 0,529\textsuperscript{+} & 0,625 & \textbf{0,630} & 0,255 & \textbf{0,312} & 0,279 & 0,286 \\
+\midrule
+German Credit (bản số) & 2 & 0,537 & 0,534 & \textbf{0,572\textsuperscript{--}} & 0,570 & 0,062 & 0,057 & \textbf{0,142\textsuperscript{--}} & 0,137 \\
+ & 3 & \textbf{0,584} & 0,580 & 0,574 & 0,568 & \textbf{0,223} & 0,214 & 0,163 & 0,153 \\
+ & 4 & \textbf{0,601} & 0,600 & 0,577 & 0,580 & \textbf{0,272} & 0,262 & 0,188 & 0,192 \\
+\midrule
+Australian Credit & 2 & \textbf{0,832\textsuperscript{--}} & \textbf{0,832\textsuperscript{--}} & 0,822 & 0,816 & \textbf{0,666\textsuperscript{--}} & \textbf{0,666\textsuperscript{--}} & 0,656 & 0,646 \\
+ & 3 & \textbf{0,832} & \textbf{0,832} & 0,779 & 0,791 & \textbf{0,666} & \textbf{0,666} & 0,559 & 0,589 \\
+ & 4 & 0,832 & 0,832 & \textbf{0,875} & 0,836 & 0,666 & 0,666 & \textbf{0,764} & 0,685 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Trung vị 30 seed, m = 2. FCM: FCM k-means++; WFCM: trọng số giải tích; NN: tìm ngẫu nhiên trọng số. Đậm: cao nhất hàng. Dấu \textsuperscript{+} / \textsuperscript{--} sau một đối chứng: PSO tốt hơn / kém hơn đối chứng đó có ý nghĩa (Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$); không dấu: không khác có ý nghĩa.}
+\end{table}

@@ -1,0 +1,21 @@
+\begin{table}[htbp]
+\centering
+\caption{TN4 -- số ô mỗi phiên bản tốt hơn / không khác / kém hơn tìm ngẫu nhiên và PSO gốc}
+\label{tab:e9-tong-hop}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{3}{c}{So với tìm ngẫu nhiên} & \multicolumn{3}{c}{So với PSO gốc} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Phiên bản & Điểm & AUC & $\Delta r$ & Điểm & AUC & $\Delta r$ \\
+\midrule
+Gốc & 11/1/0 & 2/10/0 & 9/3/0 & -- & -- & -- \\
+W & 11/1/0 & 3/9/0 & 8/4/0 & 0/12/0 & 0/12/0 & 0/12/0 \\
+S & 12/0/0 & 1/11/0 & 8/4/0 & 0/12/0 & 0/12/0 & 0/12/0 \\
+LOG & 11/1/0 & 3/9/0 & 8/4/0 & 0/12/0 & 0/12/0 & 0/12/0 \\
+QPSO & 12/0/0 & 4/8/0 & 9/3/0 & 0/12/0 & 0/12/0 & 0/12/0 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: 12 ô (2 bộ × 3 số cụm × 2 ngân sách). Điểm: Silhouette − phạt (chính là fitness); Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$.}
+\end{table}

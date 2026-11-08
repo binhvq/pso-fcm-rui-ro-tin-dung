@@ -1,0 +1,137 @@
+% ============================================================
+% 00-mo-dau.tex — Mở đầu (Bình)
+% Bốn câu hỏi nghiên cứu nêu đầy đủ ở mục 2; Tiểu kết Chương 1, Chương 3 và Kết luận dùng lại tên ngắn CH1–CH4.
+% ============================================================
+\chapter*{MỞ ĐẦU}
+\addcontentsline{toc}{chapter}{MỞ ĐẦU}
+
+\section*{1. Lý do thực hiện tiểu luận}
+
+Tổ chức tín dụng cần đánh giá khả năng trả nợ của khách hàng để hạn chế nợ xấu. Một bước thường gặp trong đánh giá này là
+chia khách hàng thành các nhóm có mức rủi ro khác nhau. Trong khung Basel, ngân hàng dùng cách tiếp cận xếp hạng nội bộ
+(IRB) phải xếp các khoản vay vào những nhóm đồng nhất rồi ước lượng tham số rủi ro, và các nghiên cứu như
+\cite{bosker2025clustered,ahelegbey2023p2p} cho thấy mô hình dựng riêng cho từng nhóm khách hàng dự báo tốt hơn một mô hình
+chung. Khi không dựa vào nhãn vỡ nợ, phân cụm là công cụ tự nhiên để chia nhóm.
+
+Ranh giới giữa các nhóm rủi ro thường không rõ: một khách hàng có thể giống nhóm rủi ro thấp ở một số chỉ tiêu và giống
+nhóm rủi ro trung bình ở các chỉ tiêu khác. Phân cụm mờ, với thuật toán tiêu biểu là Fuzzy C-Means (FCM), mô tả được
+những khách hàng ``biên'' như vậy bằng độ thuộc vào nhiều cụm thay vì ép họ vào một cụm duy nhất.
+
+FCM có 2 điểm yếu được tài liệu nêu. Điểm yếu được nhắc nhiều nhất là thuật toán chỉ bảo đảm hội tụ tới cực tiểu địa
+phương hoặc điểm yên ngựa của hàm mục tiêu~\cite{bezdek1987counterexamples}, nên kết quả có thể phụ thuộc khởi tạo. Phần lớn
+các bài ghép FCM với thuật toán tối ưu bầy đàn (PSO) hoặc metaheuristic khác nhắm vào điểm yếu này bằng cách để bầy tìm tâm
+cụm~\cite{qian2022psofcm,zhang2025qpsofcm,mane2014hpso}. Tuy vậy Hathaway và Bezdek ghi nhận trong thực nghiệm FCM khá ít
+phụ thuộc khởi tạo~\cite{hathaway1988recent} (tr.~242--243), và PSO khi tìm tâm chỉ tối ưu đúng hàm mà FCM vốn tự làm giảm.
+Điểm yếu thứ hai ít được nhắc hơn: FCM dùng khoảng cách Euclid nên coi mọi thuộc tính ngang
+nhau~\cite{liu2021msgwo}. Hồ sơ tín dụng có nhiều chỉ tiêu đo gần cùng một thứ, mà FCM không tự chọn được trọng số
+cho chúng, nên một thuật toán tìm kiếm như PSO có lý do để tham gia.
+
+Nhóm bắt đầu theo cách ghép phổ biến: dùng PSO gốc và 4 phiên bản cải tiến tìm tâm khởi tạo cho FCM trên 2 bộ dữ liệu tín
+dụng. Kết quả không như kỳ vọng: mọi phiên bản cho cùng nghiệm với FCM khởi tạo k-means++ mà chậm hơn (tới khoảng 24 lần trên Taiwan Default). Đối chiếu
+với tài liệu, các bài đề xuất PSO--FCM thường báo kết quả tốt hơn FCM, nhưng chủ yếu so với FCM khởi tạo ngẫu nhiên và không
+cùng ngân sách tính toán; các nghiên cứu so sánh độc lập lại cho thấy PSO--FCM hoà hoặc thua FCM, và chậm hơn
+(mục~\ref{sec:tinh-hinh-nghien-cuu}). Phép đo số cực tiểu của hàm mục tiêu giải thích vì sao: trên dữ liệu đã thử, hàm này hầu
+như chỉ có 1 cực tiểu, nên PSO tìm tâm không còn gì để tìm. Nhóm vì vậy chuyển hướng: để PSO tối ưu thứ FCM không tự tối ưu
+được là trọng số thuộc tính, so 5 phiên bản PSO trong vai trò mới này, và kiểm kết quả trên mẫu độc lập. Tiểu luận giữ
+lại hướng ban đầu làm bằng chứng cho lần chuyển hướng.
+
+\section*{2. Mục tiêu và câu hỏi nghiên cứu}
+
+Câu hỏi của tiểu luận là: \emph{\cauHoiTong} Các mục tiêu cụ thể là:
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+  \item trình bày FCM, thuật toán PSO gốc và 4 phiên bản cải tiến (PSO-W, PSO-S, PSO-LOG, QPSO);
+  \item thử hướng phổ biến, dùng PSO tìm tâm khởi tạo cho FCM, trên dữ liệu tín dụng, và đo số cực tiểu của hàm mục tiêu để
+  giải thích kết quả;
+  \item đề xuất cải tiến: dùng PSO tìm trọng số thuộc tính cho FCM, với fitness không dùng nhãn vỡ nợ, kèm quy trình áp dụng;
+  \item thử nghiệm đề xuất trên 7 bộ dữ liệu tín dụng, so với FCM thường, trọng số tính bằng công thức và tìm ngẫu nhiên
+  cùng ngân sách, theo khả năng tách nhóm rủi ro, chỉ số phân cụm và thời gian;
+  \item so 5 phiên bản PSO trong vai trò tìm trọng số và kiểm trọng số tìm được trên mẫu độc lập.
+\end{enumerate}
+Câu hỏi này được tách thành 4 câu hỏi nghiên cứu:
+\begin{enumerate}[label=\textbf{CH\arabic*.}, leftmargin=*]
+  \item \emph{Hướng ban đầu:} \chMot
+  \item \emph{PSO tìm trọng số:} \chHai
+  \item \emph{So sánh các phiên bản:} \chBa
+  \item \emph{Kiểm chứng và giới hạn:} \chBon
+\end{enumerate}
+
+\section*{3. Đối tượng và phạm vi nghiên cứu}
+
+Đối tượng nghiên cứu là PSO và các phiên bản cải tiến khi dùng để tìm trọng số thuộc tính cho FCM trong bài toán phân khúc
+khách hàng vay, đối chiếu với vai trò tìm tâm khởi tạo. Phạm vi như sau.
+\begin{itemize}
+  \item Phân cụm \emph{không giám sát}: nhãn vỡ nợ không đi vào thuật toán nào, chỉ dùng để đánh giá phân hoạch sau khi phân
+  cụm và, trong quy trình đề xuất, để quyết định có áp trọng số hay không.
+  \item Năm thuật toán PSO: PSO gốc (Kennedy và Eberhart, 1995), PSO-W (Shi và Eberhart, 1998, 1999), PSO-S và PSO-LOG (Qian và
+  cộng sự, 2022), QPSO (Sun và cộng sự, 2004). Đối chứng của phần trọng số: FCM thường, WFCM với trọng số tính bằng công
+  thức~\cite{keller2000weighting}, tìm ngẫu nhiên cùng ngân sách. Đối chứng của phần tìm tâm: 3 cách khởi tạo độ thuộc ngẫu
+  nhiên, $c$ điểm dữ liệu ngẫu nhiên và k-means++~\cite{arthur2007kmeanspp}.
+  \item Hệ số mờ $m = 2$, số cụm $c$ từ 2 đến 4 cho phần trọng số; phần tìm tâm kiểm tra thêm $m = 1{,}5$ và $c$ đến 8.
+  \item Dữ liệu: 2 bộ chính là dữ liệu dự báo tình trạng khó khăn tài chính của doanh nghiệp niêm yết Việt Nam và dữ liệu vỡ nợ thẻ tín
+  dụng Taiwan Default; 5 bộ tín dụng công khai khác dùng để kiểm độ rộng của kết quả.
+\end{itemize}
+
+\section*{4. Phương pháp nghiên cứu}
+
+Nghiên cứu gồm 2 giai đoạn. Giai đoạn đầu thử PSO tìm tâm khởi tạo theo cách của các bài đã đọc và đo số
+cực tiểu của hàm mục tiêu để giải thích kết quả; giai đoạn sau, khi hướng đó không cho kết quả tốt, chuyển sang PSO tìm trọng
+số thuộc tính với đầy đủ đối chứng và mẫu kiểm chứng. Hai giai đoạn dùng chung dữ liệu, tiền xử lý, seed và cách kiểm định.
+Tiểu luận dùng 2 phương pháp. Thứ nhất là tổng hợp tài liệu: đọc 10 bài chính cùng các bài
+nền tảng về FCM, trọng số thuộc tính và PSO. Thứ hai là thực nghiệm có đối chứng. Mọi phương pháp chạy trên cùng dữ liệu đã
+tiền xử lý, với cùng 30 seed (hạt giống ngẫu nhiên), cùng tâm khởi tạo và cùng mẫu đánh giá; thời gian thực đo trên cùng máy.
+Các phương pháp được so theo cặp seed bằng phép thử Wilcoxon~\cite{wilcoxon1945} kèm hiệu chỉnh Holm~\cite{holm1979}. Trọng
+số học trên một mẫu được kiểm trên một mẫu độc lập. Kết quả tái lập được bằng mã nguồn ở Phụ lục~\ref{app:code}.
+
+Về đóng góp, tiểu luận (i) đưa PSO tìm trọng số thuộc tính vào FCM trên dữ liệu tín dụng với 3 lựa chọn thiết kế cho
+fitness, (ii) tách phần lợi ích của cơ chế bầy đàn bằng đối chứng tìm ngẫu nhiên cùng ngân sách và đối chứng trọng số giải
+tích, (iii) so 5 phiên bản PSO trong vai trò này, và (iv) đề xuất quy trình chọn vai trò cho PSO, bắt đầu bằng chẩn đoán
+số cực tiểu của hàm mục tiêu (mục~\ref{sec:de-xuat}).
+
+\section*{5. Bố cục tiểu luận}
+
+Chương~\ref{chap:tong-quan} tổng quan về phân cụm trong đánh giá rủi ro tín dụng, FCM và 2 điểm yếu của nó, PSO và các
+phiên bản cải tiến, 2 cách ghép PSO với FCM, và tình hình nghiên cứu. Chương~\ref{chap:phuong-phap} trình bày FCM, PSO gốc và
+4 phiên bản cải tiến, các chỉ số đánh giá, rồi theo thứ tự nhóm thực hiện: hướng ban đầu (PSO tìm tâm), trọng số thuộc
+tính trong FCM, rồi đề xuất cải tiến của nhóm (PSO tìm trọng số thuộc tính và quy trình áp dụng).
+Chương~\ref{chap:thuc-nghiem} mô tả dữ liệu, thiết kế thực nghiệm, trình bày hướng ban đầu và lý do chuyển hướng, rồi trả lời
+lần lượt CH1 (mục~\ref{sec:diem-xuat-phat}),
+CH2 (mục~\ref{sec:pso-trong-so}), CH3 (mục~\ref{sec:phien-ban-trong-so}) và CH4 (mục~\ref{sec:kiem-chung}), diễn giải các
+phân khúc tìm được, và cuối cùng đánh giá chung từng thuật toán qua cả 2 vai trò (mục~\ref{sec:danh-gia-chung}). Phụ lục~\ref{app:code} trình bày mã nguồn kèm cách chạy
+lại thực nghiệm. Mục 6 dưới đây ghi phân công của từng thành viên.
+
+\section*{6. Phân công thực hiện}
+
+Nhóm chia việc theo thuật toán: mỗi thành viên phụ trách trọn một mạch gồm bài báo, mục lý thuyết, mã nguồn, thí nghiệm và
+mục kết quả tương ứng, để tự trình bày và trả lời câu hỏi về phần của mình (Bảng~\ref{tab:phan-cong}). Phân công đọc hiểu
+từng tệp mã nguồn ở Bảng~\ref{tab:pl-phan-cong}.
+
+\begin{table}[htbp]
+\centering
+\caption{Phân công thực hiện tiểu luận}
+\label{tab:phan-cong}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{3.5cm}@{}}
+\toprule
+Thành viên & Thuật toán & Bài báo & Chương 1 & Chương 2 & Chương 3 \\
+\midrule
+Vương Quốc Bình (trưởng nhóm) & FCM, khoảng cách có trọng số, WFCM giải tích, quy trình đề xuất & 07, 08 &
+\ref{sec:rui-ro-tin-dung}, \ref{sec:phan-cum-mo} & \ref{sec:fcm}, \ref{sec:trong-so-fcm}, \ref{sec:quy-trinh} &
+\ref{sec:kiem-chung} (TN5), tiểu kết \\
+\addlinespace
+Trần Trường Giang & PSO gốc, PSO-W, khung PSO tìm trọng số & 01, 09, 10 & \ref{sec:pso-tong-quan}, \ref{sec:metaheuristic} &
+\ref{sec:pso-goc}, \ref{sec:pso-w}, \ref{sec:de-xuat}.1--\ref{sec:de-xuat}.4 & \ref{sec:du-lieu}, \ref{sec:thiet-lap},
+\ref{sec:chuyen-huong}, \ref{sec:pso-trong-so} (TN3) \\
+\addlinespace
+Nguyễn Quang Hà & PSO-S, PSO-LOG, chỉ số đánh giá, kiểm định, đánh giá chung các thuật toán & 02, 03 & \ref{sec:cac-nghien-cuu} & \ref{sec:pso-s-log},
+\ref{sec:chi-so} & \ref{sec:kiem-dinh}, \ref{sec:phien-ban-trong-so} (TN4), \ref{sec:dien-giai}, \ref{sec:danh-gia-chung} \\
+\addlinespace
+Nguyễn Tiến Hải & QPSO, PSO tìm tâm khởi tạo, chẩn đoán số cực tiểu & 04, 05, 06 & \ref{sec:trai-chieu}, \ref{sec:diem-de-ngo} &
+\ref{sec:qpso}, \ref{sec:pso-khoi-tao} & \ref{sec:e5-dat-j}, \ref{sec:e5-doi-chung} (TN1), \ref{sec:vi-sao} (TN2) \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Phần chung: Bình viết Mở đầu, Kết luận, Tóm tắt và ghép bản LaTeX; Giang soạn
+Phụ lục~\ref{app:code}; Hà điều phối hỏi đáp; Hải làm slide thuyết trình.}
+\end{table}
+

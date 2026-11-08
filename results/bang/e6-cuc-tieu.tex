@@ -1,0 +1,45 @@
+\begin{table}[htbp]
+\centering
+\caption{TN2 -- số cực tiểu của J\textsubscript{m} và tỉ lệ đạt J tốt nhất theo m, c và kiểu khởi tạo}
+\label{tab:e6-cuc-tieu}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+Bộ, m & c & \begin{tabular}[b]{@{}c@{}}Số\\cực tiểu\end{tabular} & \begin{tabular}[b]{@{}c@{}}U ngẫu\\nhiên\end{tabular} & \begin{tabular}[b]{@{}c@{}}Điểm\\ngẫu nhiên\end{tabular} & \begin{tabular}[b]{@{}c@{}}k-\\means++\end{tabular} & \begin{tabular}[b]{@{}c@{}}PSO-W\\\end{tabular} & \begin{tabular}[b]{@{}c@{}}Sụp\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}K/c tâm\\nhỏ nhất\end{tabular} & AUC \\
+\midrule
+Taiwan Default, m = 1,5 & 2 & 1 & 100 & 100 & 100 & 100 & 0 & 5,07 & 0,446 \\
+ & 3 & 1 & 100 & 100 & 100 & 100 & 0 & 0,99 & 0,639 \\
+ & 4 & 1 & 100 & 100 & 100 & 100 & 0 & 1,45 & 0,664 \\
+ & 5 & 1 & 100 & 100 & 100 & 100 & 0 & 1,00 & 0,694 \\
+ & 6 & 1 & 100 & 100 & 100 & 100 & 0 & 0,85 & 0,707 \\
+ & 7 & 4 & 63 & 83 & 93 & 77 & 0 & 0,98 & 0,707 \\
+ & 8 & 1 & 100 & 100 & 100 & 100 & 0 & 4,83·10\textsuperscript{−5} & 0,709 \\
+\midrule
+Taiwan Default, m = 2,0 & 2 & 1 & 100 & 100 & 100 & 100 & 0 & 3,28 & 0,451 \\
+ & 3 & 1 & 100 & 100 & 100 & 100 & 0 & 5,79·10\textsuperscript{−5} & 0,434 \\
+ & 4 & 1 & 100 & 100 & 100 & 100 & 0 & 1,58·10\textsuperscript{−5} & 0,423 \\
+ & 5 & 1 & 100 & 100 & 100 & 100 & 0 & 2,05·10\textsuperscript{−6} & 0,417 \\
+ & 6 & 1 & 100 & 100 & 100 & 100 & 0 & 3,06·10\textsuperscript{−7} & 0,414 \\
+ & 7 & 1 & 100 & 100 & 100 & 100 & 0 & 5,30·10\textsuperscript{−10} & 0,412 \\
+ & 8 & 1 & 100 & 100 & 100 & 100 & 0 & 3,89·10\textsuperscript{−11} & 0,449 \\
+\midrule
+Việt Nam, m = 1,5 & 2 & 1 & 100 & 100 & 100 & 100 & 0 & 4,15 & 0,836 \\
+ & 3 & 1 & 100 & 100 & 100 & 100 & 0 & 2,58 & 0,903 \\
+ & 4 & 1 & 100 & 100 & 100 & 100 & 0 & 2,40 & 0,925 \\
+ & 5 & 1 & 100 & 100 & 100 & 100 & 0 & 2,19 & 0,950 \\
+ & 6 & 1 & 100 & 100 & 100 & 100 & 0 & 1,30 & 0,950 \\
+ & 7 & 1 & 100 & 100 & 100 & 100 & 0 & 1,65 & 0,950 \\
+ & 8 & 2 & 100 & 93 & 90 & 97 & 0 & 1,09 & 0,950 \\
+\midrule
+Việt Nam, m = 2,0 & 2 & 1 & 100 & 100 & 100 & 100 & 0 & 2,68 & 0,784 \\
+ & 3 & 1 & 100 & 100 & 100 & 100 & 0 & 0,04 & 0,840 \\
+ & 4 & 1 & 100 & 100 & 100 & 100 & 0 & 4,97·10\textsuperscript{−3} & 0,866 \\
+ & 5 & 1 & 100 & 100 & 100 & 100 & 0 & 4,71·10\textsuperscript{−5} & 0,879 \\
+ & 6 & 1 & 100 & 100 & 100 & 100 & 0 & 1,90·10\textsuperscript{−4} & 0,886 \\
+ & 7 & 1 & 100 & 100 & 100 & 100 & 0 & 1,46·10\textsuperscript{−5} & 0,888 \\
+ & 8 & 1 & 100 & 100 & 100 & 100 & 0 & 3,45·10\textsuperscript{−11} & 0,867 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: 30 seed mỗi kiểu khởi tạo; số cực tiểu: số mức J\textsubscript{m} lệch nhau quá $10^{-4}$ (tương đối) trên 120 lượt; 4 cột kiểu khởi tạo: tỉ lệ lượt (\%) có J\textsubscript{m} $\le (1 + 10^{-4})$ lần mức thấp nhất; K/c tâm nhỏ nhất: khoảng cách nhỏ nhất giữa 2 tâm (dữ liệu z-score), trung vị; AUC: AUC tách rủi ro, trung vị. PSO-W: 20 hạt, 30 vòng.}
+\end{table}

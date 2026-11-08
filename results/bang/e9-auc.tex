@@ -1,0 +1,27 @@
+\begin{table}[htbp]
+\centering
+\caption{TN4 -- AUC phân hoạch của 5 phiên bản PSO khi tìm trọng số thuộc tính}
+\label{tab:e9-auc}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lllrrrrrrr@{}}
+\toprule
+Bộ dữ liệu & c & Ngân sách & FCM & NN & Gốc & W & S & LOG & QPSO \\
+\midrule
+Việt Nam & 2 & 500 & 0,799 & 0,840 & 0,850 & 0,850\textsuperscript{+} & 0,846 & 0,851\textsuperscript{+} & \textbf{0,851\textsuperscript{+}} \\
+ &  & 1.000 &  & 0,843 & 0,850 & 0,850 & 0,849 & 0,850 & \textbf{0,851\textsuperscript{+}} \\
+ & 3 & 500 & 0,834 & 0,843 & 0,843 & 0,844 & 0,842 & 0,841 & \textbf{0,846} \\
+ &  & 1.000 &  & 0,843 & 0,843 & 0,844 & 0,844 & 0,844 & \textbf{0,849} \\
+ & 4 & 500 & 0,863 & 0,870 & 0,872 & 0,876 & 0,871 & 0,873 & \textbf{0,878} \\
+ &  & 1.000 &  & \textbf{0,872} & 0,870 & 0,871 & 0,870 & \textbf{0,872} & 0,870 \\
+\midrule
+Taiwan Default & 2 & 500 & 0,523 & 0,505 & 0,516\textsuperscript{+} & \textbf{0,517\textsuperscript{+}} & 0,514 & 0,516\textsuperscript{+} & \textbf{0,517\textsuperscript{+}} \\
+ &  & 1.000 &  & 0,506 & 0,516\textsuperscript{+} & \textbf{0,516\textsuperscript{+}} & 0,516\textsuperscript{+} & \textbf{0,516\textsuperscript{+}} & \textbf{0,516\textsuperscript{+}} \\
+ & 3 & 500 & 0,601 & 0,655 & 0,667 & 0,664 & 0,664 & 0,664 & \textbf{0,672} \\
+ &  & 1.000 &  & 0,657 & 0,672 & 0,668 & \textbf{0,674} & 0,668 & 0,666 \\
+ & 4 & 500 & 0,526 & 0,649 & 0,648 & 0,645 & 0,642 & 0,618 & \textbf{0,679} \\
+ &  & 1.000 &  & 0,670 & 0,623 & 0,640 & 0,639 & 0,617 & \textbf{0,678} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Trung vị 30 seed, m = 2; ngân sách là số lần tính fitness (10 hạt với 500, 20 hạt với 1.000). NN: tìm ngẫu nhiên cùng ngân sách. Đậm: cao nhất trong các phương pháp tìm kiếm cùng ngân sách. \textsuperscript{+} / \textsuperscript{--}: tốt hơn / kém hơn NN có ý nghĩa; \textsuperscript{*} / \textsuperscript{\dag}: tốt hơn / kém hơn PSO gốc có ý nghĩa (Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$).}
+\end{table}

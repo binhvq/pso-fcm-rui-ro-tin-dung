@@ -1,0 +1,50 @@
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}lrrrrrr@{}}
+\caption{E1 -- thời gian theo pha và chi phí trên Việt Nam: trung vị qua 30 seed}
+\label{tab:e1-thoi-gian-viet_nam}\\
+\toprule
+Phương pháp & Khởi tạo (s) & Tìm kiếm (s) & Tinh chỉnh (s) & Tổng (s) & $n_{FE}$ & Số vòng FCM \\
+\midrule
+\endfirsthead
+\toprule
+Phương pháp & Khởi tạo (s) & Tìm kiếm (s) & Tinh chỉnh (s) & Tổng (s) & $n_{FE}$ & Số vòng FCM \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\multicolumn{7}{@{}l}{\textbf{c = 2}} \\
+K-means & 0,000 & 0,000 & 0,006 & 0,006 & 0 & 0 \\
+FCM & 0,000 & 0,000 & 0,015 & 0,015 & 0 & 44 \\
+FCM (k-means++) & 4,15·10\textsuperscript{−4} & 0,000 & 0,010 & 0,011 & 0 & 29 \\
+A (ω L) & 0,003 & 0,880 & 0,000 & 0,882 & 3.020 & 0 \\
+A (ω S) & 0,003 & 0,886 & 0,000 & 0,889 & 3.020 & 0 \\
+A (ω LOG) & 0,002 & 0,930 & 0,000 & 0,933 & 3.020 & 0 \\
+B: QPSO–FCM & 0,003 & 0,790 & 0,010 & 0,801 & 2.660 & 30 \\
+Đề xuất & 0,050 & 0,000 & 0,000 & 0,050 & 0 & 144 \\
+C: MSGWO–WFCM & 0,011 & 2,213 & 4,81·10\textsuperscript{−4} & 2,227 & 4.000 & 0 \\
+\midrule
+\multicolumn{7}{@{}l}{\textbf{c = 3}} \\
+K-means & 0,000 & 0,000 & 0,008 & 0,008 & 0 & 0 \\
+FCM & 0,000 & 0,000 & 0,424 & 0,424 & 0 & 1.157 \\
+FCM (k-means++) & 0,001 & 0,000 & 0,435 & 0,436 & 0 & 1.226 \\
+A (ω L) & 0,007 & 1,001 & 0,000 & 1,009 & 3.020 & 0 \\
+A (ω S) & 0,006 & 1,014 & 0,000 & 1,020 & 3.020 & 0 \\
+A (ω LOG) & 0,006 & 1,012 & 0,000 & 1,019 & 3.020 & 0 \\
+B: QPSO–FCM & 0,006 & 0,939 & 0,444 & 1,371 & 2.780 & 1.230 \\
+Đề xuất & 2,181 & 0,000 & 0,000 & 2,181 & 0 & 6.104 \\
+C: MSGWO–WFCM & 0,016 & 3,440 & 0,001 & 3,456 & 4.240 & 0 \\
+\midrule
+\multicolumn{7}{@{}l}{\textbf{c = 4}} \\
+K-means & 0,000 & 0,000 & 0,007 & 0,007 & 0 & 0 \\
+FCM & 0,000 & 0,000 & 0,153 & 0,153 & 0 & 394 \\
+FCM (k-means++) & 0,001 & 0,000 & 0,161 & 0,162 & 0 & 443 \\
+A (ω L) & 0,011 & 1,014 & 0,000 & 1,024 & 3.020 & 0 \\
+A (ω S) & 0,010 & 1,007 & 0,000 & 1,018 & 3.020 & 0 \\
+A (ω LOG) & 0,010 & 1,010 & 0,000 & 1,020 & 3.020 & 0 \\
+B: QPSO–FCM & 0,010 & 0,928 & 0,162 & 1,077 & 2.720 & 438 \\
+Đề xuất & 0,822 & 0,000 & 0,000 & 0,822 & 0 & 2.193 \\
+C: MSGWO–WFCM & 0,023 & 3,701 & 0,001 & 3,726 & 3.440 & 0 \\
+\end{longtable}
+}
+{\scriptsize\noindent Ghi chú: thời gian thực là thước đo chi phí chính; $n_{FE}$ không đồng đơn vị giữa các phương pháp (Mục~\ref{sec:thiet-lap}), chỉ để tham khảo.\par}

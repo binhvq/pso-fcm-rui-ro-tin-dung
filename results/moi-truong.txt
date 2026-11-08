@@ -1,0 +1,27 @@
+=== Lần chạy 2026-10-13T17:04:11: --thi-nghiem tat-ca --tien-trinh 8
+CPU: Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+Số lõi logic: 16
+Hệ điều hành: Linux-6.19.11-100.fc42.x86_64-x86_64-with-glibc2.41
+Python: 3.9.4
+numpy: 2.0.2
+scipy: 1.13.1
+pandas: 2.3.3
+scikit-learn: 1.6.1
+Luồng BLAS mỗi tiến trình: 1
+Số tiến trình: 8
+E1: 180 tác vụ chạy, thời gian tường 1315.7 s
+E2: 60 tác vụ chạy, thời gian tường 215.1 s
+E3: 28 tác vụ chạy, thời gian tường 39.7 s
+E4: 6 tác vụ chạy, thời gian tường 24.7 s
+=== Lần chạy 2026-10-20T10:18:53: --thi-nghiem E4
+CPU: Intel(R) Xeon(R) E-2278G CPU @ 3.40GHz
+Số lõi logic: 16
+Hệ điều hành: Linux-6.19.11-100.fc42.x86_64-x86_64-with-glibc2.41
+Python: 3.9.4
+numpy: 2.0.2
+scipy: 1.13.1
+pandas: 2.3.3
+scikit-learn: 1.6.1
+Luồng BLAS mỗi tiến trình: 1
+Số tiến trình: 8
+E4: 2 tác vụ chạy, thời gian tường 62.7 s

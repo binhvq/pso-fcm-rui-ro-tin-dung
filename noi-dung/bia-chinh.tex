@@ -1,0 +1,61 @@
+% ============================================================
+% bia-chinh.tex — Trang bìa chính tiểu luận (mẫu khung trang trí HAUI)
+% ============================================================
+
+\definecolor{hauiblue}{RGB}{0,51,153}
+
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+
+% Khung ngoài
+\draw[line width=1.2pt,hauiblue] ([xshift=1.2cm,yshift=-1.2cm]current page.north west) rectangle ([xshift=-1.2cm,yshift=1.2cm]current page.south east);
+% Khung trong
+\draw[line width=5pt,hauiblue] ([xshift=1.5cm,yshift=-1.5cm]current page.north west) rectangle ([xshift=-1.5cm,yshift=1.5cm]current page.south east);
+% Góc trên trái
+\draw[line width=0.8pt,hauiblue] ([xshift=1.0cm,yshift=-1.0cm]current page.north west) rectangle ++(0.4cm,-0.4cm);
+\draw[line width=0.8pt,hauiblue] ([xshift=1.15cm,yshift=-1.15cm]current page.north west) rectangle ++(0.4cm,-0.4cm);
+% Góc trên phải
+\draw[line width=0.8pt,hauiblue] ([xshift=-1.4cm,yshift=-1.0cm]current page.north east) rectangle ++(0.4cm,-0.4cm);
+\draw[line width=0.8pt,hauiblue] ([xshift=-1.55cm,yshift=-1.15cm]current page.north east) rectangle ++(0.4cm,-0.4cm);
+% Góc dưới trái
+\draw[line width=0.8pt,hauiblue] ([xshift=1.0cm,yshift=1.4cm]current page.south west) rectangle ++(0.4cm,-0.4cm);
+\draw[line width=0.8pt,hauiblue] ([xshift=1.15cm,yshift=1.55cm]current page.south west) rectangle ++(0.4cm,-0.4cm);
+% Góc dưới phải
+\draw[line width=0.8pt,hauiblue] ([xshift=-1.4cm,yshift=1.4cm]current page.south east) rectangle ++(0.4cm,-0.4cm);
+\draw[line width=0.8pt,hauiblue] ([xshift=-1.55cm,yshift=1.55cm]current page.south east) rectangle ++(0.4cm,-0.4cm);
+\end{tikzpicture}
+
+% nội dung chính
+\begin{center}
+
+{\normalsize BỘ CÔNG THƯƠNG}\\[0.2cm]
+{\large\bfseries ĐẠI HỌC CÔNG NGHIỆP HÀ NỘI}\\[0.5cm]
+
+\includegraphics[width=3cm]{haui_Logo.jpg}\\[1cm]
+
+{\normalsize\bfseries TIỂU LUẬN MÔN HỌC}\\[0.3cm]
+{\large\bfseries Môn: KHAI PHÁ DỮ LIỆU VÀ PHÁT HIỆN TRI THỨC}\\[2cm]
+
+{\fontsize{16pt}{20pt}\selectfont\bfseries ỨNG DỤNG PSO KẾT HỢP FUZZY C-MEANS\\[0.1cm]
+TRONG PHÂN CỤM DỮ LIỆU PHỤC VỤ\\[0.1cm]
+ĐÁNH GIÁ RỦI RO TÍN DỤNG\\[2.5cm]}
+
+\begin{flushleft}
+\hspace{2.5cm}
+\begin{tabular}{ll}
+\textbf{Giảng viên hướng dẫn:} & TS. Trần Hùng Cường \\[0.4cm]
+\textbf{Nhóm thực hiện:} & Nhóm 1 \\
+\quad Vương Quốc Bình & -- MSSV: 2026700009 \\
+\quad Trần Trường Giang & -- MSSV: 2026700031 \\
+\quad Nguyễn Quang Hà & -- MSSV: 2026700033 \\
+\quad Nguyễn Tiến Hải & -- MSSV: 2026700052 \\[0.4cm]
+\textbf{Mã lớp học phần:} & 20261IT7314001 \\
+\end{tabular}
+\end{flushleft}
+
+\vfill
+
+{\normalsize Hà Nội, 2026}
+
+\end{center}
+\end{titlepage}

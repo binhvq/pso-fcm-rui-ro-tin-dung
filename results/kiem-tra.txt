@@ -1,0 +1,108 @@
+K1 [bắt buộc] ĐẠT: số dòng {'E1': 3060, 'E2': 600, 'E3': 1680}, cần {'E1': 3060, 'E2': 600, 'E3': 1680}; E3 mỗi (bộ, c) [60] (cần 60); E4 6/6 tệp; khoá trùng 0
+K2 [bắt buộc] ĐẠT: E1: 0 dòng lỗi, 0 dòng NaN ở cột bắt buộc, silhouette NaN 0; E2: 0 dòng lỗi, 0 dòng NaN ở cột bắt buộc, silhouette NaN 0; E3 NaN 0
+K3 [bắt buộc] ĐẠT: chạy lại TacVu(thi_nghiem='E1', bo='taiwan_kiem_chung', c=3, khoa=1000): lệch tương đối lớn nhất 3.87e-13 (cột ARI), NaN khớp True, goi_pso khớp True
+K4 [hợp lý] ĐẠT: tỉ lệ lượt cùng J_m với fcm_kpp mỗi (bộ, c): b_qpso_fcm min 100%; cach2_fcm_gieo min 100%; cach3_xen_ke min 100%; fcm_lap_lai min 100%; fcm_kpp min 100%; de_xuat min 100%
+K5 [hợp lý] ĐẠT: de_xuat gọi PSO ở 0/180 lượt E1
+K6 [hợp lý] KHÔNG ĐẠT: E2 c = 6 tỉ lệ đạt J tốt nhất: a_LOG 0%, b_qpso_fcm 87%, cach2_fcm_gieo 43%, cach3_xen_ke 100%, de_xuat 100%, de_xuat_ep_pso 100%, fcm 57%, fcm_kpp 100%, fcm_lap_lai 100%, kmeans 0%; c = 3: a_LOG 0%, b_qpso_fcm 100%, cach2_fcm_gieo 100%, cach3_xen_ke 100%, de_xuat 100%, de_xuat_ep_pso 100%, fcm 100%, fcm_kpp 100%, fcm_lap_lai 100%, kmeans 0%
+K7 [bắt buộc] ĐẠT: de_xuat_ep_pso: goi_pso True 60/60, n_fe > 0 60/60
+K8 [hợp lý] ĐẠT: tỉ lệ sụp khi khởi tạo U ngẫu nhiên: german_so c=2 100%, german_so c=3 100%, german_so c=4 100%, south_german c=2 100%, south_german c=3 100%, south_german c=4 100%, taiwan_pha_san c=2 100%, taiwan_pha_san c=3 100%, taiwan_pha_san c=4 100%
+K9 [bắt buộc] ĐẠT: AUC cứng (chỉ số phụ) ≥ 0,5 theo xây dựng: E1: NaN 0, < 0,5 0, nhỏ nhất 0.500; E2: NaN 0, < 0,5 0, nhỏ nhất 0.521
+
+Bắt buộc không đạt: không; hợp lý không đạt: ['K6']
+
+== Chẩn đoán K6 (13/10/2026 17:40) — không sửa code, không chạy lại
+Hiện tượng trùng bản thử P16: Taiwan không log c = 6 có đúng 2 mức J (19.075,1 và 19.140,9; chênh 0,34%);
+E2 fcm trùng E3 u_ngau_nhien (cùng seed). Chỉ tỉ lệ đạt J tốt nhất khác: 17/30 (seed 1000–1029) so với 7/30 (P16).
+Đo bằng code hiện tại, FCM(6, m = 2), khởi tạo U ngẫu nhiên:
+  seed 0–29,      max_iter 3000:  7/30 đạt J tốt nhất, số vòng lớn nhất 343   (tái lập đúng P16)
+  seed 0–29,      max_iter 10000: 7/30, số vòng lớn nhất 343                  (trần vòng không ảnh hưởng)
+  seed 1000–1029, max_iter 3000:  17/30, số vòng lớn nhất 393                 (trùng E2 chính thức)
+  seed 1030–1129, max_iter 10000: 39/100, số vòng lớn nhất 449                (tỉ lệ thực ≈ 0,4)
+Kết luận: K6 không đạt do dao động mẫu với n = 30 (khoảng tin cậy 95% ≈ ±0,18), không do lỗi code; dải 15–50% chốt
+trước quá hẹp. fcm_kpp 30/30 (đạt phần thứ hai của K6). Dùng số chính thức (người dùng chốt 13/10/2026 20:17).
+Script chẩn đoán (thư mục tạm của job sẽ bị xoá nên chép nguyên văn dưới đây):
+    import sys; sys.path.insert(0, "/home/binh/learn/ths/khai-pha-du-lieu-va-phat-hien-tri-thuc/tieu-luan/code")
+    import numpy as np, tien_xu_ly as tx
+    from fcm import FCM
+    X = tx.nap("taiwan_kiem_chung_khong_log").X
+    def ti_le(seeds, max_iter):
+        J, it = [], []
+        for s in seeds:
+            m = FCM(6, m=2.0, max_iter=max_iter); _, V, n = m.fit(X, seed=np.random.default_rng(s) if s >= 1000 else s)
+            J.append(m.objective_from_centroids(X, V)); it.append(n)
+        J = np.array(J); return (J <= 19075.2).sum(), len(J), max(it)
+    for seeds, mi in [(range(30), 3000), (range(30), 10000), (range(1000, 1030), 3000), (range(1030, 1130), 10000)]:
+        print(f"seed {seeds.start}-{seeds.stop-1}, max_iter {mi}: đạt J tốt nhất %d/%d, số vòng lớn nhất %d" % ti_le(seeds, mi))
+
+== Đối chiếu ngẫu nhiên 10 số (bảng + macro) với CSV, tính lại độc lập (rng 2026), 13/10/2026
+Lệnh: python3 doi_chieu_10_so.py /home/binh/learn/ths/khai-pha-du-lieu-va-phat-hien-tri-thuc/tieu-luan/results  (script chép nguyên văn dưới đây)
+    ĐẠT  ('E1', 'viet_nam', 2, 'fcm_lap_lai'): CSV 0,784 | macro \soLieuEMotVietNamCHaiFcmLapLaiAuc = 0,784 | có trong e1-ket-qua-viet_nam.tex: True
+    ĐẠT  ('E1', 'taiwan_kiem_chung', 2, 'fcm_kpp'): CSV 0,451 | macro \soLieuEMotTaiwanKiemChungCHaiFcmKppAuc = 0,451 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
+    ĐẠT  ('E1', 'viet_nam', 3, 'c_msgwo_wfcm'): CSV 0,594 | macro \soLieuEMotVietNamCBaCMsgwoWfcmAuc = 0,594 | có trong e1-ket-qua-viet_nam.tex: True
+    ĐẠT  ('E1', 'taiwan_kiem_chung', 4, 'b_qpso_fcm'): CSV 0,423 | macro \soLieuEMotTaiwanKiemChungCBonBQpsoFcmAuc = 0,423 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
+    ĐẠT  ('E2', 6, 'de_xuat'): CSV 100 | macro \soLieuEHaiCSauDeXuatDatJ = 100 | có trong e2-it-nhieu-cum.tex: True
+    ĐẠT  ('E1', 'taiwan_kiem_chung', 2, 'fcm'): CSV 0,451 | macro \soLieuEMotTaiwanKiemChungCHaiFcmAuc = 0,451 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
+    ĐẠT  ('E1', 'viet_nam', 2, 'cach5_pso_U'): CSV 0,506 | macro \soLieuEMotVietNamCHaiCachNamPsoUAuc = 0,506 | có trong e1-ket-qua-viet_nam.tex: True
+    ĐẠT  ('E1', 'taiwan_kiem_chung', 3, 'kmeans'): CSV 0,664 | macro \soLieuEMotTaiwanKiemChungCBaKmeansAuc = 0,664 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
+    ĐẠT  ('E1', 'taiwan_kiem_chung', 2, 'fcm_lap_lai'): CSV 0,451 | macro \soLieuEMotTaiwanKiemChungCHaiFcmLapLaiAuc = 0,451 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
+    ĐẠT  ('E1', 'taiwan_kiem_chung', 4, 'cach3_xen_ke'): CSV 0,423 | macro \soLieuEMotTaiwanKiemChungCBonCachBaXenKeAuc = 0,423 | có trong e1-ket-qua-taiwan_kiem_chung.tex: True
+    10/10 số khớp
+Script:
+    import glob, os, re, sys
+    import numpy as np, pandas as pd
+    R = sys.argv[1]
+    doc = lambda e: pd.concat([pd.read_csv(f) for f in sorted(glob.glob(f"{R}/{e}/*.csv"))], ignore_index=True)
+    e1, e2, e3 = doc("E1"), doc("E2"), doc("E3")
+    macro = dict(re.findall(r"\\newcommand\{\\(\w+)\}\{([^}]*)\}", open(f"{R}/so-lieu.tex").read()))
+    bang = {os.path.basename(f): open(f).read() for f in glob.glob(f"{R}/bang/*.tex")}
+    CHU = dict(zip("0123456789", ["Khong", "Mot", "Hai", "Ba", "Bon", "Nam", "Sau", "Bay", "Tam", "Chin"]))
+    cap = lambda s: "".join("".join(CHU[ch] for ch in t) if t.isdigit() else t[0].upper() + t[1:]
+                            for w in re.split(r"[_ ]", s) for t in re.findall(r"[A-Za-z]+|[0-9]+", w))
+    SO = {2: "Hai", 3: "Ba", 4: "Bon", 5: "Nam", 6: "Sau"}
+    ung_vien = ([("E1", b, c, p) for b in ("viet_nam", "taiwan_kiem_chung") for c in (2, 3, 4) for p in e1.phuong_phap.unique()]
+                + [("E2", c, p) for c in (3, 6) for p in e2.phuong_phap.unique()]
+                + [("E3", b, c) for (b, c) in e3.groupby(["bo", "c"]).size().index])
+    rng = np.random.default_rng(2026)
+    dat = 0
+    for i in rng.choice(len(ung_vien), 10, replace=False):
+        u = ung_vien[i]
+        if u[0] == "E1":
+            _, b, c, p = u
+            v = e1[(e1.bo == b) & (e1.c == c) & (e1.phuong_phap == p)].auc_rui_ro.median()
+            ky_vong, ten, tep = f"{v:.3f}".replace(".", ","), f"soLieuEMot{cap(b)}C{SO[c]}{cap(p)}Auc", f"e1-ket-qua-{b}.tex"
+        elif u[0] == "E2":
+            _, c, p = u
+            d = e2[e2.c == c]; jmin = d.J_m.min(); dp = d[d.phuong_phap == p]
+            ky_vong, ten, tep = str(int(round(100 * (dp.J_m <= (1 + 1e-4) * jmin).mean()))), f"soLieuEHaiC{SO[c]}{cap(p)}DatJ", "e2-it-nhieu-cum.tex"
+        else:
+            _, b, c = u
+            d = e3[(e3.bo == b) & (e3.c == c) & (e3.kieu == "u_ngau_nhien")]
+            ky_vong, ten, tep = str(int(round(100 * d.sup.mean()))), f"soLieuEBa{cap(b)}C{SO[c]}UNgauNhienSup", "e3-chan-doan.tex"
+        ok_macro = macro.get(ten) == ky_vong
+        ok_bang = ky_vong in bang[tep]
+        dat += ok_macro and ok_bang
+        print(f"{'ĐẠT' if ok_macro and ok_bang else 'LỆCH'}  {u}: CSV {ky_vong} | macro \\{ten} = {macro.get(ten)} | có trong {tep}: {ok_bang}")
+    print(f"{dat}/10 số khớp")
+
+== Sửa quy tắc "trùng" của kiểm định Wilcoxon (13/10/2026 17:55)
+Phát hiện khi đọc bảng e1-kiem-dinh: các phương pháp loại I cùng nghiệm với fcm_kpp (K4 100%) có |ΔAUC| ≤ 2,7·10⁻⁵
+(nhiễu hội tụ, FCM dừng ở ε = 10⁻⁵) nên quy tắc "mọi hiệu bằng 0" so số thực tuyệt đối không nhận ra, Wilcoxon báo
+"khác biệt" giả (ví dụ cách 2 Taiwan c = 2 p Holm 0,036). Hiệu thật giữa phương pháp khác nghiệm ≥ 1,25·10⁻⁴.
+Sửa: với phương pháp cùng hàm mục tiêu J_m, cặp seed có |ΔJ_m| ≤ 10⁻⁴ (định nghĩa "cùng kết quả với FCM" chốt trước)
+tính hiệu bằng 0. Phép thử: kiem_thu_phan_tich.test_kiem_dinh_cung_J_la_trung_du_AUC_lech_so_hoc.
+Trước sửa: 2 trùng / 94 có p / 61 khác biệt. Sau sửa: 36 trùng / 60 có p / 58 khác biệt (Holm, α = 0,05).
+Đối chiếu 10 số chạy lại sau khi sinh lại đầu ra: kết quả giống hệt (10/10).
+
+== Sửa sau review mã (13/10/2026 17:50) — CSV kết quả không đổi, chỉ sinh lại bảng/macro/hình
+- Trung vị XB khi có ∞: bảng dùng phân vị "nearest", macro dùng median → lệch 3 ô Taiwan (WFCM c = 4, cách 7 c = 3, 4).
+  Nay cả hai dùng phan_tich.phan_vi (nội suy tuyến tính, ∞ giữ là ∞). Phép thử test_phan_vi_chung_cho_bang_va_macro_khi_co_vo_cung.
+- Chạy tiếp: dòng có cột loi giờ không được tính là đã xong và được thay khi chạy lại (test_chay_tiep_chay_lai_dong_loi).
+- Kiểm định: bỏ cặp NaN trước Wilcoxon; hình thời gian không còn cộng thêm 1 ms vào mỗi thanh.
+- Ghi chú AUC: bỏ chữ "lạc quan" — chọn cụm bằng nhãn không tối đa hoá AUC; AUC < 0,5 có thể xảy ra (FCM trên Taiwan).
+Sau sửa: đối chiếu 10 số vẫn 10/10; tài liệu thử chứa mọi bảng/hình biên dịch 0 lỗi, 0 tràn lề.
+
+== Chỉ số phụ auc_cung (13/10/2026 20:05, theo khuyến nghị kongming, người dùng đồng ý)
+Chạy lại E1, E2 bằng code có cột auc_cung vào thư mục riêng; ghép cột vào CSV chính thức sau khi kiểm mọi cột không phải
+thời gian: 3.660 dòng, lệch tương đối lớn nhất 0 (trùng tuyệt đối). Cột thời gian giữ của lần chạy chính thức. Sao lưu
+CSV trước khi ghép ở thư mục tạm của job. K9 (bắt buộc) thêm cùng cột: auc_cung ≥ 0,5, không NaN — đạt.
+auc_cung chỉ mô tả, không vào kiểm định Wilcoxon/Holm.

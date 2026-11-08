@@ -1,0 +1,17 @@
+\begin{table}[htbp]
+\centering
+\caption{TN5 -- số cấu hình trọng số PSO chuyển sang mẫu đích tốt hơn / không khác / kém hơn từng cách khác}
+\label{tab:e10-tong-hop}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+PSO chuyển so với & FCM & WFCM chuyển & NN chuyển & PSO tại chỗ \\
+\midrule
+AUC phân hoạch & 9 / 2 / 1 & 7 / 4 / 1 & 3 / 9 / 0 & 0 / 10 / 2 \\
+Chênh tỉ lệ vỡ nợ & 10 / 2 / 0 & 6 / 6 / 0 & 8 / 4 / 0 & 0 / 11 / 1 \\
+Silhouette − phạt & 12 / 0 / 0 & 10 / 2 / 0 & 9 / 3 / 0 & 0 / 7 / 5 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: 12 cấu hình (4 chiều chuyển × 3 số cụm), Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$.}
+\end{table}

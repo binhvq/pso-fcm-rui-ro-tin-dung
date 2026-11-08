@@ -1,0 +1,18 @@
+\documentclass[12pt]{article}
+\usepackage[paperwidth=30cm,paperheight=8cm,margin=1cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{unicode-math}
+\setmathfont{TeX Gyre Termes Math}
+\setmainfont{TeX Gyre Termes}
+\pagestyle{empty}
+\newcommand{\cg}[1]{\clearpage\noindent\begin{minipage}{27cm}\Large #1\end{minipage}}
+\begin{document}
+\cg{$\displaystyle J_m(U,V)=\sum_{i=1}^{n}\sum_{k=1}^{c}u_{ik}^{m}\,\lVert \mathbf{x}_i-\mathbf{v}_k\rVert^{2},\qquad \sum_{k=1}^{c}u_{ik}=1$}
+\cg{$\begin{aligned}\Delta x_{jd}^{(t)}&=\omega(t)\,\Delta x_{jd}^{(t-1)}+c_1 r_{1jd}\big(p_{jd}-x_{jd}^{(t-1)}\big)+c_2 r_{2jd}\big(g_{d}-x_{jd}^{(t-1)}\big)\\ x_{jd}^{(t)}&=x_{jd}^{(t-1)}+\Delta x_{jd}^{(t)}\end{aligned}$}
+\cg{$\displaystyle \omega(t)=\omega_{\text{đầu}}-\big(\omega_{\text{đầu}}-\omega_{\text{cuối}}\big)\frac{t-1}{T-1},\qquad 0{,}9\to 0{,}4$}
+\cg{$\begin{aligned}\text{PSO-S:}\quad&\omega(t)=\omega_s-(\omega_s-\omega_e)\Big(\frac{t}{T}\Big)^{2}\\ \text{PSO-LOG:}\quad&\omega(t)=\Big[\ln\Big(2{,}98+\frac{t}{T}\Big)\Big]^{-z}\end{aligned}$}
+\cg{$\begin{aligned}m_{\text{best},d}&=\frac{1}{N}\sum_{j=1}^{N}p_{jd},\qquad \varphi_{jd}=\rho_{jd}\,p_{jd}+(1-\rho_{jd})\,g_{d},\qquad \rho_{jd}\sim\mathcal{U}(0,1)\\ x_{jd}&\leftarrow\varphi_{jd}\pm\gamma\,\big|m_{\text{best},d}-x_{jd}\big|\,\ln(1/q_{jd}),\qquad q_{jd}\sim\mathcal{U}(0,1],\qquad \gamma=0{,}9\,\frac{T-t}{T}+0{,}1\end{aligned}$}
+\cg{$\displaystyle d_{ik}^{2}(\symbf{\lambda})=\sum_{j=1}^{D}\frac{\lambda_j}{\bar{\lambda}}\,(x_{ij}-v_{kj})^{2},\qquad \symbf{\lambda}\in[0{,}05;\,1]^{D}$}
+\cg{$\displaystyle f(\symbf{\lambda})=-\,\mathrm{Sil}+P,\qquad P=\frac{\max\big(0,\;0{,}05-n_{\min}/n\big)}{0{,}05}$}
+\cg{$\displaystyle \Delta r=\max_k r_k-\min_k r_k,\qquad \mathrm{AUC}=\frac{1}{n_1 n_0}\sum_{y_i=1}\sum_{y_j=0}\Big(\mathbb{1}[q_i>q_j]+\tfrac12\,\mathbb{1}[q_i=q_j]\Big)$}
+\end{document}

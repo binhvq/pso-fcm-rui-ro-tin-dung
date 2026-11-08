@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\caption{TN1 -- số lượt đạt J\textsubscript{m} tốt nhất trên 2 cấu hình có nhiều cực tiểu}
+\label{tab:e7-dat-j}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+& \multicolumn{3}{c}{Taiwan Default, m = 1,5, c = 7} & \multicolumn{3}{c}{Việt Nam, m = 1,5, c = 8} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Phương pháp & Đạt & KTC 95\% & Giây & Đạt & KTC 95\% & Giây \\
+\midrule
+FCM (U ngẫu nhiên) & 19/30 & [46; 78] & 1,08 & 30/30 & [89; 100] & 0,56 \\
+FCM (điểm ngẫu nhiên) & 25/30 & [66; 93] & 0,63 & 28/30 & [79; 98] & 0,43 \\
+FCM (k-means++) & 28/30 & [79; 98] & 0,63 & 27/30 & [74; 97] & 0,51 \\
+FCM (k-means++, 20 lần) & 30/30 & [89; 100] & 12,10 & 30/30 & [89; 100] & 13,46 \\
+\midrule
+PSO gốc (20 hạt, 30 vòng) & 21/30 & [52; 83] & 3,78 & 29/30 & [83; 99] & 2,28 \\
+PSO-W (20 hạt, 30 vòng) & 23/30 & [59; 88] & 3,89 & 29/30 & [83; 99] & 2,38 \\
+PSO-S (20 hạt, 30 vòng) & 22/30 & [56; 86] & 3,89 & 30/30 & [89; 100] & 2,24 \\
+PSO-LOG (20 hạt, 30 vòng) & 24/30 & [63; 90] & 3,91 & 29/30 & [83; 99] & 2,21 \\
+QPSO (20 hạt, 30 vòng) & 20/30 & [49; 81] & 4,05 & 30/30 & [89; 100] & 2,37 \\
+\midrule
+PSO gốc (30 hạt, 50 vòng) & 26/30 & [70; 95] & 9,21 & 30/30 & [89; 100] & 4,93 \\
+PSO-W (30 hạt, 50 vòng) & 22/30 & [56; 86] & 8,75 & 30/30 & [89; 100] & 4,99 \\
+PSO-S (30 hạt, 50 vòng) & 22/30 & [56; 86] & 8,88 & 30/30 & [89; 100] & 5,29 \\
+PSO-LOG (30 hạt, 50 vòng) & 24/30 & [63; 90] & 8,92 & 30/30 & [89; 100] & 5,16 \\
+QPSO (30 hạt, 50 vòng) & 22/30 & [56; 86] & 8,38 & 30/30 & [89; 100] & 5,18 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: 30 seed mỗi phương pháp; đạt: J\textsubscript{m} $\le (1 + 10^{-4})$ lần mức thấp nhất của cấu hình; KTC 95\%: khoảng Wilson của tỉ lệ đạt (\%); giây: thời gian thực trung vị.}
+\end{table}

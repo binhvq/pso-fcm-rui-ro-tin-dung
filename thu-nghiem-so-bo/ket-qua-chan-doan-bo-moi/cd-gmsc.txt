@@ -1,0 +1,8 @@
+Bỏ 1 cột không phải số: ['MonthlyIncome']
+give-me-some-credit.csv: 5000 dòng × 9 thuộc tính số; nhãn dương 6.7%
+ c  so_muc_J  u_ngau_nhien_dat  diem_ngau_nhien_dat  kmeans_pp_dat  pso_w_dat  sup_%  pc_tv  cum_nho_tv_%  auc_tv
+ 2         1               100                  100            100        100    100  0.500          47.5   0.557
+ 3         2               100                  100             87        100     97  0.333          14.8   0.593
+ 4         2               100                  100             80        100     95  0.250           0.0   0.566
+ 5         2               100                  100             73        100     93  0.200           0.0   0.557
+ 6         2               100                  100             67        100     92  0.167           0.0   0.556

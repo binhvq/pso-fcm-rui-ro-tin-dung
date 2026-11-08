@@ -1,0 +1,39 @@
+Mẫu, tỉ lệ phá sản: {'polish_3year': (5000, 0.0472), 'taiwan_bankruptcy': (5000, 0.0322)}
+            dataset    n  D  lech    nhon  so_gia_tri_rieng
+         polish_log 5000 64  1.68   17.21            4818.0
+   polish_khong_log 5000 64 42.07 2398.05            4818.0
+      tw_phasan_log 5000 94  6.63  233.86            4261.0
+tw_phasan_khong_log 5000 94 10.19  287.86            4244.0 
+
+=== so_cuc_tieu
+c                      2    3    4    5    6    8
+dataset                                          
+polish_khong_log     1.0  1.0  1.0  1.0  1.0  1.0
+polish_log           1.0  1.0  1.0  1.0  1.0  1.0
+tw_phasan_khong_log  1.0  1.0  1.0  1.0  1.0  1.0
+tw_phasan_log        1.0  1.0  1.0  1.0  1.0  1.0 
+
+=== ty_le_tot
+c                      2    3    4    5    6    8
+dataset                                          
+polish_khong_log     1.0  1.0  1.0  1.0  1.0  1.0
+polish_log           1.0  1.0  1.0  1.0  1.0  1.0
+tw_phasan_khong_log  1.0  1.0  1.0  1.0  1.0  1.0
+tw_phasan_log        1.0  1.0  1.0  1.0  1.0  1.0 
+
+=== sup
+c                      2    3    4    5    6    8
+dataset                                          
+polish_khong_log     0.0  0.0  0.0  0.0  0.0  0.0
+polish_log           0.0  0.0  0.0  0.0  0.0  0.0
+tw_phasan_khong_log  1.0  1.0  1.0  1.0  1.0  1.0
+tw_phasan_log        1.0  1.0  1.0  1.0  1.0  1.0 
+
+=== chenh_J
+c                      2    3    4    5    6    8
+dataset                                          
+polish_khong_log     0.0  0.0  0.0  0.0  0.0  0.0
+polish_log           0.0  0.0  0.0  0.0  0.0  0.0
+tw_phasan_khong_log  0.0  0.0  0.0  0.0  0.0  0.0
+tw_phasan_log        0.0  0.0  0.0  0.0  0.0  0.0 
+

@@ -1,0 +1,8 @@
+Bỏ 0 cột không phải số: []
+fico-heloc.csv: 5000 dòng × 23 thuộc tính số; nhãn dương 52.0%
+ c  so_muc_J  u_ngau_nhien_dat  diem_ngau_nhien_dat  kmeans_pp_dat  pso_w_dat  sup_%  pc_tv  cum_nho_tv_%  auc_tv
+ 2         1               100                  100            100        100    100  0.500          47.8   0.741
+ 3         1               100                  100            100        100    100  0.333           0.1   0.741
+ 4         1               100                  100            100        100    100  0.250           0.0   0.741
+ 5         1               100                  100            100        100    100  0.200           0.0   0.741
+ 6         1               100                  100            100        100    100  0.167           0.0   0.741

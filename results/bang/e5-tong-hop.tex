@@ -1,0 +1,25 @@
+\begin{table}[htbp]
+\centering
+\caption{TN1 -- PSO gốc và các phiên bản cải tiến làm bộ khởi tạo tâm cho FCM (20 hạt, 30 vòng, 30 seed)}
+\label{tab:e5-tong-hop}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+& \multicolumn{3}{c}{Việt Nam, c~=~3} & \multicolumn{3}{c}{Taiwan Default, c~=~3} & \multicolumn{3}{c}{Taiwan Default (không log), c~=~6} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+Phương pháp & \begin{tabular}[b]{@{}c@{}}Đạt\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Lệch\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Thời gian\\(s)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Đạt\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Lệch\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Thời gian\\(s)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Đạt\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Lệch\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Thời gian\\(s)\end{tabular} \\
+\midrule
+FCM (U ngẫu nhiên) & 100 & -- & 0,98 & 100 & -- & 0,06 & 57 & -- & 0,50 \\
+FCM (điểm ngẫu nhiên) & 100 & 55,5 & 0,81 & 100 & 63,1 & 0,04 & 100 & 48,4 & 0,15 \\
+FCM (k-means++) & 100 & -- & 0,88 & 100 & -- & 0,04 & 100 & -- & 0,14 \\
+\midrule
+PSO gốc (1995) & 100 & 17,6 & 1,65 & 100 & 23,2 & 0,97 & 93 & 21,3 & 1,61 \\
+PSO-W (1998) & 100 & 10,0 & 1,48 & 100 & 13,8 & 1,30 & 100 & 17,9 & 1,85 \\
+PSO-S (2022) & 100 & 13,6 & 0,94 & 100 & 17,7 & 0,80 & 100 & 20,1 & 1,64 \\
+PSO-LOG (2022) & 100 & 11,8 & 1,32 & 100 & 16,2 & 0,74 & 97 & 19,1 & 1,55 \\
+QPSO (2004) & 100 & 9,9 & 1,36 & 100 & 13,9 & 0,82 & 83 & 12,7 & 1,57 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Đạt: tỉ lệ lượt đạt J tốt nhất sau khi FCM chạy tới hội tụ; lệch: J\textsubscript{m} của bộ tâm đưa vào FCM (gbest của PSO, hoặc c điểm ngẫu nhiên) so với J\textsubscript{m} tốt nhất (\%), trung vị; thời gian gồm PSO và FCM, trung vị. Bầy PSO khởi tạo bằng điểm dữ liệu ngẫu nhiên, chạy đủ số vòng, c\textsubscript{1} = c\textsubscript{2} = 2 (trừ QPSO).}
+\end{table}

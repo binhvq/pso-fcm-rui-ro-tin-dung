@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{TN1 -- chỉ số sau khi FCM hội tụ: FCM (k-means++) và mức chênh của các phương pháp còn lại}
+\label{tab:e5-chi-so}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+& \multicolumn{3}{c}{FCM (k-means++)} & \multicolumn{3}{c}{Chênh lớn nhất theo seed} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Cấu hình & PC & Silhouette & AUC & PC & AUC & Silhouette & XB (khoảng) \\
+\midrule
+Việt Nam, c = 3 & 0,373 & 0,080 & 0,840 & 8,14·10\textsuperscript{−6} & 8,88·10\textsuperscript{−6} & 0,001 & 3.677,89 -- 4.664,12 \\
+Taiwan, c = 3 & 0,395 & 0,129 & 0,434 & 4,68·10\textsuperscript{−6} & 7,66·10\textsuperscript{−6} & 0,018 & 1,57·10\textsuperscript{9} -- 6,98·10\textsuperscript{9} \\
+Taiwan chưa log, c = 6 & 0,196 & 0,054 & 0,545 & 3,15·10\textsuperscript{−6} & 2,74·10\textsuperscript{−5} & 0,116 & 3,33·10\textsuperscript{12} -- 3,60·10\textsuperscript{14} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: PC, Silhouette, AUC: trung vị 30 seed của FCM (k-means++); chênh lớn nhất: |hiệu| lớn nhất theo từng seed giữa một phương pháp bất kỳ (3 đối chứng, 45 tổ hợp PSO) và FCM (k-means++), chỉ trên các lượt cùng nghiệm; XB: khoảng trung vị của 8 phương pháp (3 đối chứng, 5 phiên bản PSO với 20 hạt, 30 vòng); XB không ổn định khi 2 tâm gần trùng, xem mục~\ref{sec:e5-chi-so}.}
+\end{table}

@@ -1,0 +1,8 @@
+Bỏ 0 cột không phải số: []
+american_bankruptcy_dataset.csv: 5000 dòng × 18 thuộc tính số; nhãn dương 6.6%
+ c  so_muc_J  u_ngau_nhien_dat  diem_ngau_nhien_dat  kmeans_pp_dat  pso_w_dat  sup_%  pc_tv  cum_nho_tv_%  auc_tv
+ 2         1               100                  100            100        100      0  0.555          48.5   0.528
+ 3         1               100                  100            100        100      0  0.372          24.6   0.513
+ 4         1               100                  100            100        100      0  0.278          18.5   0.521
+ 5         1               100                  100            100        100      0  0.223           9.5   0.508
+ 6         1               100                  100            100        100      0  0.186           5.8   0.530

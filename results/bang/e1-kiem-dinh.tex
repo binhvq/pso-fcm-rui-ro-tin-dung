@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+\centering
+\caption{E1 -- AUC tách rủi ro so với FCM (k-means++): trung vị hiệu theo cặp seed và p Holm}
+\label{tab:e1-kiem-dinh}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+& \multicolumn{3}{c}{Taiwan Default} & \multicolumn{3}{c}{Việt Nam} \\
+Phương pháp & c = 2 & c = 3 & c = 4 & c = 2 & c = 3 & c = 4 \\
+\midrule
+K-means & \begin{tabular}[c]{@{}c@{}}0,053$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,230$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,228$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,059$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,013$^{*}$\\{\tiny p = 6,06·10\textsuperscript{−5}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,121$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} \\
+FCM & trùng & trùng & trùng & trùng & trùng & trùng \\
+A (ω L) & \begin{tabular}[c]{@{}c@{}}0,014$^{*}$\\{\tiny p = 0,009}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,116$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,140$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,042$^{*}$\\{\tiny p = 3,23·10\textsuperscript{−4}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,037$^{*}$\\{\tiny p = 0,005}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,063$^{*}$\\{\tiny p = 1,83·10\textsuperscript{−4}}\end{tabular} \\
+A (ω S) & \begin{tabular}[c]{@{}c@{}}0,019$^{*}$\\{\tiny p = 0,002}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,107$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,123$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,037$^{*}$\\{\tiny p = 3,08·10\textsuperscript{−4}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,030$^{*}$\\{\tiny p = 0,006}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,044$^{*}$\\{\tiny p = 2,91·10\textsuperscript{−4}}\end{tabular} \\
+A (ω LOG) & \begin{tabular}[c]{@{}c@{}}0,004$^{*}$\\{\tiny p = 0,041}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,077$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,146$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,027$^{*}$\\{\tiny p = 0,003}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,022$^{*}$\\{\tiny p = 0,009}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,041$^{*}$\\{\tiny p = 3,58·10\textsuperscript{−5}}\end{tabular} \\
+B: QPSO–FCM & trùng & trùng & trùng & trùng & trùng & trùng \\
+Đề xuất & trùng & trùng & trùng & trùng & trùng & trùng \\
+C: MSGWO–WFCM & \begin{tabular}[c]{@{}c@{}}0,123$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,163$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,209$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}0,095$^{*}$\\{\tiny p = 0,006}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,246$^{*}$\\{\tiny p = 3,58·10\textsuperscript{−5}}\end{tabular} & \begin{tabular}[c]{@{}c@{}}−0,087$^{*}$\\{\tiny p = 1,12·10\textsuperscript{−7}}\end{tabular} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Wilcoxon theo cặp seed; với phương pháp cùng hàm mục tiêu J\textsubscript{m}, cặp seed có J\textsubscript{m} lệch tương đối $\le 10^{-4}$ (cùng nghiệm) tính hiệu bằng 0; hiệu chỉnh Holm trên toàn họ phép so AUC của E1 đã chốt trước (60 phép so có p, gồm cả các phương pháp phụ không in trong bảng); $^{*}$: p Holm $<$ 0,05; ``trùng'': mọi hiệu bằng 0, không tính p. Quy tắc làm rõ sau khi chạy; theo nguyên văn (so 0 tuyệt đối): 2 trùng, 61 khác biệt trên 94 phép so có p. Holm trên đủ 96 phép so (trùng tính p = 1): 55 khác biệt; đổi kết luận ở A (ω L) Taiwan Default c = 2, A (ω LOG) Taiwan Default c = 2, A (ω LOG) Việt Nam c = 3.}
+\end{table}

@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\centering
+\caption{TN3 -- số cấu hình PSO tìm trọng số tốt hơn / không khác / kém hơn từng đối chứng}
+\label{tab:e8-tong-hop}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+PSO so với & FCM & WFCM giải tích & Ngẫu nhiên \\
+\midrule
+AUC phân hoạch & 7 / 9 / 5 & 4 / 13 / 4 & 2 / 18 / 1 \\
+Chênh tỉ lệ vỡ nợ & 5 / 12 / 4 & 4 / 14 / 3 & 4 / 16 / 1 \\
+Silhouette & 15 / 4 / 2 & 15 / 3 / 3 & 12 / 9 / 0 \\
+\midrule
+Thời gian trung vị (giây) & 0,05 & 0,24 & 39,87 \\
+Thời gian PSO (giây) & \multicolumn{3}{c}{29,2} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: 21 cấu hình (7 bộ × 3 số cụm), Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$. Silhouette là fitness của PSO nên chỉ là chỉ số phụ.}
+\end{table}

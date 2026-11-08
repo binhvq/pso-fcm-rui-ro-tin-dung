@@ -1,0 +1,27 @@
+\begin{table}[htbp]
+\centering
+\caption{TN4 -- Chênh tỉ lệ vỡ nợ của 5 phiên bản PSO khi tìm trọng số thuộc tính}
+\label{tab:e9-chenh}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lllrrrrrrr@{}}
+\toprule
+Bộ dữ liệu & c & Ngân sách & FCM & NN & Gốc & W & S & LOG & QPSO \\
+\midrule
+Việt Nam & 2 & 500 & 0,284 & 0,356 & 0,436\textsuperscript{+} & 0,438\textsuperscript{+} & 0,425\textsuperscript{+} & \textbf{0,447\textsuperscript{+}} & 0,442\textsuperscript{+} \\
+ &  & 1.000 &  & 0,363 & 0,447\textsuperscript{+} & 0,438\textsuperscript{+} & 0,446\textsuperscript{+} & 0,441\textsuperscript{+} & \textbf{0,456\textsuperscript{+}} \\
+ & 3 & 500 & 0,341 & 0,415 & 0,460\textsuperscript{+} & 0,465\textsuperscript{+} & 0,467\textsuperscript{+} & \textbf{0,468\textsuperscript{+}} & 0,462\textsuperscript{+} \\
+ &  & 1.000 &  & 0,415 & 0,473\textsuperscript{+} & 0,471\textsuperscript{+} & \textbf{0,475\textsuperscript{+}} & 0,470\textsuperscript{+} & 0,474\textsuperscript{+} \\
+ & 4 & 500 & 0,420 & 0,498 & 0,541\textsuperscript{+} & \textbf{0,557} & 0,544 & 0,536 & 0,552\textsuperscript{+} \\
+ &  & 1.000 &  & 0,507 & 0,553\textsuperscript{+} & 0,549\textsuperscript{+} & 0,567\textsuperscript{+} & 0,559\textsuperscript{+} & \textbf{0,572\textsuperscript{+}} \\
+\midrule
+Taiwan Default & 2 & 500 & 0,036 & 0,009 & 0,031\textsuperscript{+} & \textbf{0,033\textsuperscript{+}} & 0,026\textsuperscript{+} & 0,030\textsuperscript{+} & 0,032\textsuperscript{+} \\
+ &  & 1.000 &  & 0,010 & 0,031\textsuperscript{+} & \textbf{0,032\textsuperscript{+}} & 0,031\textsuperscript{+} & \textbf{0,032\textsuperscript{+}} & \textbf{0,032\textsuperscript{+}} \\
+ & 3 & 500 & 0,155 & 0,238 & 0,261 & \textbf{0,261} & 0,258 & 0,257 & \textbf{0,261} \\
+ &  & 1.000 &  & 0,241 & 0,270\textsuperscript{+} & 0,272\textsuperscript{+} & 0,271\textsuperscript{+} & \textbf{0,274\textsuperscript{+}} & 0,257 \\
+ & 4 & 500 & 0,168 & 0,266 & 0,302 & 0,315 & 0,299 & 0,274 & \textbf{0,345\textsuperscript{+}} \\
+ &  & 1.000 &  & 0,277 & 0,287 & 0,283 & 0,319 & 0,282 & \textbf{0,358} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Trung vị 30 seed, m = 2; ngân sách là số lần tính fitness (10 hạt với 500, 20 hạt với 1.000). NN: tìm ngẫu nhiên cùng ngân sách. Đậm: cao nhất trong các phương pháp tìm kiếm cùng ngân sách. \textsuperscript{+} / \textsuperscript{--}: tốt hơn / kém hơn NN có ý nghĩa; \textsuperscript{*} / \textsuperscript{\dag}: tốt hơn / kém hơn PSO gốc có ý nghĩa (Wilcoxon theo cặp seed, Holm toàn họ, $\alpha = 0{,}05$).}
+\end{table}

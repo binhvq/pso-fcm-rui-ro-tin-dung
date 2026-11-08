@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+\centering
+\caption{TN3 -- K-means không trọng số làm mốc tham chiếu trên 2 bộ chính}
+\label{tab:e8-kmeans}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+& & \multicolumn{3}{c}{AUC phân hoạch} & \multicolumn{3}{c}{Chênh tỉ lệ vỡ nợ} \\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+Bộ dữ liệu & c & FCM & K-means & PSO & FCM & K-means & PSO \\
+\midrule
+Việt Nam & 2 & 0,799 & 0,843 & 0,850\textsuperscript{+} & 0,284 & 0,373 & 0,438\textsuperscript{+} \\
+ & 3 & 0,834 & 0,879 & 0,844\textsuperscript{--} & 0,341 & 0,563 & 0,465\textsuperscript{--} \\
+ & 4 & 0,863 & 0,882 & 0,876\textsuperscript{--} & 0,420 & 0,842 & 0,557\textsuperscript{--} \\
+\midrule
+Taiwan Default & 2 & 0,523 & 0,504 & 0,517\textsuperscript{+} & 0,036 & 0,007 & 0,033\textsuperscript{+} \\
+ & 3 & 0,601 & 0,699 & 0,664 & 0,155 & 0,385 & 0,261 \\
+ & 4 & 0,526 & 0,684 & 0,645 & 0,168 & 0,446 & 0,315\textsuperscript{--} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: Trung vị 30 seed, cùng seed và tiền xử lý với Bảng~\ref{tab:e8-ket-qua}. FCM: FCM k-means++, m = 2; PSO: FCM với trọng số do PSO tìm. Dấu \textsuperscript{+} / \textsuperscript{--}: PSO tốt hơn / kém hơn K-means có ý nghĩa (Wilcoxon theo cặp seed, Holm trên 42 phép so với K-means ở 7 bộ, $\alpha = 0{,}05$).}
+\end{table}

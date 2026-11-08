@@ -1,0 +1,43 @@
+# Phụ thuộc Node của script sinh slide
+node_modules/
+
+# Bytecode và cache Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# File phụ do XeLaTeX/Biber sinh ra (giữ lại build/main.pdf)
+*.aux
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.toc
+*.xdv
+*.synctex.gz
+
+# Tài liệu làm việc nội bộ, không thuộc bài nộp
+.claude/
+plans/
+slide/qa/
+noi-dung/phu-luc-a-phieu-doc.tex
+
+# Font thương mại (Times New Roman, Courier New): tự chép vào fonts/ trước khi biên dịch
+fonts/
+
+# Dữ liệu doanh nghiệp Việt Nam: tác giả không cho phân phối lại, tải từ nguồn gốc
+data/raw/vn-financial-distress-listed-firms/
+code/mau_kiem_thu/
+
+# Bộ dữ liệu không dùng trong kết quả chính hoặc giấy phép chưa rõ
+data/raw/american-bankruptcy/
+data/raw/credit-approval-crx/
+data/raw/fico-heloc/
+data/raw/give-me-some-credit/
+data/raw/hmeq/
+data/raw/lending-club-openml/

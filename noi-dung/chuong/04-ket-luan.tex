@@ -1,0 +1,70 @@
+% ============================================================
+% 04-ket-luan.tex — Kết luận và hướng phát triển (Bình)
+% Số liệu dùng macro \soLieu... (results/so-lieu*.tex). Bốn câu hỏi CH1–CH4 khớp Mở đầu và Tiểu kết Chương 1.
+% ============================================================
+\chapter*{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}
+\addcontentsline{toc}{chapter}{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}
+
+\section*{Kết quả đạt được}
+
+Tiểu luận đi theo 2 giai đoạn. Nhóm bắt đầu bằng cách ghép phổ biến, dùng PSO tìm tâm khởi tạo cho FCM, và thấy cách này
+không cải thiện FCM trên dữ liệu tín dụng, đúng như các so sánh độc lập trong tài liệu. Nhóm chuyển sang dùng PSO tìm trọng số
+thuộc tính cho FCM, đề xuất 3 lựa chọn thiết kế cho bài toán này, so 5 phiên bản PSO và kiểm trọng số trên mẫu độc lập.
+Câu trả lời cho 4 câu hỏi nghiên cứu, với số liệu ở Bảng~\ref{tab:ch3-tong-ket}, như sau.
+
+\emph{CH1 (hướng ban đầu).} PSO tìm tâm khởi tạo không giúp FCM: các bản cải tiến tối ưu tốt hơn PSO gốc, nhưng sau khi FCM
+chạy, mọi phiên bản cho cùng nghiệm với FCM khởi tạo k-means++ mà chậm hơn (khoảng 1,7 lần trên Việt Nam, 24 lần trên Taiwan Default). Nguyên nhân là hàm mục tiêu trên dữ liệu
+đã thử hầu như chỉ có 1 cực tiểu, nên PSO và FCM làm giảm cùng một hàm. Các bài báo PSO--FCM báo kết quả tốt hơn chủ yếu vì
+so với FCM khởi tạo ngẫu nhiên và không cùng ngân sách.
+
+\emph{CH2 (đề xuất).} PSO tìm trọng số làm các phân khúc tách rủi ro tốt hơn FCM thường có ý nghĩa trên 2 bộ chính (Việt Nam
+ở mọi số cụm, Taiwan Default với 3 và 4 cụm); với 2 cụm trên Việt Nam, chênh tỉ lệ vỡ nợ giữa các cụm tăng từ
+\soLieuETamVietNamCHaiFcmKppChenhTiLe{} lên \soLieuETamVietNamCHaiPsoTrongSoChenhTiLe. So với tìm ngẫu nhiên cùng ngân sách, PSO
+tối ưu fitness tốt hơn ở đa số cấu hình, nhưng chỉ tách rủi ro tốt hơn ở vài cấu hình, chủ yếu trên Việt Nam; trọng số tính bằng công thức không thay được PSO trên Taiwan Default.
+Lợi ích này đo so với FCM $m = 2$: với ba, 4 cụm, K-means không trọng số vẫn tách rủi ro tốt hơn trên Việt Nam (và theo
+chênh tỉ lệ vỡ nợ trên Taiwan Default với 4 cụm), nên FCM có trọng số chỉ đáng dùng khi cần độ thuộc. Trọng số tìm
+được có nghĩa kinh tế: lịch sử trả nợ trên Taiwan Default, định giá và đòn bẩy trên Việt Nam.
+
+\emph{CH3 (so sánh các phiên bản).} Cả 5 phiên bản đều hơn tìm ngẫu nhiên cùng ngân sách, nhưng không bản cải tiến nào hơn
+PSO gốc, ngược với vai trò tìm tâm. Trong vai trò tìm trọng số, không phát hiện khác biệt giữa các phiên bản sau hiệu chỉnh Holm, nên
+chọn phiên bản nào không phải yếu tố quyết định.
+
+\emph{CH4 (kiểm chứng và giới hạn).} Trọng số học trên một mẫu vẫn cải thiện phân khúc trên mẫu kia so với FCM thường; theo chênh tỉ lệ
+vỡ nợ, kết quả không khác học ngay trên mẫu đó ở \soLieuEMuoiChenhTiLePsoTaiChoBang{} trên \soLieuEMuoiSoCauHinh{} cấu hình, còn theo AUC
+kém hơn ở \soLieuEMuoiAucCungPsoTaiChoKem{} cấu hình. Lợi ích không phổ quát: trên các bộ mà FCM thường đã gần sụp và với 2 cụm (kể cả Taiwan Default, mức chênh
+nhỏ), PSO không có ích hoặc kém hơn, vì fitness không dùng nhãn.
+
+Về thực hành, khi phân khúc khách hàng tín dụng bằng FCM, không nên dùng PSO tìm tâm: khởi tạo k-means++ là đủ, và nên chẩn
+đoán số cực tiểu trước khi nghĩ tới PSO cho tâm. Nên dùng PSO để tìm trọng số thuộc tính theo đề xuất, và chỉ áp trọng số
+khi nó cải thiện phân khúc trên một mẫu có nhãn lịch sử không dùng để tìm trọng số (mục~\ref{sec:de-xuat}).
+
+\section*{Hạn chế}
+
+\begin{itemize}
+  \item Phần trọng số dùng một fitness (Silhouette trên không gian gốc, phạt cụm dưới 5\%), một số mũ $m = 2$ và $c$ từ 2 đến
+  4; với $m = 2$ trên Taiwan Default, độ thuộc vẫn chia gần đều ngay cả khi phân hoạch cứng đã tách rủi ro tốt hơn.
+  \item Hai chỉ số chính dùng nhãn để đánh giá và tính trên chính mẫu được phân cụm; TN5 kiểm trên mẫu độc lập nhưng chỉ cho
+  2 bộ chính. Bộ Việt Nam gồm các quan sát doanh nghiệp--năm không độc lập; 2 nửa được chia theo doanh nghiệp để giảm ảnh
+  hưởng này.
+  \item Đối chứng chính là FCM với $m = 2$, vốn gần suy biến khi có từ 3 cụm; K-means không trọng số được thêm làm mốc tham
+  chiếu và tách rủi ro tốt hơn ở các cấu hình này. Chưa thử PSO tìm trọng số cho K-means hay cho FCM với $m$ nhỏ hơn.
+  \item Kiểm định lấy seed làm đơn vị, nên chỉ đo dao động của thuật toán trên mẫu đã cho, không đo dao động do lấy mẫu khách
+  hàng. Nhãn của bộ Việt Nam được định nghĩa từ chính các đại lượng tài chính có trong thuộc tính (vốn chủ sở hữu, EBITDA, lãi
+  vay) và gán theo doanh nghiệp, nên mức tách rủi ro trên bộ này có thể cao hơn khi dự báo thật.
+  \item Chỉ có 2 bộ dữ liệu chính, trong đó bộ Việt Nam và cả 2 mẫu Taiwan Default đã được dùng ở các thí nghiệm thử; 5 bộ phụ cho thấy kết quả không khái quát
+  được cho mọi dữ liệu tín dụng.
+  \item Silhouette của fitness tính trên mẫu 1.000 điểm nên có nhiễu mẫu; ngân sách 500 và 1.000 lần tính fitness nhỏ so với
+  các bài đã đọc, và các phiên bản dùng chung tham số thay vì tham số riêng của từng bài.
+  \item Phần tìm tâm dùng $m = 2$, $c = 3$ trong thí nghiệm chính, một chế độ gần suy biến; kiểm lại với $m = 1{,}5$ cho cùng
+  kết luận nhưng chỉ trên 2 bộ dữ liệu. ``Số cực tiểu'' là số mức $J_m$ quan sát được, không phải số cực tiểu thật.
+  \item Thời gian được đo khi nhiều tiến trình chạy song song và máy còn chạy việc khác, nên chỉ chênh lệch nhiều lần là đáng
+  tin.
+  \item Danh sách thuộc tính gần trùng của bộ Việt Nam được chọn thủ công và bỏ sót X10 (tương quan 0,966 với X8).
+\end{itemize}
+
+\section*{Hướng phát triển}
+
+Ba hướng tiếp nối trực tiếp phần trọng số: tìm trọng số cùng lúc với $m$ và $c$ thay vì cố định chúng, thử các fitness khác
+Silhouette (chẳng hạn chỉ số mờ như XB khi các tâm tách rõ), và cho phép trọng số riêng cho từng cụm như WFCM của bài
+06~\cite{liu2021msgwo}. Hai hướng khác là xử lý dữ liệu hỗn hợp số và định danh để FCM không sụp trên các bộ tín dụng cá nhân,
+và dùng các phân khúc có trọng số làm đầu vào cho mô hình chấm điểm theo cụm như Bosker và cộng sự~\cite{bosker2025clustered}.

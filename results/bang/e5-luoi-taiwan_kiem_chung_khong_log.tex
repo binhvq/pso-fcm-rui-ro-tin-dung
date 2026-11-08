@@ -1,0 +1,24 @@
+\begin{table}[htbp]
+\centering
+\caption{TN1 -- tỉ lệ đạt J tốt nhất (\%) theo số hạt và số vòng trên Taiwan Default (không log), c~=~6}
+\label{tab:e5-luoi-taiwan_kiem_chung_khong_log}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+& \multicolumn{3}{c}{10 hạt} & \multicolumn{3}{c}{20 hạt} & \multicolumn{3}{c}{30 hạt} \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+Phiên bản & T = 20 & T = 30 & T = 50 & T = 20 & T = 30 & T = 50 & T = 20 & T = 30 & T = 50 \\
+\midrule
+PSO gốc (1995) & 90 & 90 & 90 & 93 & 93 & 93 & 90 & 90 & 90 \\
+PSO-W (1998) & 87 & 93 & 90 & 97 & 100 & 93 & 100 & 97 & 97 \\
+PSO-S (2022) & 100 & 90 & 93 & 90 & 100 & 90 & 97 & 90 & 90 \\
+PSO-LOG (2022) & 87 & 87 & 90 & 100 & 97 & 90 & 97 & 77 & 93 \\
+QPSO (2004) & 97 & 97 & 90 & 93 & 83 & 87 & 93 & 77 & 87 \\
+\multicolumn{10}{@{}l}{\textit{Đối chứng FCM (U ngẫu nhiên): 57\%}} \\
+\multicolumn{10}{@{}l}{\textit{Đối chứng FCM (điểm ngẫu nhiên): 100\%}} \\
+\multicolumn{10}{@{}l}{\textit{Đối chứng FCM (k-means++): 100\%}} \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: 30 seed mỗi ô; T: số vòng PSO trước khi FCM chạy tới hội tụ.}
+\end{table}

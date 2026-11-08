@@ -1,0 +1,22 @@
+\begin{table}[htbp]
+\centering
+\caption{Hồ sơ các bộ dữ liệu sau tiền xử lý}
+\label{tab:mo-ta-du-lieu}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+Bộ dữ liệu & $n$ & $D$ & \begin{tabular}[b]{@{}c@{}}Nhãn 1\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Mất\\cân bằng\end{tabular} & \begin{tabular}[b]{@{}c@{}}Bất\\đối xứng\end{tabular} & \begin{tabular}[b]{@{}c@{}}Nhọn\\dư\end{tabular} & \begin{tabular}[b]{@{}c@{}}Ngoại lai\\(\%)\end{tabular} & \begin{tabular}[b]{@{}c@{}}Cặp\\$|r|>0{,}9$\end{tabular} & $D_{90\%}$ \\
+\midrule
+Việt Nam & 3.277 & 21 & 13,3 & 6,5 & 1,11 & 0,6 & 15,4 & 6 & 10 \\
+Taiwan Default & 5.000 & 23 & 22,1 & 3,5 & 0,89 & 0,0 & 5,9 & 0 & 13 \\
+Taiwan Default (không log) & 5.000 & 23 & 22,1 & 3,5 & 2,52 & 7,8 & 12,9 & 7 & 13 \\
+South German Credit & 1.000 & 20 & 30,0 & 2,3 & 0,77 & 0,5 & 12,8 & 0 & 16 \\
+German Credit (bản số) & 1.000 & 24 & 30,0 & 2,3 & 1,17 & 0,4 & 17,9 & 0 & 18 \\
+Australian Credit & 690 & 14 & 55,5 & 0,8 & 1,15 & 0,5 & 15,9 & 0 & 12 \\
+Polish Bankruptcy & 5.000 & 64 & 4,7 & 20,2 & 1,68 & 17,2 & 24,3 & 29 & 20 \\
+Taiwan Bankruptcy & 5.000 & 94 & 3,2 & 30,0 & 6,63 & 233,9 & 26,0 & 39 & 42 \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: mất cân bằng: số quan sát nhãn 0 trên số quan sát nhãn 1; bất đối xứng, nhọn dư: trung vị $|$hệ số bất đối xứng$|$ và độ nhọn dư các thuộc tính sau tiền xử lý; ngoại lai: tỉ lệ điểm có ít nhất một thuộc tính $|z|>3$; $D_{90\%}$: số thành phần chính giữ 90\% phương sai.}
+\end{table}

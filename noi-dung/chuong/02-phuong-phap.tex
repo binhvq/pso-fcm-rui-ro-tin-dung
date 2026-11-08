@@ -1,0 +1,594 @@
+% 02-phuong-phap.tex — Chương 2: FCM, PSO và các phiên bản, chỉ số đánh giá, PSO tìm tâm (hướng ban đầu), trọng số
+% thuộc tính trong FCM, đề xuất PSO tìm trọng số thuộc tính. Tham số đúng theo code/*.py; không có số liệu kết quả.
+\chapter{FUZZY C-MEANS, PSO VÀ ĐỀ XUẤT PSO TÌM TRỌNG SỐ THUỘC TÍNH}
+\label{chap:phuong-phap}
+
+Chương này có 2 phần. Phần nền gồm các thuật toán và thước đo dùng chung cho cả 2 giai đoạn nghiên cứu:
+Fuzzy C-Means (FCM) và lý do kết quả của FCM có thể phụ thuộc khởi tạo (mục~\ref{sec:fcm}), thuật toán tối ưu bầy đàn
+(Particle Swarm Optimization, PSO) ở dạng gốc của Kennedy và Eberhart~\cite{kennedy1995pso} (mục~\ref{sec:pso-goc}), 4
+phiên bản cải tiến lấy từ các bài đã đọc (mục~\ref{sec:pso-cai-tien}) và các chỉ số đánh giá (mục~\ref{sec:chi-so}). Phần
+sau đi theo thứ tự nhóm thực hiện: mục~\ref{sec:pso-khoi-tao} là hướng thử đầu tiên, dùng PSO tìm tâm khởi tạo cho FCM; khi
+hướng này không cải thiện FCM trên dữ liệu tín dụng, nhóm chuyển sang trọng số thuộc tính. Mục~\ref{sec:trong-so-fcm} chỉ ra
+vì sao FCM không tự chọn được trọng số và giới hạn của cách tính trọng số bằng công thức; mục~\ref{sec:de-xuat} là đề xuất cải
+tiến của nhóm, dùng PSO tìm trọng số thuộc tính cho FCM.
+
+Các thuật toán trong tiểu luận không độc lập với nhau (Bảng~\ref{tab:ch2-ban-do}). Mọi phương pháp đều là FCM, chỉ khác ở
+hai chỗ có thể thay: \emph{tâm khởi tạo} và \emph{trọng số thuộc tính}. PSO là một bộ tìm kiếm duy nhất, lắp vào một trong hai
+chỗ đó; 5 phiên bản PSO dùng chung một khung và chỉ khác nhau ở quy tắc di chuyển hạt. Một thí nghiệm vì vậy được xác định
+bằng 3 lựa chọn: cách khởi tạo tâm, cách đặt trọng số và, nếu có PSO, phiên bản PSO.
+
+\begin{table}[htbp]
+\centering
+\caption{Bản đồ các thuật toán: một lõi FCM, hai chỗ thay và một bộ tìm kiếm PSO}
+\label{tab:ch2-ban-do}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{7.0cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+Khối & Các lựa chọn & Mục & Tệp mã \\
+\midrule
+Lõi: FCM & Lặp cập nhật độ thuộc $U$ và tâm $V$ tới hội tụ; mọi phương pháp kết thúc bằng khối này &
+\ref{sec:fcm} & \texttt{fcm.py} \\
+\addlinespace
+Chỗ thay 1: tâm khởi tạo & $U$ ngẫu nhiên; $c$ điểm ngẫu nhiên; k-means++; \textbf{PSO} (hạt là một bộ tâm, fitness $R_m$) &
+\ref{sec:pso-khoi-tao} & \texttt{pso\_khoi\_tao.py} \\
+\addlinespace
+Chỗ thay 2: trọng số thuộc tính & $\symbf{\lambda} = \mathbf{1}$ (FCM thường); WFCM giải tích; tìm ngẫu nhiên; \textbf{PSO} (hạt là
+vector $\symbf{\lambda}$, fitness Silhouette cộng phạt; đề xuất của nhóm) & \ref{sec:trong-so-fcm}, \ref{sec:de-xuat} &
+\texttt{cach\_ket\_hop.py}, \texttt{pso\_trong\_so.py} \\
+\addlinespace
+Bộ tìm kiếm PSO & Một vòng lặp chung. PSO gốc, PSO-W, PSO-S, PSO-LOG chỉ khác hàm quán tính $\omega(t)$; QPSO thay cập nhật vận
+tốc bằng lấy mẫu quanh điểm hút & \ref{sec:pso-goc}, \ref{sec:pso-cai-tien} & \texttt{pso\_co\_so.py}, \texttt{thuat\_toan\_a.py},
+\texttt{thuat\_toan\_b.py} \\
+\addlinespace
+Đánh giá & Chính: $\Delta r$, AUC phân hoạch; phụ: Silhouette, PC, PE, XB, thời gian; so sánh bằng Wilcoxon kèm Holm &
+\ref{sec:chi-so}, \ref{sec:kiem-dinh} & \texttt{danh\_gia.py}, \texttt{chi\_so\_danh\_gia.py}, \texttt{phan\_tich.py} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Trong toàn chương, dữ liệu là tập $X = \{\mathbf{x}_1, \dots, \mathbf{x}_n\} \subset \mathbb{R}^D$ đã qua tiền xử lý
+(mục~\ref{sec:tien-xu-ly}), $c$ là số cụm, $U = [u_{ik}]$ là ma trận độ thuộc kích thước $n \times c$ và
+$V = [\mathbf{v}_1, \dots, \mathbf{v}_c]^{\top}$ là ma trận tâm cụm kích thước $c \times D$. Khoảng cách là khoảng cách
+Euclid, $d_{ik} = \lVert \mathbf{x}_i - \mathbf{v}_k \rVert$.
+
+% ------------------------------------------------------------
+\section{Thuật toán Fuzzy C-Means}
+\label{sec:fcm}
+
+\subsection{Hàm mục tiêu và điều kiện tối ưu}
+
+FCM~\cite{bezdek1981pattern,bezdek1984fcm} cho mỗi điểm thuộc về mọi cụm với mức độ trong $[0, 1]$, tổng bằng một, và tìm
+$(U, V)$ cực tiểu hoá
+\begin{equation}
+  J_m(U, V) = \sum_{i=1}^{n} \sum_{k=1}^{c} u_{ik}^{m} \, d_{ik}^{2},
+  \label{eq:fcm-j}
+\end{equation}
+với ràng buộc
+\begin{equation}
+  u_{ik} \in [0, 1], \qquad \sum_{k=1}^{c} u_{ik} = 1 \;\; (i = 1, \dots, n), \qquad
+  0 < \sum_{i=1}^{n} u_{ik} < n \;\; (k = 1, \dots, c).
+  \label{eq:fcm-rang-buoc}
+\end{equation}
+Số mũ $m > 1$ điều khiển độ mờ: khi $m \to 1$, FCM tiến về k-means cứng; khi $m$ tăng, độ thuộc tiến về $1/c$. Dùng nhân
+tử Lagrange cho ràng buộc tổng, điều kiện cần để $(U, V)$ là điểm dừng của~\eqref{eq:fcm-j} là~\cite{bezdek1981pattern}
+\begin{align}
+  \mathbf{v}_k &= \frac{\sum_{i=1}^{n} u_{ik}^{m} \mathbf{x}_i}{\sum_{i=1}^{n} u_{ik}^{m}}, \label{eq:fcm-v}\\[2pt]
+  u_{ik} &= \left[ \sum_{l=1}^{c} \left( \frac{d_{ik}}{d_{il}} \right)^{2/(m-1)} \right]^{-1}. \label{eq:fcm-u}
+\end{align}
+Khi $d_{ik} = 0$, mã nguồn thay khoảng cách bằng một số dương rất nhỏ để tránh chia cho không.
+
+FCM luân phiên tính $V$ theo~\eqref{eq:fcm-v} và $U$ theo~\eqref{eq:fcm-u} tới khi thay đổi đủ nhỏ
+(Thuật toán~\ref{alg:fcm}, \texttt{fcm.py}). Khi khởi động từ một bộ tâm (c điểm dữ liệu, k-means++~\cite{arthur2007kmeanspp} hoặc gbest của PSO),
+FCM cập nhật $U$ trước và dừng theo thay đổi của tâm. Mọi cách khởi tạo bằng tâm trong tiểu luận (điểm ngẫu nhiên,
+k-means++, gbest của PSO) kết thúc bằng cùng một FCM với cùng tiêu chuẩn dừng, nên chúng chỉ khác nhau ở điểm xuất phát.
+Riêng đối chứng FCM khởi tạo $U$ ngẫu nhiên dừng theo thay đổi của $U$, đúng dạng gốc.
+
+\begin{algorithm}[htbp]
+\caption{Fuzzy C-Means (bản cài đặt trong \texttt{fcm.py})}
+\label{alg:fcm}
+\begin{algorithmic}[1]
+\REQUIRE Dữ liệu $X$, số cụm $c$, số mũ $m = 2$, ngưỡng $\varepsilon = 10^{-5}$, số vòng tối đa $I_{\max} = 10.000$,
+  tâm ban đầu $V^{(0)}$ (tuỳ chọn)
+\ENSURE Ma trận độ thuộc $U$, tâm cụm $V$
+\IF{không có $V^{(0)}$}
+  \STATE Khởi tạo $U^{(0)}$ ngẫu nhiên, chuẩn hoá mỗi hàng về tổng bằng 1
+\ENDIF
+\FOR{$t = 0, 1, \dots, I_{\max} - 1$}
+  \IF{khởi động từ $U$}
+    \STATE $V^{(t+1)} \leftarrow$ \eqref{eq:fcm-v} từ $U^{(t)}$; \quad $U^{(t+1)} \leftarrow$ \eqref{eq:fcm-u} từ $V^{(t+1)}$
+    \STATE \textbf{nếu} $\max |U^{(t+1)} - U^{(t)}| < \varepsilon$ \textbf{thì} dừng
+  \ELSE
+    \STATE $U^{(t+1)} \leftarrow$ \eqref{eq:fcm-u} từ $V^{(t)}$; \quad $V^{(t+1)} \leftarrow$ \eqref{eq:fcm-v} từ $U^{(t+1)}$
+    \STATE \textbf{nếu} $\max |V^{(t+1)} - V^{(t)}| < \varepsilon$ \textbf{thì} dừng
+  \ENDIF
+\ENDFOR
+\RETURN $U, V$ ở vòng cuối
+\end{algorithmic}
+\end{algorithm}
+\subsection{Hàm rút gọn, hội tụ và vai trò của khởi tạo}
+\label{sec:fcm-khoi-tao}
+
+Với $V$ cố định, \eqref{eq:fcm-u} cho đúng ma trận $U$ làm $J_m$ nhỏ nhất. Thay~\eqref{eq:fcm-u} vào~\eqref{eq:fcm-j},
+Hathaway và Bezdek~\cite{hathaway1995reformulation} đưa $J_m$ về một hàm chỉ của tâm:
+\begin{equation}
+  R_m(V) = \min_{U} J_m(U, V) = J_m\big(U^{*}(V), V\big)
+  = \sum_{i=1}^{n} \left( \sum_{k=1}^{c} d_{ik}^{\,2/(1-m)} \right)^{1-m}.
+  \label{eq:fcm-rut-gon}
+\end{equation}
+FCM làm giảm chính hàm này; Gröll và Jäkel~\cite{groll2005convergence} xem FCM trên $R_m$ là một phương pháp hạ dốc với bước
+thay đổi. Mọi dãy lặp FCM hội tụ, ít nhất theo một dãy con, tới một cực tiểu địa phương hoặc một điểm yên ngựa của
+$J_m$~\cite{bezdek1987counterexamples}; khởi tạo đủ gần một cực tiểu thì hội tụ về đúng cực tiểu đó, với tốc độ tuyến
+tính~\cite{hathaway1988recent}. Từ đó suy ra điều kiện để một bộ khởi tạo tốt hơn có ích: \emph{$J_m$ phải có nhiều cực
+tiểu, và các cách khởi tạo thông thường phải hay dừng ở cực tiểu kém}. Hathaway và Bezdek cũng ghi nhận trong thực tế FCM
+khá ít phụ thuộc khởi tạo. Số cực tiểu của $J_m$ trên dữ liệu tín dụng vì vậy là câu hỏi thực nghiệm, được đo ở
+mục~\ref{sec:vi-sao}; kết quả đo quyết định PSO nên được dùng vào việc gì (mục~\ref{sec:de-xuat}).
+
+Mỗi vòng FCM tốn $O(ncD)$, nên một lần chạy tốn $O(I\,ncD)$ với $I$ là số vòng tới hội tụ. Tiểu luận cố định $m = 2$, giá
+trị dùng phổ biến và cũng là giá trị của Qian và cộng sự~\cite{qian2022psofcm}; phần đối chiếu ở Chương~\ref{chap:thuc-nghiem}
+kiểm tra lại với $m = 1{,}5$.
+
+% ------------------------------------------------------------
+\section{PSO gốc}
+\label{sec:pso-goc}
+
+Trong PSO~\cite{kennedy1995pso}, một bầy $N$ hạt cùng tìm cực tiểu của hàm $f$ trên $\mathbb{R}^{D}$. Hạt $j$ có vị trí
+$\mathbf{x}_j = (x_{j1}, \dots, x_{jD})$ (nghiệm ứng viên), vị trí tốt nhất nó từng đi qua $\mathbf{p}_j$ (pbest) và vị trí tốt
+nhất cả bầy từng gặp $\mathbf{g}$ (gbest). ``Vận tốc'' của hạt chỉ là bước dịch chuyển giữa 2 vòng liên tiếp,
+$\Delta x_{jd}^{(t)} = x_{jd}^{(t)} - x_{jd}^{(t-1)}$. Ở vòng $t$, với mỗi chiều $d = 1, \dots, D$:
+\begin{align}
+  \Delta x_{jd}^{(t)} &= \omega(t)\, \Delta x_{jd}^{(t-1)}
+     + c_1 r_{1jd} \big(p_{jd} - x_{jd}^{(t-1)}\big)
+     + c_2 r_{2jd} \big(g_{d} - x_{jd}^{(t-1)}\big), \label{eq:pso-v}\\
+  x_{jd}^{(t)} &= x_{jd}^{(t-1)} + \Delta x_{jd}^{(t)}, \label{eq:pso-x}
+\end{align}
+với $r_{1jd}, r_{2jd}$ là số ngẫu nhiên đều trên $[0, 1]$, rút mới ở mỗi vòng, mỗi hạt và mỗi chiều. Bước mới~\eqref{eq:pso-v}
+gồm 3 phần: một phần $\omega(t)$ của bước cũ (quán tính), phần kéo về pbest (thành phần ``nhận thức'', hạt nhớ chỗ tốt của
+mình) và phần kéo về gbest (thành phần ``xã hội'', hạt đi theo bầy).
+
+Bản gốc năm 1995 không có hệ số $\omega$, tức $\omega(t) = 1$, và dùng $c_1 = c_2 = 2$~\cite{kennedy1995pso}. Vì vận tốc
+cũ được giữ nguyên rồi cộng thêm, vận tốc có xu hướng tăng dần. Các cài đặt PSO thời kỳ đầu chặn vận tốc bằng một ngưỡng
+tối đa $\Delta x_{\max}$ cho từng chiều (Shi và Eberhart dùng ngưỡng này trong thí nghiệm của mình~\cite{shi1998inertia}).
+Tiểu luận đặt $\Delta x_{\max}$ bằng 0,2 lần độ rộng hộp tìm kiếm ở mỗi chiều. Không có $\omega < 1$ để giảm dần bước đi, bầy khó
+thu hẹp vùng tìm kiếm về quanh gbest. Phiên bản cải tiến đầu tiên (mục~\ref{sec:pso-w}) nhắm vào điểm yếu này.
+
+Thuật toán~\ref{alg:pso} là bản cài đặt dùng chung cho PSO gốc và 3 phiên bản có vận tốc (\texttt{pso\_co\_so.py});
+các phiên bản chỉ khác nhau ở hàm $\omega(t)$. Trong thực nghiệm, PSO chạy đủ $T$ vòng, không dừng sớm, để ngân sách tính
+toán là một tham số được kiểm soát. Chi phí là $N(T + 1)$ lần tính fitness $f$.
+
+\begin{algorithm}[htbp]
+\caption{PSO có vận tốc (tệp \texttt{pso\_co\_so.py}), dùng cho PSO gốc, PSO-W, PSO-S, PSO-LOG}
+\label{alg:pso}
+\begin{algorithmic}[1]
+\REQUIRE Bầy ban đầu $\{\mathbf{x}_j\}_{j=1}^{N}$, hộp $[\mathbf{l}, \mathbf{u}]$, hàm fitness $f$ (cực tiểu hoá),
+  lịch $\omega(t)$, số vòng $T$, $c_1 = c_2 = 2$
+\ENSURE gbest $\mathbf{g}$ và $f(\mathbf{g})$
+\STATE Kẹp $\mathbf{x}_j$ vào hộp; $\Delta\mathbf{x}_j \leftarrow \mathbf{0}$; $\mathbf{p}_j \leftarrow \mathbf{x}_j$;
+  $\mathbf{g} \leftarrow \arg\min_j f(\mathbf{x}_j)$; $\Delta\mathbf{x}_{\max} \leftarrow 0{,}2(\mathbf{u} - \mathbf{l})$
+\FOR{$t = 1$ \TO $T$}
+  \FOR{mỗi hạt $j$}
+    \STATE Cập nhật $\Delta\mathbf{x}_j$ theo~\eqref{eq:pso-v}, kẹp trong $\pm\Delta\mathbf{x}_{\max}$
+    \STATE Cập nhật $\mathbf{x}_j$ theo~\eqref{eq:pso-x}, kẹp vào $[\mathbf{l}, \mathbf{u}]$
+  \ENDFOR
+  \STATE Chấm $f(\mathbf{x}_j)$ cho cả bầy; cập nhật $\mathbf{p}_j$ nếu tốt hơn
+  \STATE $\mathbf{g} \leftarrow \arg\min_j f(\mathbf{p}_j)$ nếu tốt hơn gbest cũ
+\ENDFOR
+\RETURN $\mathbf{g}, f(\mathbf{g})$
+\end{algorithmic}
+\end{algorithm}
+
+% ------------------------------------------------------------
+\section{Các phiên bản cải tiến lấy từ các bài đã đọc}
+\label{sec:pso-cai-tien}
+
+Nhóm chọn 4 phiên bản theo 2 tiêu chí: là cải tiến được dùng rộng rãi (PSO-W, QPSO) hoặc đã được dùng với FCM trong
+các bài nhóm đọc (PSO-S, PSO-LOG từ bài 02~\cite{qian2022psofcm}; QPSO từ bài 04~\cite{zhang2025qpsofcm}). Bảng~\ref{tab:ch2-phien-ban}
+tóm tắt 5 thuật toán được so sánh.
+
+\subsection{PSO-W: trọng số quán tính giảm tuyến tính}
+\label{sec:pso-w}
+
+Shi và Eberhart~\cite{shi1998inertia} thêm trọng số quán tính $\omega$ vào số hạng vận tốc cũ của~\eqref{eq:pso-v}. $\omega$
+lớn giữ đà để bầy đi xa (khám phá), $\omega$ nhỏ làm hạt chậm lại quanh pbest và gbest (khai thác). Bài 1998 thử $\omega$
+giảm tuyến tính trong khoảng rộng (từ 1,4 xuống 0). Lịch giảm tuyến tính từ $\omega_{\text{đầu}} = 0{,}9$ xuống
+$\omega_{\text{cuối}} = 0{,}4$ được dùng rộng rãi về sau và thường được dẫn về nghiên cứu thực nghiệm năm 1999 của hai tác
+giả~\cite{shi1999empirical}; nhóm không có toàn văn bài này nên chỉ dùng lịch theo cách các tài liệu về sau mô tả. Tiểu luận dùng lịch này:
+\begin{equation}
+  \omega(t) = \omega_{\text{đầu}} - \big(\omega_{\text{đầu}} - \omega_{\text{cuối}}\big)\,\frac{t - 1}{T - 1},
+  \qquad t = 1, \dots, T.
+  \label{eq:pso-omega}
+\end{equation}
+PSO gốc là trường hợp $\omega \equiv 1$. Lịch tuyến tính cũng là đối chứng L-PSO trong bài 02~\cite{qian2022psofcm} (công thức 30, với
+$\omega_s = 1{,}2$, $\omega_e = 0{,}3$); tiểu luận giữ khoảng $0{,}9 \to 0{,}4$ cho PSO-W vì đây là giá trị chuẩn trong tài liệu,
+còn PSO-S và PSO-LOG giữ nguyên tham số của bài 02.
+
+\subsection{PSO-S và PSO-LOG: lịch quán tính phi tuyến}
+\label{sec:pso-s-log}
+
+Qian và cộng sự~\cite{qian2022psofcm} (bài 02) so 3 lịch $\omega$ cho PSO--FCM khi phân cụm tổ hợp quan sát của hệ thống
+định vị BDS-3. Ngoài lịch tuyến tính, bài dùng 2 lịch phi tuyến, với $t = 1, \dots, T$:
+\begin{align}
+  \text{PSO-S (công thức 31):}\quad & \omega(t) = \omega_s - (\omega_s - \omega_e)\left(\frac{t}{T}\right)^{2}, \label{eq:omega-s}\\
+  \text{PSO-LOG (công thức 32):}\quad & \omega(t) = \left[\ln\!\left(2{,}98 + \frac{t}{T}\right)\right]^{-z}, \label{eq:omega-log}
+\end{align}
+với $\omega_s = 1{,}2$, $\omega_e = 0{,}3$, $z = 1{,}51$ như bài; lịch logarit kế thừa từ ELPSO~\cite{zhang2020elpso}.
+Dạng và hằng số ở~\eqref{eq:omega-log} theo bài 02; bài ELPSO gốc viết $\omega(t) = [\ln(2{,}1 + t)]^{-z}$ với $z = 1{,}05$
+(công thức 12 trong~\cite{zhang2020elpso}), tức không chuẩn hoá $t$ theo $T$.
+PSO-S giữ $\omega$ cao (trên 1 ở phần đầu) lâu hơn rồi giảm nhanh về $0{,}3$; PSO-LOG đi từ khoảng $0{,}87$ xuống khoảng
+$0{,}61$, tức quán tính thay đổi ít hơn PSO-W. Bài không nêu $c_1, c_2$; tiểu luận dùng $c_1 = c_2 = 2$ như mọi phiên bản
+có vận tốc khác để chỉ lịch $\omega$ thay đổi. Bài kết luận (tr.~21) S-PSO-FCM tốt nhất, nhưng theo Bảng~5 của chính bài,
+ở 300 vòng LOG tốt nhất trên cả 3 chỉ số, còn S chỉ dẫn đầu ở 1.000 vòng. Thứ hạng đổi theo số vòng là một lý do để thực
+nghiệm khảo sát số vòng.
+
+\subsection{QPSO: PSO hành vi lượng tử}
+\label{sec:qpso}
+
+Trong QPSO~\cite{sun2004qpso}, hạt không có vận tốc mà được lấy mẫu quanh một điểm hút nằm giữa pbest và gbest, theo
+phân phối mũ hai phía (phân phối Laplace). Ở dạng được dùng rộng rãi, mà Zhang và cộng sự dẫn về bài của Sun, Xu và Feng
+cùng năm~\cite{sun2004global}, độ rộng của phân phối tỉ lệ với khoảng cách từ hạt tới trung bình các pbest
+($\mathbf{m}_{\text{best}}$). Tiểu luận dùng dạng của
+Zhang và cộng sự~\cite{zhang2025qpsofcm} (bài 04, QPSO--FCM). Ở mỗi vòng $t = 0, \dots, T - 1$, với mỗi hạt $j$ và mỗi
+chiều $d = 1, \dots, D$:
+\begin{align}
+  \text{(công thức 16)}\quad & m_{\text{best},d} = \frac{1}{N} \sum_{j=1}^{N} p_{jd}, \label{eq:b-mbest}\\
+  \text{(công thức 17, đã sửa)}\quad & \varphi_{jd} = \rho_{jd}\, p_{jd} + (1 - \rho_{jd})\, g_{d},
+     \qquad \rho_{jd} \sim \mathcal{U}(0, 1), \label{eq:b-phi}\\
+  \text{(công thức 18)}\quad & x_{jd} \leftarrow \varphi_{jd} \pm \gamma\, \big|m_{\text{best},d} - x_{jd}\big|\, \ln(1/q_{jd}), \label{eq:b-z}\\
+  \text{(công thức 19)}\quad & \gamma = 0{,}9 \cdot \frac{T - t}{T} + 0{,}1. \label{eq:b-gamma}
+\end{align}
+Các phép nhân ở~\eqref{eq:b-phi} và~\eqref{eq:b-z} là phép nhân số thông thường trên từng toạ độ; $\rho_{jd}$ và $q_{jd}$ được
+rút mới ở mỗi vòng, mỗi hạt và mỗi chiều, như $r_{1jd}, r_{2jd}$ ở~\eqref{eq:pso-v}. Dấu $\pm$ của từng toạ độ do một số đều
+quyết định (cộng nếu số đó $\ge 0{,}5$). Với $q$ đều trên $(0, 1]$,
+$\ln(1/q)$ có phân phối mũ với trung bình 1; ghép với dấu ngẫu nhiên, mỗi toạ độ mới có phân phối Laplace tâm
+$\varphi_{jd}$, tham số tỉ lệ $\gamma\,|m_{\text{best},d} - x_{jd}|$. $\gamma$ giảm tuyến tính từ $1{,}0$ xuống
+gần $0{,}1$ nên bước nhảy thu hẹp dần, tương tự $\omega$ giảm dần ở PSO-W. Mỗi pbest được cập nhật khi vị trí mới
+tốt hơn. Bản in của công thức 17 là $\varphi_{ij} = \rho\, p_{ij} + (1 - \rho)\, p_{ij}$ (ký hiệu $\omega$ trong bài được đổi
+thành $\rho$ để khỏi trùng với trọng số quán tính). Như vậy gbest không xuất hiện trong phương trình nào. Tiểu luận coi
+đây là lỗi in và sửa theo QPSO chuẩn~\cite{sun2004qpso,sun2004global} như~\eqref{eq:b-phi}. Vị trí được kẹp vào hộp tìm
+kiếm như các phiên bản khác (\texttt{thuat\_toan\_b.py}, hàm \texttt{qpso}).
+
+\begin{table}[htbp]
+\centering
+\caption{Năm thuật toán PSO được so sánh}
+\label{tab:ch2-phien-ban}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{4.4cm}>{\raggedright\arraybackslash}p{5.2cm}@{}}
+\toprule
+Tên & Nguồn & Cập nhật & Tham số \\
+\midrule
+PSO gốc & Kennedy, Eberhart 1995~\cite{kennedy1995pso} & \eqref{eq:pso-v}--\eqref{eq:pso-x} & $\omega = 1$, $c_1 = c_2 = 2$, $\Delta x_{\max} = 0{,}2 \times$ độ rộng hộp \\
+PSO-W & Shi, Eberhart 1998, 1999~\cite{shi1998inertia,shi1999empirical} & như trên & $\omega$ theo~\eqref{eq:pso-omega}: $0{,}9 \to 0{,}4$ \\
+PSO-S & Qian và cộng sự 2022~\cite{qian2022psofcm} & như trên & $\omega$ theo~\eqref{eq:omega-s}: $1{,}2 \to 0{,}3$ \\
+PSO-LOG & Qian và cộng sự 2022~\cite{qian2022psofcm} & như trên & $\omega$ theo~\eqref{eq:omega-log}: $\approx 0{,}87 \to 0{,}61$ \\
+QPSO & Sun và cộng sự 2004~\cite{sun2004qpso,sun2004global}; dạng của~\cite{zhang2025qpsofcm} & \eqref{eq:b-mbest}--\eqref{eq:b-gamma}, không có vận tốc & $\gamma$: $1{,}0 \to 0{,}1$ \\
+\bottomrule
+\end{tabular}
+\par\smallskip\parbox{\linewidth}{\scriptsize Ghi chú: trong mỗi vai trò (tìm trọng số, mục~\ref{sec:pso-trong-so-pp};
+tìm tâm, mục~\ref{sec:pso-khoi-tao}), mọi phiên bản dùng chung hộp tìm kiếm, cách khởi tạo bầy và hàm fitness.}
+\end{table}
+
+
+% ------------------------------------------------------------
+\section{Các chỉ số đánh giá}
+\label{sec:chi-so}
+
+Các chỉ số trả lời 3 câu hỏi: phân hoạch tách rủi ro tốt tới đâu, phân hoạch tốt tới đâu về hình học, và tốn bao nhiêu
+(Bảng~\ref{tab:ch2-chi-so}). Ba chỉ số chỉ dùng cho hướng tìm tâm được định nghĩa cùng hướng đó
+(mục~\ref{sec:chi-so-tam}). Chỉ số phân cụm tính trên $(U, V)$ cuối của từng
+lượt, trong không gian dữ liệu đã tiền xử lý (\texttt{danh\_gia.py}, \texttt{chi\_so\_danh\_gia.py}). Nhãn vỡ nợ
+$y_i \in \{0, 1\}$ không đi vào thuật toán nào, chỉ dùng sau khi phân cụm. Nhãn cứng của điểm $i$ là
+$\ell_i = \arg\max_k u_{ik}$, cụm cứng $k$ là $C_k = \{i : \ell_i = k\}$.
+
+\subsection{Chỉ số tách rủi ro}
+\label{sec:chi-so-rui-ro}
+
+Phân cụm ở đây nhằm chia khách hàng thành các phân khúc có mức rủi ro khác nhau. Gọi $r_k$ là tỉ lệ vỡ nợ của cụm cứng
+$C_k$. Hai chỉ số chính của tiểu luận đánh giá chính phân hoạch cứng:
+\begin{itemize}
+\item \emph{Chênh tỉ lệ vỡ nợ} $\Delta r = \max_k r_k - \min_k r_k$ trên các cụm không rỗng: phân khúc có ích cho quản
+trị rủi ro khi các nhóm khác nhau rõ về tỉ lệ vỡ nợ.
+\item \emph{AUC phân hoạch}: với điểm rủi ro $q_i = r_{\ell_i}$ (tỉ lệ vỡ nợ của cụm chứa $i$),
+\begin{equation}
+  \mathrm{AUC} = \frac{1}{n_1 n_0} \sum_{i : y_i = 1} \; \sum_{j : y_j = 0}
+     \Big( \mathbb{1}[q_i > q_j] + \tfrac{1}{2}\,\mathbb{1}[q_i = q_j] \Big),
+  \label{eq:chi-so-auc}
+\end{equation}
+với $n_1, n_0$ là số khách hàng vỡ nợ và không vỡ nợ~\cite{fawcett2006roc}: xác suất một khách hàng vỡ nợ chọn ngẫu nhiên
+nằm ở phân khúc rủi ro cao hơn một khách hàng không vỡ nợ chọn ngẫu nhiên. Vì $q_i$ tăng theo tỉ lệ vỡ nợ của cụm, chỉ số này
+luôn từ $0{,}5$ trở lên, bằng $0{,}5$ khi mọi cụm có cùng tỉ lệ vỡ nợ.
+\end{itemize}
+\subsection{Chỉ số về kết quả phân cụm}
+Hệ số phân hoạch (PC) và entropy phân hoạch chuẩn hoá (PE)~\cite{bezdek1981pattern} đo độ ``rõ'' của phân hoạch:
+\begin{equation}
+  \mathrm{PC} = \frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{c} u_{ik}^{2} \in \left[\tfrac{1}{c}, 1\right], \qquad
+  \mathrm{PE} = -\frac{1}{n \log_2 c} \sum_{i=1}^{n} \sum_{k=1}^{c} u_{ik} \log_2 u_{ik} \in [0, 1].
+  \label{eq:chi-so-pc-pe}
+\end{equation}
+PC lớn, PE nhỏ là phân hoạch gần cứng; PC $= 1/c$ và PE $= 1$ khi mọi độ thuộc bằng $1/c$, dấu hiệu của nghiệm suy biến có
+các tâm trùng nhau. Tiểu luận phân biệt 2 mức: nghiệm \emph{sụp} khi mọi tâm dồn về trung bình dữ liệu (độ lớn tâm dưới
+$10^{-3}$ trên dữ liệu z-score), và nghiệm \emph{gần suy biến} khi chỉ một số tâm gần trùng nhau (khoảng cách nhỏ nhất giữa
+2 tâm rất nhỏ so với độ trải của dữ liệu). Chỉ số Xie--Beni (XB)~\cite{xie1991validity} đo tỉ số giữa độ nén và độ tách:
+\begin{equation}
+  \mathrm{XB} = \frac{\sum_{i=1}^{n} \sum_{k=1}^{c} u_{ik}^{m} \lVert \mathbf{x}_i - \mathbf{v}_k \rVert^{2}}
+                     {n \cdot \min_{k \ne l} \lVert \mathbf{v}_k - \mathbf{v}_l \rVert^{2}}.
+  \label{eq:chi-so-xb}
+\end{equation}
+XB nhỏ là tốt. Mẫu số là bình phương khoảng cách nhỏ nhất giữa 2 tâm, nên khi 2 tâm gần trùng, một thay đổi rất nhỏ
+của tâm làm XB thay đổi rất lớn (mã nguồn trả vô cùng khi trùng hẳn). PC và XB là 2 chỉ số bài 04 dùng (công thức 21--22
+trong~\cite{zhang2025qpsofcm}). Hệ số Silhouette~\cite{rousseeuw1987silhouettes} đánh giá phân hoạch cứng. Với $a(i)$ là
+khoảng cách trung bình từ $i$ tới các điểm cùng cụm và $b(i)$ là khoảng cách trung bình nhỏ nhất tới các điểm của một cụm
+khác,
+\begin{equation}
+  s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}, \qquad \mathrm{Sil} = \frac{1}{|S|} \sum_{i \in S} s(i) \in [-1, 1],
+  \label{eq:chi-so-sil}
+\end{equation}
+với $S$ là một mẫu cố định $3.000$ điểm (toàn bộ nếu $n \le 3.000$, seed 0) dùng chung cho mọi phương pháp và mọi lượt
+trên cùng bộ dữ liệu.
+Silhouette cũng là fitness của đề xuất (mục~\ref{sec:pso-trong-so-pp}, mẫu 1.000 điểm khác mẫu đánh giá), nên
+khi so PSO với đối chứng, Silhouette chỉ là chỉ số phụ; 2 chỉ số tách rủi ro không nằm trong fitness.
+\subsection{Chỉ số về chi phí}
+
+Thước đo chi phí là \emph{thời gian thực} (\texttt{perf\_counter}) của cả quá trình, gồm khởi tạo, tìm kiếm (nếu có) và FCM,
+trên cùng máy và cùng thư viện (mục~\ref{sec:thiet-lap}).
+
+\begin{table}[htbp]
+\centering
+\caption{Các chỉ số đánh giá}
+\label{tab:ch2-chi-so}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.8cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{1.4cm}>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\toprule
+Chỉ số & Tốt khi & Dùng nhãn & Vai trò \\
+\midrule
+Chênh tỉ lệ vỡ nợ $\Delta r$ & lớn & có & \textbf{chính}: các phân khúc khác nhau về rủi ro tới mức nào \\
+AUC phân hoạch \eqref{eq:chi-so-auc} & lớn & có & \textbf{chính}: khả năng xếp hạng rủi ro của phân hoạch cứng; $\ge 0{,}5$ \\
+Silhouette \eqref{eq:chi-so-sil} & lớn & không & chất lượng phân hoạch cứng; là fitness khi tìm trọng số \\
+PC, PE \eqref{eq:chi-so-pc-pe} & PC lớn, PE nhỏ & không & độ rõ của phân hoạch mờ; phát hiện nghiệm suy biến \\
+XB \eqref{eq:chi-so-xb} & nhỏ & không & nén/tách; không ổn định khi 2 tâm gần trùng \\
+Thời gian thực & nhỏ & không & chi phí \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ------------------------------------------------------------
+\section{PSO tìm tâm khởi tạo cho FCM}
+\label{sec:pso-khoi-tao}
+
+Cách ghép PSO với FCM phổ biến trong tài liệu (mục~\ref{sec:metaheuristic}) là dùng PSO tìm tâm, và đây là hướng nhóm thử
+đầu tiên. Nhóm dùng dạng đơn giản nhất của cách này: mỗi hạt là một bộ tâm $V \in \mathbb{R}^{c \times D}$, fitness là
+$R_m(V)$ theo~\eqref{eq:fcm-rut-gon} (cách mã hoá tương tự Runkler và Katz~\cite{runkler2006psofcm}), mỗi hạt ban đầu là $c$
+điểm dữ liệu khác nhau chọn ngẫu nhiên, hộp tìm kiếm là $[\min_i x_{id}, \max_i x_{id}]$ theo từng thuộc tính. PSO chạy đủ
+$T$ vòng, rồi gbest làm tâm khởi tạo cho FCM chạy tới hội tụ (Thuật toán~\ref{alg:pso-khoi-tao}, \texttt{pso\_khoi\_tao.py});
+cách ghép tuần tự này là cách bài 04 dùng cho QPSO--FCM~\cite{zhang2025qpsofcm}. Năm phiên bản được khảo sát với số hạt
+$N \in \{10, 20, 30\}$ và số vòng $T \in \{20, 30, 50\}$.
+
+\begin{algorithm}[htbp]
+\caption{PSO tìm tâm khởi tạo cho FCM (\texttt{pso\_khoi\_tao.py})}
+\label{alg:pso-khoi-tao}
+\begin{algorithmic}[1]
+\REQUIRE Dữ liệu $X$, số cụm $c$, $m = 2$, phiên bản PSO, số hạt $N$, số vòng $T$
+\ENSURE Tâm $V^{*}$, độ thuộc $U^{*}$
+\STATE Mỗi hạt $j = 1, \dots, N$: chọn $c$ điểm dữ liệu khác nhau ngẫu nhiên làm $\mathbf{x}_j$
+\STATE Chạy phiên bản PSO đã chọn đủ $T$ vòng với fitness $R_m$; được gbest $\mathbf{g}$
+\STATE $(U^{*}, V^{*}) \leftarrow$ FCM (Thuật toán~\ref{alg:fcm}) khởi động từ tâm $\mathbf{g}$, chạy tới hội tụ
+\RETURN $U^{*}, V^{*}$
+\end{algorithmic}
+\end{algorithm}
+
+Vì PSO và FCM làm giảm cùng một hàm $R_m$, PSO chỉ có thể giúp khi $R_m$ có nhiều cực tiểu (mục~\ref{sec:fcm-khoi-tao}).
+Đối chứng là 3 cách khởi tạo không tốn tìm kiếm, cùng kết thúc bằng FCM: độ thuộc $U$ ngẫu nhiên (dạng gốc của Bezdek),
+$c$ điểm dữ liệu ngẫu nhiên (đúng một hạt PSO trước khi bay, nên khác biệt chỉ là phần tìm kiếm) và
+k-means++~\cite{arthur2007kmeanspp} (tâm sau chọn với xác suất tỉ lệ bình phương khoảng cách tới tâm gần nhất đã chọn).
+
+\emph{Chỉ số riêng của hướng này.} Hai chỉ số đầu đo chất lượng tối ưu. Gọi $J^{\star}$ là $J_m$ nhỏ nhất trên mọi lượt của mọi phương pháp
+ở cùng cấu hình (bộ dữ liệu, $m$, $c$). \emph{Độ lệch $J$ sau PSO} là $100\,(R_m(\mathbf{g}) - J^{\star}) / J^{\star}$ (\%), đo
+tại gbest trước khi FCM chạy, so các phiên bản PSO như những thuật toán tối ưu. \emph{Tỉ lệ đạt $J$ tốt nhất} đo kết quả sau
+FCM: một lượt đạt nếu $J_m \le (1 + 10^{-4})\,J^{\star}$; ngưỡng $10^{-4}$ (tương đối) cũng là ngưỡng để coi 2 lượt cho
+``cùng nghiệm''. Chỉ số thứ ba, theo cách các bài đã đọc đánh giá phân cụm, là \emph{AUC tách rủi ro}: \eqref{eq:chi-so-auc} với điểm rủi ro là độ thuộc vào
+cụm có tỉ lệ vỡ nợ cao nhất, $q_i = u_{ik^{*}}$, $k^{*} = \arg\max_k r_k$. Độ thuộc đo độ gần tâm và không nhất thiết tăng
+theo rủi ro, nên chỉ số này có thể nhỏ hơn $0{,}5$ khi các tâm gần trùng.
+\label{sec:chi-so-tam}
+
+% ------------------------------------------------------------
+\section{Trọng số thuộc tính trong FCM}
+\label{sec:trong-so-fcm}
+
+Khi PSO tìm tâm không cải thiện FCM (mục~\ref{sec:chuyen-huong}), nhóm xét điểm yếu thứ hai của FCM nêu ở
+mục~\ref{sec:phan-cum-mo}: mọi thuộc tính được coi ngang nhau. Mục này chỉ ra vì sao FCM không tự sửa được điểm yếu này, và
+cách sửa bằng công thức có giới hạn gì; đó là chỗ đề xuất ở mục~\ref{sec:de-xuat} nhắm vào.
+
+\subsection{Khoảng cách có trọng số thuộc tính}
+\label{sec:kc-trong-so}
+
+FCM ở~\eqref{eq:fcm-j} dùng khoảng cách Euclid trên dữ liệu đã chuẩn hoá z-score, tức mọi thuộc tính có ảnh hưởng ngang
+nhau tới khoảng cách. Với vector trọng số không âm $\symbf{\lambda} = (\lambda_1, \dots, \lambda_D)$, khoảng cách có trọng
+số là
+\begin{equation}
+  d_{ik}^{2}(\symbf{\lambda}) = \sum_{j=1}^{D} \frac{\lambda_j}{\bar{\lambda}} \, (x_{ij} - v_{kj})^{2},
+  \qquad \bar{\lambda} = \frac{1}{D} \sum_{j=1}^{D} \lambda_j .
+  \label{eq:kc-trong-so}
+\end{equation}
+Chia cho $\bar{\lambda}$ làm khoảng cách chỉ phụ thuộc tỉ lệ giữa các trọng số, và với $\symbf{\lambda} = \mathbf{1}$ ta có
+lại FCM thường. Với $\symbf{\lambda}$ cố định, FCM theo~\eqref{eq:kc-trong-so} chính là FCM thường chạy trên dữ liệu đã nhân
+từng cột với $s_j = \sqrt{\lambda_j / \bar{\lambda}}$, nên mọi tính chất ở mục này giữ nguyên; tâm báo cáo được tính lại
+trên dữ liệu gốc bằng~\eqref{eq:fcm-v} với độ thuộc cuối (hàm \texttt{phan\_hoach\_trong\_so}).
+
+FCM không tự chọn được $\symbf{\lambda}$. Nếu cực tiểu hoá cả $J_m$ theo $\symbf{\lambda}$ với tổng trọng số cố định,
+$J_m$ tuyến tính theo $\symbf{\lambda}$ nên cực tiểu nằm ở một đỉnh: dồn toàn bộ trọng số vào thuộc tính có độ phân tán
+trong cụm nhỏ nhất, và phân cụm chỉ còn theo một thuộc tính. Vì vậy cần hoặc một số mũ để làm trơn bài toán
+(mục~\ref{sec:wfcm}), hoặc một tiêu chí khác $J_m$ để chọn trọng số (mục~\ref{sec:pso-trong-so-pp}).
+
+\subsection{Trọng số tính bằng công thức (WFCM) và giới hạn}
+\label{sec:wfcm}
+
+Keller và Klawonn~\cite{keller2000weighting} làm trơn bài toán ở mục~\ref{sec:kc-trong-so} bằng một số mũ $\beta > 1$: khoảng
+cách dùng $w_j^{\beta}$ thay cho $\lambda_j$, với $\sum_j w_j = 1$. Khi đó cực tiểu theo $\mathbf{w}$ (giữ $U, V$) có dạng
+đóng
+\begin{equation}
+  w_j \propto \left( \sum_{i=1}^{n} \sum_{k=1}^{c} u_{ik}^{m} (x_{ij} - v_{kj})^{2} \right)^{-1/(\beta - 1)},
+  \label{eq:wfcm-w}
+\end{equation}
+và thuật toán WFCM luân phiên cập nhật $U$, $V$ và $\mathbf{w}$. Tiểu luận dùng $\beta = 2$, khởi tạo $w_j = 1/D$ và tâm
+k-means++, dừng khi tâm thay đổi dưới $10^{-5}$ (\texttt{wfcm\_giai\_tich} trong \texttt{cach\_ket\_hop.py}); trọng số
+tương đương theo~\eqref{eq:kc-trong-so} là $\lambda_j = w_j^{2}$. Bài 06~\cite{liu2021msgwo} dùng một biến thể có trọng số
+riêng cho từng cụm, cũng tính bằng công thức, còn tâm do thuật toán bầy sói xám cải tiến (MSGWO) tìm.
+
+Công thức~\eqref{eq:wfcm-w} cho thuộc tính nào làm các cụm chặt hơn thì nặng hơn, tức vẫn theo tiêu chí ``cụm chặt'' của
+$J_m$ và không xét các cụm có tách nhau hay không. Trên dữ liệu có nhóm thuộc tính tương quan cao và ít biến động (chẳng hạn dư nợ các
+tháng của bộ Taiwan Default), công thức có thể dồn trọng số vào nhóm đó dù nhóm này không tạo ra cấu trúc nhóm có ý nghĩa.
+WFCM giải tích rẻ, chỉ tốn cỡ một lần chạy FCM, nên là đối chứng cần thiết: PSO chỉ đáng dùng khi nó tốt hơn công thức này.
+
+% ------------------------------------------------------------
+\section{Đề xuất cải tiến: PSO tìm trọng số thuộc tính cho FCM}
+\label{sec:pso-trong-so-pp}
+\label{sec:de-xuat}
+
+\subsection{Ý tưởng}
+
+Trên dữ liệu tín dụng, nhiều chỉ tiêu đo gần cùng một thứ (các tỉ số nợ trên vốn chủ sở hữu và trên tổng tài sản; dư nợ
+các tháng liên tiếp), còn một số chỉ tiêu gần như không liên quan tới cấu trúc nhóm, nên khi trọng số bằng nhau, các thuộc tính
+thừa có thể chi phối phân hoạch. Trọng số là một vector $D$ chiều ($D$ từ 14 tới 94 trên các bộ đã thử), quá
+nhiều để quét lưới; chất lượng phân hoạch theo trọng số không có đạo hàm vì mỗi lần đánh giá là một lần chạy FCM; và công
+thức giải tích chỉ tối ưu độ chặt (mục~\ref{sec:wfcm}). Ở vai trò này, một metaheuristic như PSO tối ưu thứ FCM không tự
+tối ưu được; khi tìm tâm, PSO tối ưu đúng hàm $R_m$ mà FCM đã tự làm giảm (mục~\ref{sec:pso-khoi-tao}). Nhóm chuyển sang
+hướng này sau khi PSO tìm tâm không cải thiện FCM trên dữ liệu tín dụng (mục~\ref{sec:chuyen-huong}).
+
+Trong 10 bài đã đọc, đề xuất dựa trên 3 bài. Bài 06~\cite{liu2021msgwo} nêu việc coi mọi thuộc tính ngang nhau là một điểm
+yếu của FCM và cho thấy đánh trọng số đóng góp nhiều hơn tìm tâm (mục~\ref{sec:tinh-hinh-nghien-cuu}), nhưng trọng số ở đó tính
+bằng công thức còn bầy sói tìm tâm; ở đây tâm khởi tạo do k-means++ chọn và PSO chỉ tìm trọng số. Bài 02 và 04 cung cấp
+các phiên bản PSO (mục~\ref{sec:pso-cai-tien}), được lắp vào khung tìm trọng số thay vì khung tìm tâm. Ngoài 10 bài, Lu
+và cộng sự~\cite{lu2011psovw} và O'Neill và cộng sự~\cite{oneill2018psofw} đã dùng PSO tìm trọng số thuộc tính cho phân cụm
+cứng; tiểu luận đưa cách làm đó vào FCM trên dữ liệu tín dụng và so 5 phiên bản PSO trong vai trò này. Cách làm của nhóm khác O'Neill và cộng sự ở chỗ bài đó cho PSO
+vừa chọn vừa đánh trọng số thuộc tính, tính Silhouette trên chính tập thuộc tính đã đánh trọng số (chỉ thành phần connectedness dùng toàn bộ
+thuộc tính gốc, mục III.B), và ghi nhận ở phần kết luận rằng một số nghiệm sinh ra cụm tầm thường, vấn đề bài để ngỏ.
+
+\subsection{Mã hoá và fitness}
+
+Mỗi hạt là vector trọng số $\symbf{\lambda} \in [0{,}05;\ 1]^D$, dùng trong khoảng cách~\eqref{eq:kc-trong-so}. Cận dưới
+$0{,}05$ giữ mọi thuộc tính trong bài toán, vì mục tiêu là đánh trọng số chứ không chọn bỏ thuộc tính. Fitness của một hạt tính
+theo 3 bước (\texttt{bai\_toan\_trong\_so} trong \texttt{cach\_ket\_hop.py}):
+\begin{enumerate}[leftmargin=*]
+  \item chạy FCM (tối đa 200 vòng) với khoảng cách~\eqref{eq:kc-trong-so}, từ một bộ tâm k-means++ $V^{(0)}$ cố định cho
+  cả lượt;
+  \item lấy phân hoạch cứng, tính Silhouette~\eqref{eq:chi-so-sil} \emph{trên không gian gốc} với một mẫu cố định 1.000 điểm;
+  \item $f(\symbf{\lambda}) = -\mathrm{Sil} + P$, với phạt $P = \max(0,\ 0{,}05 - n_{\min}/n) / 0{,}05$ khi cụm cứng nhỏ nhất
+  có ít hơn 5\% số khách hàng.
+\end{enumerate}
+Ba lựa chọn thiết kế trong bài toán này là phần cải tiến của nhóm:
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+\item \emph{Silhouette tính trên không gian gốc.} Silhouette đo độ tách giữa các cụm, bù cho tiêu chí độ chặt của $J_m$. Nếu
+tính trên không gian đã nhân trọng số, PSO có thể tăng chỉ số chỉ bằng cách thu nhỏ các chiều khó tách; tính trên không gian
+gốc buộc phân hoạch phải tốt đối với dữ liệu thật.
+\item \emph{Phạt cụm dưới 5\%.} Silhouette có thể cao khi một cụm chỉ gồm vài điểm ngoại lai; phân khúc như vậy không dùng
+được cho chính sách tín dụng. Đây là cách nhóm xử lý vấn đề cụm tầm thường mà O'Neill và cộng sự để ngỏ.
+\item \emph{Hạt khởi đầu $\symbf{\lambda} = \mathbf{1}$ và tâm khởi tạo cố định.} Nghiệm của PSO không bao giờ kém FCM thường
+theo fitness, và mọi khác biệt giữa các trọng số chỉ do trọng số, không do khởi tạo.
+\end{enumerate}
+
+\subsection{Thuật toán và tham số}
+
+Hạt đầu tiên của bầy là $\symbf{\lambda} = \mathbf{1}$ như lựa chọn (c), $N - 1$ hạt còn lại rút đều trong hộp. Bất kỳ phiên bản nào ở mục~\ref{sec:pso-cai-tien} cũng lắp được
+vào khung này mà không đổi gì khác: 4 phiên bản có vận tốc chạy Thuật toán~\ref{alg:pso} với lịch $\omega(t)$ của mình,
+$c_1 = c_2 = 2$; QPSO chạy~\eqref{eq:b-mbest}--\eqref{eq:b-gamma}. Mọi phiên bản chạy đủ 49 vòng sau khởi tạo, không dừng
+sớm, nên ngân sách là $50N$ lần tính fitness. Tiểu luận dùng 2 ngân sách: 500 lần (10 hạt) và 1.000 lần (20 hạt). Sau PSO,
+FCM chạy tới hội tụ với trọng số gbest từ cùng $V^{(0)}$ (Thuật toán~\ref{alg:pso-trong-so}, \texttt{pso\_trong\_so.py}).
+Thí nghiệm chính so với các đối chứng dùng PSO-W với 500 lần; thí nghiệm so phiên bản dùng cả 5 phiên bản ở 2 ngân sách.
+
+\begin{algorithm}[htbp]
+\caption{PSO tìm trọng số thuộc tính cho FCM (\texttt{pso\_trong\_so.py})}
+\label{alg:pso-trong-so}
+\begin{algorithmic}[1]
+\REQUIRE $X \in \mathbb{R}^{n \times D}$ đã chuẩn hoá, số cụm $c$, $m = 2$, phiên bản PSO, số hạt $N$, ngân sách $50N$ lần tính fitness
+\ENSURE Trọng số $\symbf{\lambda}^{*}$ và phân hoạch $(U, V)$
+\STATE Chọn $V^{(0)}$ bằng k-means++; chọn mẫu Silhouette $S$ gồm 1.000 điểm
+\STATE Khởi tạo bầy: hạt 1 là $\mathbf{1}$, $N - 1$ hạt rút đều trong $[0{,}05;\ 1]^D$; tính $f$ cho mọi hạt
+\FOR{$t = 1$ \TO $49$}
+  \STATE Di chuyển bầy theo phiên bản đã chọn (Thuật toán~\ref{alg:pso} hoặc QPSO); kẹp vào hộp
+  \STATE Với mỗi hạt: FCM với khoảng cách~\eqref{eq:kc-trong-so} từ $V^{(0)}$; $f = -\mathrm{Sil}_S + P$
+  \STATE Cập nhật pbest, gbest
+\ENDFOR
+\STATE $\symbf{\lambda}^{*} \leftarrow$ gbest; FCM tới hội tụ với $\symbf{\lambda}^{*}$ từ $V^{(0)}$
+\RETURN $\symbf{\lambda}^{*}$, $U$ cuối và $V$ tính trên không gian gốc
+\end{algorithmic}
+\end{algorithm}
+
+Mỗi lần tính fitness gồm một lần chạy FCM (tối đa 200 vòng, $O(ncD)$ mỗi vòng) và một lần tính Silhouette trên 1.000 điểm
+($O(10^6)$ phép tính khoảng cách cho mỗi phân hoạch), nên một lượt PSO tốn cỡ vài trăm lần chạy FCM. Đây là chi phí trả một
+lần khi dựng phân khúc.
+
+\subsection{Các đối chứng}
+
+Ba đối chứng tách 3 nguồn lợi ích có thể có:
+\begin{itemize}
+\item \emph{FCM k-means++} ($\symbf{\lambda} = \mathbf{1}$, cùng $V^{(0)}$) cho biết việc đánh trọng số có ích không;
+\item \emph{WFCM giải tích} (mục~\ref{sec:wfcm}) cho biết có cần tìm kiếm không, hay một công thức rẻ là đủ;
+\item \emph{Tìm ngẫu nhiên} rút $50N - 1$ vector trong cùng hộp, cộng $\mathbf{1}$, giữ vector có fitness nhỏ nhất, với cùng
+$V^{(0)}$, cùng mẫu Silhouette và cùng ngân sách như PSO khi cùng seed (\texttt{ngau\_nhien\_trong\_so}). Phần chênh giữa PSO
+và tìm ngẫu nhiên là phần do cơ chế bầy đàn đem lại, không do việc đánh trọng số hay do ngân sách tính toán.
+\end{itemize}
+Để kiểm tra lợi ích có giữ ngoài dữ liệu đã dùng để tìm trọng số, trọng số học trên một mẫu còn được áp lên một mẫu độc lập
+(mục~\ref{sec:kiem-chung}).
+
+\subsection{Quy trình áp dụng}
+\label{sec:quy-trinh}
+
+Đề xuất được dùng trong một quy trình 3 bước (Thuật toán~\ref{alg:chan-doan}), rút ra từ chính 2 giai đoạn của tiểu luận:
+trước khi nghĩ tới PSO cho tâm, đo xem $J_m$ có nhiều cực tiểu không; dùng PSO cho trọng số; và chỉ áp trọng số khi nó cải
+thiện phân khúc trên dữ liệu có nhãn lịch sử không dùng để tìm trọng số.
+
+\begin{algorithm}[htbp]
+\caption{Quy trình áp dụng đề xuất khi phân cụm khách hàng bằng FCM}
+\label{alg:chan-doan}
+\begin{algorithmic}[1]
+\REQUIRE Dữ liệu $X$ đã tiền xử lý, số cụm $c$, số mũ $m$, số lượt $R$ (ví dụ $R = 30$), ngưỡng gộp $\tau = 10^{-4}$; nhãn
+  lịch sử $y$ (chỉ dùng ở bước 3)
+\ENSURE Cách khởi tạo, trọng số thuộc tính và phân hoạch
+\STATE \textbf{Bước 1, chẩn đoán số cực tiểu:} chạy FCM từ $R$ khởi tạo $U$ ngẫu nhiên và $R$ khởi tạo k-means++; sắp $2R$
+  giá trị $J_m$ cuối tăng dần, gộp các giá trị lệch nhau dưới $(1 + \tau)$ lần vào cùng mức, được $L_1 < \dots < L_K$
+\IF{các lượt ở mức $L_1$ là nghiệm sụp (mọi tâm gần trung bình dữ liệu, $\mathrm{PC} \approx 1/c$)}
+  \STATE Đổi tiền xử lý, $m$ hoặc $c$; khởi tạo không cứu được
+\ELSIF{$K = 1$ hoặc k-means++ hầu như luôn đạt $L_1$}
+  \STATE Khởi tạo bằng k-means++; \textbf{không} dùng PSO tìm tâm
+\ELSE
+  \STATE Dùng k-means++ nhiều lần, giữ lượt có $J_m$ nhỏ nhất; chỉ cân nhắc PSO tìm tâm nếu cách này vẫn hay trượt $L_1$
+\ENDIF
+\STATE \textbf{Bước 2, tìm trọng số:} chạy PSO tìm trọng số (Thuật toán~\ref{alg:pso-trong-so}) với tâm khởi tạo đã chọn;
+  so fitness với WFCM giải tích và với tìm ngẫu nhiên cùng ngân sách
+\STATE \textbf{Bước 3, kiểm bằng nhãn lịch sử:} so $\Delta r$ và AUC phân hoạch của phân hoạch có trọng số với FCM thường,
+  trên một mẫu không dùng để tìm trọng số; chỉ dùng trọng số nếu phân khúc tách rủi ro tốt hơn
+\RETURN cách khởi tạo, $\symbf{\lambda}^{*}$ (hoặc $\mathbf{1}$) và phân hoạch tương ứng
+\end{algorithmic}
+\end{algorithm}
+
+\emph{Bước 1} dùng 2 kiểu khởi tạo có vai trò khác nhau. Khởi tạo $U$ ngẫu nhiên là dạng gốc của FCM, tâm ban đầu nằm gần
+trung bình dữ liệu, nên có thể lộ ra các mức mà k-means++ không tới, kể cả nghiệm sụp. Khởi tạo k-means++ là cách sẽ dùng nếu
+không cần PSO, nên tần suất nó đạt $L_1$ trả lời trực tiếp câu hỏi có cần bộ khởi tạo tốt hơn không. Số mức $K$ là số cực
+tiểu \emph{quan sát được}, không phải số cực tiểu thật; ngưỡng $\tau$ trùng ngưỡng của tỉ lệ đạt $J$ tốt nhất, và cách gộp
+giống hàm \texttt{so\_cuc\_tieu} trong \texttt{phan\_tich.py}. Bước này tốn $2R$ lần chạy FCM, chỉ làm một lần cho mỗi bộ
+$(X, m, c)$, và tự cho luôn một nghiệm dùng được. \emph{Bước 2} dùng 2 đối chứng để biết có cần PSO không: nếu WFCM giải
+tích đạt cùng fitness thì dùng công thức; nếu tìm ngẫu nhiên đạt cùng fitness thì phiên bản PSO không đóng góp gì.
+\emph{Bước 3} cần thiết vì fitness không nhìn nhãn: một phân hoạch đẹp hơn về hình học không nhất thiết tách rủi ro tốt hơn.
+Tổ chức tín dụng thường có nhãn vỡ nợ lịch sử; dùng nhãn này để \emph{chọn} có áp trọng số hay không, trên một mẫu độc lập
+với mẫu tìm trọng số, giữ cho bước phân cụm vẫn không giám sát.
+
+Đóng góp của đề xuất vì vậy gồm 2 phần: bài toán tìm trọng số với 3 lựa chọn thiết kế cho fitness, và quy trình quyết định
+PSO dùng vào việc gì. Đề xuất không tạo ra phiên bản PSO mới; mọi phiên bản ở mục~\ref{sec:pso-cai-tien} đều lắp được vào nó.
+Chương~\ref{chap:thuc-nghiem} đánh giá đề xuất: bước 1 ở mục~\ref{sec:diem-xuat-phat}, bước 2 ở mục~\ref{sec:pso-trong-so}
+và~\ref{sec:phien-ban-trong-so}, bước 3 ở mục~\ref{sec:kiem-chung}.
+
+\section*{Tiểu kết Chương 2}
+\addcontentsline{toc}{section}{Tiểu kết Chương 2}
+
+Chương trình bày FCM, PSO gốc, 4 phiên bản cải tiến (PSO-W; PSO-S và PSO-LOG từ bài 02; QPSO từ bài 04) và các chỉ số
+đánh giá, rồi 2 cách dùng PSO theo thứ tự nhóm thực hiện. Hai chỉ số chính là chênh tỉ lệ vỡ nợ và AUC phân hoạch, đều dùng
+nhãn và không nằm trong fitness nào. Ở hướng ban đầu, mỗi hạt là một bộ tâm và fitness là hàm rút gọn $R_m$; vì PSO và FCM làm giảm cùng một hàm, PSO chỉ
+có thể giúp khi $R_m$ có nhiều cực tiểu. Hướng thứ hai nhắm vào điểm yếu FCM không tự sửa được: cực tiểu hoá $J_m$ theo trọng
+số cho nghiệm suy biến, còn công thức của WFCM chỉ tối ưu độ chặt của cụm. Đề xuất cải tiến của nhóm dùng PSO tìm trọng số
+thuộc tính, với 3 lựa chọn thiết kế cho fitness (Silhouette trên không gian gốc, phạt cụm dưới 5\%, hạt khởi đầu là FCM
+thường), lắp được mọi phiên bản PSO, ở 2 ngân sách 500 và 1.000 lần tính fitness, và được dùng trong quy trình 3 bước:
+chẩn đoán số cực tiểu, tìm trọng số, kiểm bằng nhãn lịch sử trên mẫu độc lập. Ba đối chứng tách 3 nguồn lợi ích: FCM thường,
+WFCM giải tích và tìm ngẫu nhiên cùng ngân sách.

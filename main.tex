@@ -1,0 +1,194 @@
+% ============================================================
+% main.tex — Tiểu luận: Ứng dụng PSO kết hợp Fuzzy C-means trong phân cụm
+% dữ liệu phục vụ đánh giá rủi ro tín dụng
+% Engine: XeLaTeX (KHÔNG dùng pdfLaTeX)
+% Compile: ./compile.sh (Docker TeX Live)
+%          hoặc: latexmk -xelatex -outdir=build main.tex
+% ============================================================
+
+\documentclass[a4paper,12pt,oneside]{report}
+
+\input{noi-dung/preamble}
+% Số liệu Chương 3 sinh tự động bởi code/phan_tich.py — mọi con số trong văn bản dùng macro \soLieu...
+\input{results/so-lieu.tex}
+\input{results/so-lieu-e5.tex}
+\input{results/so-lieu-e6.tex}
+\input{results/so-lieu-e7.tex}
+\input{results/so-lieu-e8.tex}
+\input{results/so-lieu-e8-kmeans.tex}
+\input{results/so-lieu-e9.tex}
+\input{results/so-lieu-e10.tex}
+% Câu hỏi của tiểu luận: định nghĩa một lần, dùng ở Tóm tắt, Mở đầu, Tiểu kết Chương 1 và Chương 3.
+\newcommand{\cauHoiTong}{PSO tìm tâm khởi tạo, cách ghép phổ biến nhất, có giúp FCM trên dữ liệu tín dụng không; nếu không,
+dùng PSO tìm trọng số thuộc tính có làm phân khúc khách hàng tách rủi ro tốt hơn không, với phiên bản PSO nào, và lợi ích có
+giữ trên mẫu độc lập không?}
+\newcommand{\chMot}{tâm khởi tạo do PSO tìm có làm FCM tốt hơn các cách khởi tạo không dùng PSO (ngẫu nhiên, k-means++)
+không, và điều đó phụ thuộc vào số cực tiểu của hàm mục tiêu ra sao?}
+\newcommand{\chHai}{trọng số thuộc tính do PSO tìm có làm FCM tách rủi ro tốt hơn FCM thường và trọng số tính bằng công thức
+không, và phần lợi ích đó do cơ chế bầy đàn (so với tìm ngẫu nhiên cùng ngân sách) hay chỉ do việc đánh trọng số?}
+\newcommand{\chBa}{PSO gốc và 4 phiên bản cải tiến khác nhau thế nào khi tìm trọng số thuộc tính, ở 2 mức ngân sách tính
+toán?}
+\newcommand{\chBon}{trọng số học trên một mẫu có giữ được lợi ích khi áp lên một mẫu độc lập không, và khi nào PSO tìm trọng
+số không có ích?}
+
+\begin{document}
+
+% ---- Phần đầu: không đánh số trang ----
+\pagenumbering{gobble}
+
+\input{noi-dung/bia-chinh}
+\input{noi-dung/bia-phu}
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\chapter*{LỜI CẢM ƠN}
+\addcontentsline{toc}{chapter}{LỜI CẢM ƠN}
+
+Nhóm tác giả xin chân thành cảm ơn TS. Trần Hùng Cường đã tận tình hướng dẫn và
+tạo điều kiện để nhóm hoàn thành tiểu luận này. Xin cảm ơn gia đình, bạn bè và các
+thành viên trong nhóm đã hỗ trợ trong suốt quá trình thực hiện.
+
+\newpage
+\chapter*{LỜI CAM ĐOAN}
+\addcontentsline{toc}{chapter}{LỜI CAM ĐOAN}
+
+Nhóm tác giả xin cam đoan tiểu luận ``Ứng dụng PSO kết hợp Fuzzy C-means trong phân
+cụm dữ liệu phục vụ đánh giá rủi ro tín dụng'' là công trình do nhóm thực hiện dưới
+sự hướng dẫn của TS. Trần Hùng Cường. Các số liệu, bảng biểu và hình vẽ lấy
+trực tiếp từ kết quả chạy chương trình trên dữ liệu tín dụng công khai; cố định seed
+(hạt giống ngẫu nhiên) thì chạy lại cho cùng kết quả. Các nội dung kế thừa từ tài liệu khác đều được trích dẫn đầy đủ trong danh
+mục tài liệu tham khảo. Nhóm xin chịu trách nhiệm về tính trung thực của tiểu luận.
+
+% Tóm tắt: số liệu dùng macro \soLieu... như Chương 3.
+\newpage
+\chapter*{TÓM TẮT}
+\addcontentsline{toc}{chapter}{TÓM TẮT}
+
+Phần lớn nghiên cứu ghép thuật toán tối ưu bầy đàn (PSO) với Fuzzy C-Means (FCM) dùng PSO tìm tâm cụm. Nhóm bắt đầu theo
+hướng này trên dữ liệu tín dụng và thấy nó không cải thiện FCM; các so sánh độc lập trong tài liệu cũng cho thấy PSO--FCM hoà
+hoặc thua FCM khi đối chứng tương đương. Trong khi đó FCM coi mọi thuộc tính đã chuẩn hoá ngang nhau và không tự chọn được
+trọng số thuộc tính, dù hồ sơ tín dụng có nhiều chỉ tiêu đo gần cùng một thứ. Câu hỏi của tiểu luận vì vậy là: \cauHoiTong
+
+Phương pháp chính dùng PSO tìm vector trọng số thuộc tính cho FCM, với fitness là hệ số Silhouette trên không gian gốc cộng
+phạt cụm dưới 5\% số khách hàng; nhãn vỡ nợ không đi vào fitness. Năm thuật toán PSO được lắp vào cùng khung: PSO gốc (Kennedy
+và Eberhart, 1995), PSO-W với trọng số quán tính giảm tuyến tính, PSO-S và PSO-LOG với quán tính phi tuyến, và QPSO. Đối
+chứng là FCM thường, trọng số tính bằng công thức (WFCM) và tìm ngẫu nhiên cùng ngân sách. Dữ liệu chính là dữ liệu dự báo tình
+trạng khó khăn tài chính của doanh nghiệp niêm yết Việt Nam và dữ liệu vỡ nợ thẻ tín dụng Taiwan Default, cùng 5 bộ tín dụng công khai
+khác; mỗi phương pháp chạy với 30 seed, so theo cặp seed bằng kiểm định Wilcoxon kèm hiệu chỉnh Holm, và trọng số được kiểm
+trên mẫu độc lập.
+
+Trên 2 bộ chính (Việt Nam ở mọi số cụm, Taiwan Default với 3 và 4 cụm), PSO tìm trọng số làm các phân khúc tách rủi ro
+tốt hơn FCM thường có ý nghĩa: trên Việt Nam với 2 cụm,
+chênh tỉ lệ vỡ nợ giữa các cụm tăng từ \soLieuETamVietNamCHaiFcmKppChenhTiLe{} lên \soLieuETamVietNamCHaiPsoTrongSoChenhTiLe;
+trên Taiwan Default với 3 cụm, AUC của phân hoạch tăng từ \soLieuETamTaiwanKiemChungCBaFcmKppAucCung{} lên
+\soLieuETamTaiwanKiemChungCBaPsoTrongSoAucCung, còn trọng số tính bằng công thức thì không tách được rủi ro. PSO tối ưu fitness tốt hơn tìm
+ngẫu nhiên cùng ngân sách ở \soLieuETamSilhouetteNgauNhienTrongSoHon{} trên \soLieuETamSoCauHinh{} cấu hình, nhưng về tách rủi ro chỉ
+hơn ở \soLieuETamChenhTiLeNgauNhienTrongSoHon{} cấu hình theo chênh tỉ lệ vỡ nợ, chủ yếu trên Việt Nam. Cả 5 phiên bản PSO đều hơn tìm ngẫu nhiên, nhưng không bản cải tiến nào hơn PSO gốc
+trong vai trò này, ngược với vai trò tìm tâm.
+Trọng số học trên một mẫu, áp lên mẫu độc lập, vẫn tốt hơn FCM thường ở \soLieuEMuoiChenhTiLeFcmKppHon{} trên
+\soLieuEMuoiSoCauHinh{} cấu hình theo chênh tỉ lệ vỡ nợ. Trọng số tìm được có nghĩa kinh tế (lịch sử trả nợ; định giá và đòn
+bẩy). Lợi ích này đo so với FCM $m = 2$: với ba, 4 cụm, K-means không trọng số vẫn tách rủi ro tốt hơn trên Việt Nam.
+Lợi ích cũng không phổ quát: với 2 cụm, PSO kém FCM thường theo AUC ở \soLieuETamAucCungFcmKppKem{} cấu hình, kể cả Taiwan Default
+(mức chênh nhỏ), vì fitness không dùng nhãn.
+
+Với hướng ban đầu là tìm tâm khởi tạo, PSO không giúp FCM: hàm mục tiêu trên dữ liệu đã thử hầu như chỉ có 1 cực tiểu
+(\soLieuESauSoCauHinhMotCucTieu{} trên \soLieuESauSoCauHinh{} cấu hình), nên mọi phiên bản cho cùng nghiệm với FCM khởi tạo
+k-means++ mà chậm hơn (từ khoảng 1,7 lần trên Việt Nam tới khoảng 24 lần trên Taiwan Default). Tiểu luận đề xuất quy trình 3 bước: chẩn đoán số cực tiểu trước khi dùng PSO cho tâm, dùng
+PSO tìm trọng số thuộc tính, và chỉ áp trọng số khi nó cải thiện phân khúc trên một mẫu có nhãn lịch sử độc lập.
+
+\medskip
+\noindent\textbf{Từ khoá:} phân cụm mờ, Fuzzy C-Means, tối ưu bầy đàn, trọng số thuộc tính, phân khúc khách hàng, khởi tạo tâm cụm, rủi ro tín dụng.
+
+\newpage
+\tableofcontents
+\newpage
+
+\renewcommand{\listfigurename}{Danh mục hình}
+\renewcommand{\listtablename}{Danh mục bảng}
+\listoffigures
+\addcontentsline{toc}{chapter}{\MakeUppercase{\listfigurename}}
+\newpage
+
+\listoftables
+\addcontentsline{toc}{chapter}{\MakeUppercase{\listtablename}}
+\newpage
+
+\chapter*{DANH MỤC TỪ VIẾT TẮT}
+\addcontentsline{toc}{chapter}{DANH MỤC TỪ VIẾT TẮT}
+
+{\small\setstretch{1.1}
+\begin{longtable}{@{}lp{11.5cm}@{}}
+\toprule
+\textbf{Viết tắt} & \textbf{Nghĩa đầy đủ} \\
+\midrule
+AUC     & Area Under the Curve (Diện tích dưới đường cong ROC) \\
+BLAS    & Basic Linear Algebra Subprograms (Thư viện đại số tuyến tính cơ bản) \\
+CH      & Câu hỏi nghiên cứu (CH1--CH4) \\
+CSV     & Comma-Separated Values (Tệp giá trị phân tách bằng dấu phẩy) \\
+EAD     & Exposure at Default (Dư nợ tại thời điểm vỡ nợ) \\
+EBITDA  & Earnings Before Interest, Taxes, Depreciation and Amortization (Lợi nhuận trước lãi vay, thuế và khấu hao) \\
+ELPSO   & Enhanced Logarithmical PSO (PSO quán tính logarit cải tiến) \\
+FCM     & Fuzzy C-Means (Phân cụm mờ C-Means) \\
+GA      & Genetic Algorithm (Giải thuật di truyền) \\
+GRU     & Gated Recurrent Unit (Mạng hồi quy có cổng) \\
+GWO     & Grey Wolf Optimizer (Tối ưu bầy sói xám) \\
+HNX     & Sở Giao dịch Chứng khoán Hà Nội \\
+HOSE    & Sở Giao dịch Chứng khoán Thành phố Hồ Chí Minh \\
+IRB     & Internal Ratings-Based (Cách tiếp cận xếp hạng nội bộ) \\
+KDD     & Knowledge Discovery in Databases (Phát hiện tri thức trong cơ sở dữ liệu) \\
+KFCM    & Kernel Fuzzy C-Means (FCM dùng hàm nhân) \\
+LGD     & Loss Given Default (Tỉ lệ tổn thất khi vỡ nợ) \\
+P2P     & Peer-to-Peer lending (Cho vay ngang hàng) \\
+PC      & Partition Coefficient (Hệ số phân hoạch) \\
+PD      & Probability of Default (Xác suất vỡ nợ) \\
+PE      & Partition Entropy (Entropy phân hoạch) \\
+PSO     & Particle Swarm Optimization (Tối ưu bầy đàn) \\
+PSO-LOG & PSO với trọng số quán tính theo hàm logarit \\
+PSO-S   & PSO với trọng số quán tính giảm theo bình phương \\
+PSO-W   & PSO với trọng số quán tính (inertia Weight) giảm tuyến tính \\
+QPSO    & Quantum-behaved PSO (Tối ưu bầy đàn hành vi lượng tử) \\
+SHA-256 & Secure Hash Algorithm 256 bit (Hàm băm SHA-256) \\
+TN      & Thí nghiệm (TN1--TN5, Bảng~\ref{tab:ch3-thi-nghiem}) \\
+UCI     & University of California, Irvine (Kho dữ liệu học máy UCI) \\
+UPCOM   & Thị trường giao dịch chứng khoán của công ty đại chúng chưa niêm yết \\
+WFCM    & Weighted Fuzzy C-Means (FCM có trọng số thuộc tính) \\
+XB      & Xie--Beni Index (Chỉ số Xie--Beni) \\
+XGBoost & Extreme Gradient Boosting (Tăng cường gradient cực trị) \\
+\bottomrule
+\end{longtable}
+}
+
+\newpage
+
+% ============================================================
+% NỘI DUNG CHÍNH
+% ============================================================
+
+\input{noi-dung/chuong/00-mo-dau}
+\input{noi-dung/chuong/01-tong-quan}
+\input{noi-dung/chuong/02-phuong-phap}
+\input{noi-dung/chuong/03-thuc-nghiem}
+\input{noi-dung/chuong/04-ket-luan}
+
+% ============================================================
+% TÀI LIỆU THAM KHẢO
+% ============================================================
+
+
+\newpage
+\begingroup\sloppy\emergencystretch=3em
+\printbibliography[title={TÀI LIỆU THAM KHẢO}]
+\addcontentsline{toc}{chapter}{TÀI LIỆU THAM KHẢO}
+\endgroup
+
+% ============================================================
+% PHỤ LỤC
+% ============================================================
+
+\appendix
+\addtocontents{toc}{\protect\renewcommand{\protect\chaptertocprefix}{PHỤ LỤC}}
+\input{noi-dung/phu-luc-b-ma-nguon}
+
+\end{document}

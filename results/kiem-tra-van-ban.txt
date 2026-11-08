@@ -1,0 +1,23 @@
+== Kiểm tra văn bản sau khi đơn giản hoá, 14/10/2026 05:10
+Cổng chung: lỗi 0, undefined 0, overfull 0; tổng 65 trang (trần 80) -> ĐẠT
+Trang MỞ ĐẦU: 3 (ngân sách 2.5, ±20% = 2.0–3.0) -> trong khoảng
+Trang 1 TỔNG QUAN VỀ PHÂN CỤM DỮ LIỆU TRONG ĐÁ: 9 (ngân sách 14.5, ±20% = 11.6–17.4) -> NGOÀI KHOẢNG
+Trang 2 CÁC CÁCH KẾT HỢP PSO VỚI FUZZY C-MEANS: 15 (ngân sách 22, ±20% = 17.6–26.4) -> NGOÀI KHOẢNG
+Trang 3 THỰC NGHIỆM VÀ ĐÁNH GIÁ: 18 (ngân sách 21.5, ±20% = 17.2–25.8) -> trong khoảng
+Trang KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN: 2 (ngân sách 2, ±20% = 1.6–2.4) -> trong khoảng
+Cờ TODO/CẦN KIỂM TRA trong noi-dung/ và main.tex: không còn
+Macro \soLieu dùng: 123, thiếu định nghĩa: không
+10 bài được trích trong các chương: 10/10; \nocite trong main.tex: đã gỡ
+Ch.1 — Rủi ro tín dụng và vai trò của phân nhóm khác: 3 bài trong 10 bài (ĐẠT ≥ 3)
+Ch.1 — Khai phá dữ liệu trong đánh giá rủi ro tín dụ: 3 bài trong 10 bài (ĐẠT ≥ 3)
+Ch.1 — Phân cụm dữ liệu và phân cụm mờ: 5 bài trong 10 bài (ĐẠT ≥ 3)
+Ch.1 — Hạn chế của FCM và hướng dùng metaheuristic: 6 bài trong 10 bài (ĐẠT ≥ 3)
+Ch.1 — Tình hình nghiên cứu và khoảng trống: 10 bài trong 10 bài (ĐẠT ≥ 3)
+Ch.1 — Tiểu kết Chương 1: 0 bài trong 10 bài (ĐẠT ≥ 3)
+Số mục TLTK in ra: 52; bài đã thay (qin2021apso) có in: không; khoá bezdek1980convergence có in: không
+Biber cảnh báo: 0
+
+== Đối chiếu ngẫu nhiên 10 số với CSV, lấy mẫu trong các phương pháp hiện trong bài (rng 2026)
+10/10 số khớp
+
+Ngân sách trang cũ (bản 80 trang) không còn áp dụng: plan 261014-0439 thu gọn còn 7 phương pháp, mục tiêu ~60–68 trang.
